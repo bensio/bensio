@@ -17,6 +17,8 @@ function preload() {
   game.load.image("orangeblock", "assets/orangeblock.png",72,72);
   //game.load.image("uppipe", "assets/wormup.png");
   //game.load.image("downpipe", "assets/wormdown.png");
+
+  console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
 function create() {
