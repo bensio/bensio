@@ -1,5 +1,10 @@
 var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
-  {preload:preload,create:create,update:update,render:render});
+  {
+  preload:preload,
+  create:create,
+  //update:update,
+  //render:render
+  });
 
 var background;
 
@@ -12,8 +17,8 @@ function preload() {
   game.load.image("orangeblock", "assets/orangeblock.png",72,72);
   //game.load.image("uppipe", "assets/wormup.png");
   //game.load.image("downpipe", "assets/wormdown.png");
-
 }
+
 function create() {
   // Add physics and scroll background
   game.physics.startSystem(Phaser.Physics.ARCADE);
