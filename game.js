@@ -40,7 +40,7 @@ function create() {
   blocks.forEach(function(block) {
   
     block.body.bounce.setTo(1,1);
-    block.body.velocity.setTo(100 + Math.random() * 40,100);
+    block.body.velocity.setTo(RandomDataGenerator.angle(),RandomDataGenerator.between(100,500));
     block.body.collideWorldBounds = true;
     block.body.allowRotation = true;
   }, this);
