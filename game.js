@@ -20,6 +20,11 @@ function create() {
   game.physics.p2.restitution = 1;
   game.physics.p2.applyDamping = false; 
 
+
+
+  game.physics.p2.applyGravity = false;
+  
+  
   game.physics.p2.friction = 0;
 
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -58,9 +63,11 @@ function create() {
     block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
     block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
     
-    block.body.dampening = 0;
+    block.body.damping = 0;
     block.body.friction = 0;
-    block.body.angularDampening = 0;
+    block.body.angularDamping = 0;
+    //block.body.mass = 0;
+    
     //block.body.velocity.setTo(game.rnd.integerInRange(0,360),game.rnd.integerInRange(100,500));
     //block.body.collideWorldBounds = true;
     //block.body.allowRotation = true;
