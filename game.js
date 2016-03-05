@@ -21,8 +21,8 @@ function create() {
   
   //Set properties of 'blocks' group
   blocks = game.add.group();
-  blocks.anchor.x = .5;
-  blocks.anchor.y = .5;
+  //blocks.anchor.x = .5;
+  //blocks.anchor.y = .5;
 
 
   //create blocks
@@ -31,21 +31,24 @@ function create() {
   greenblock = blocks.create(400, 150, 'greenblock');
   orangeblock = blocks.create(400, 300, 'orangeblock');
 
+  //blocks.anchor.x = .5;
+  //blocks.anchor.y = .5;
 
 
   game.physics.enable(blocks, Phaser.Physics.ARCADE);
   
-  blocks.body.velocity.setTo(200,200);
-  blocks.body.collideWorldBounds = true;
-
-  blocks.body.bounce.setTo(1,1);
-
+  blocks.forEach(function(block) {
+  
+    block.body.bounce.setTo(1,1);
+    block.body.velocity.setTo(100 + Math.random() * 40,100);
+    block.body.collideWorldBounds = true;
+    block.body.allowRotation = true;
+  }, this);
 }
 
 function update () {
 
   game.physics.arcade.collide(blocks, blocks);
-  
 
 
 }
