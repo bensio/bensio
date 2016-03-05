@@ -1,27 +1,52 @@
 var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
-  {preload:preload,create:create,update:update,render:render});
+  {preload:preload,create:create,update:update});
 
 var background;
 
 function preload() {
   game.stage.backgroundColor = '#ffffff';
   //game.load.image("background","assets/bg.png");
-  game.load.image("blueblock", "assets/blueblock.png",72,72);
-  game.load.image("redblock", "assets/redblock.png",72,72);
-  game.load.image("greenblock", "assets/greenblock.png",72,72);
-  game.load.image("orangeblock", "assets/orangeblock.png",72,72);
+  game.load.image("blueblock", "assets/bluesquare.png",72,72);
+  game.load.image("redblock", "assets/redsquare.png",72,72);
+  game.load.image("greenblock", "assets/greensquare.png",72,72);
+  game.load.image("orangeblock", "assets/orangesquare.png",72,72);
   //game.load.image("uppipe", "assets/wormup.png");
   //game.load.image("downpipe", "assets/wormdown.png");
 
 }
 function create() {
-  // Add physics and scroll background
+  // Add physics
   game.physics.startSystem(Phaser.Physics.ARCADE);
   //background = game.add.tileSprite(0,0,320,568,"background");
-  // Add the bird and set his animation and values
-  blueblock = game.add.sprite(100, 245, 'blueblock');
-  block.anchor.x = .5;
-  block.anchor.y = .5;
-  blueblock.scale.set(1);
-  bird.animations.add('fly', [0,1,2,3], 10, true);
+  
+  //Set properties of 'blocks' group
+  blocks = game.add.group();
+  blocks.anchor.x = .5;
+  blocks.anchor.y = .5;
+
+
+  //create blocks
+  blueblock = blocks.create(200, 150, 'blueblock');
+  redblock = blocks.create(200, 300, 'redblock');
+  greenblock = blocks.create(400, 150, 'greenblock');
+  orangeblock = blocks.create(400, 300, 'orangeblock');
+
+
+
+  game.physics.enable(blocks, Phaser.Physics.ARCADE);
+  
+  blocks.body.velocity.setTo(200,200);
+  blocks.body.collideWorldBounds = true;
+
+  blocks.body.bounce.setTo(1,1);
+
 }
+
+function update () {
+
+  game.physics.arcade.collide(blocks, blocks);
+  
+
+
+}
+
