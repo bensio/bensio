@@ -66,11 +66,11 @@ function create() {
 
   
 
-    //block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-    //block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+    block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+    block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
     
-    block.body.velocity.x = 1000;
-    block.body.velocity.y = 1000;
+    //block.body.velocity.x = 1000;
+    //block.body.velocity.y = 1000;
 
     /*
     block.body.damping = 0;
