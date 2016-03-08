@@ -17,19 +17,20 @@ function create() {
   
   //game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  game.physics.p2.restitution = 1;
-  game.physics.p2.applyDamping = false; 
-
-
-
-  game.physics.p2.applyGravity = false;
+  //game.physics.p2.restitution = 1;
+  //game.physics.p2.applyDamping = false; 
+  //game.physics.p2.applyGravity = false;
   
-  
-  game.physics.p2.friction = 0;
 
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
 
   game.physics.p2.updateBoundsCollisionGroup();
+
+  game.physics.p2.damping = 0;
+  game.physics.p2.friction = 0;
+  game.physics.p2.angularDamping = 0;
+  //game.physics.mass = .1;
+  game.physics.p2.restitution = 1;
 
 
   //background = game.add.tileSprite(0,0,320,568,"background");
@@ -45,7 +46,7 @@ function create() {
   greenblock = blocks.create(400, 150, 'greenblock');
   orangeblock = blocks.create(400, 300, 'orangeblock');
 
-  game.physics.p2.enable(blocks);
+  //game.physics.p2.enable(blocks);
   
   blocks.forEach(function(block) {
 
@@ -53,6 +54,9 @@ function create() {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
 
+
+
+    //block.body.collideWorldBounds = true; 
     //block.body.bounce.setTo(1,1);
     
     block.anchor.x = .5;
@@ -63,11 +67,17 @@ function create() {
     block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
     block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
     
+    //block.body.velocity.x = 1000;
+    //block.body.velocity.y = 1000;
+
+    /*
     block.body.damping = 0;
     block.body.friction = 0;
     block.body.angularDamping = 0;
-    //block.body.mass = 0;
-    
+    block.body.mass = .1;
+    block.body.restitution = 1;
+
+   */
     //block.body.velocity.setTo(game.rnd.integerInRange(0,360),game.rnd.integerInRange(100,500));
     //block.body.collideWorldBounds = true;
     //block.body.allowRotation = true;
