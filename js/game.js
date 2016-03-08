@@ -1,5 +1,14 @@
 var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
+<<<<<<< HEAD:game.js
   {preload:preload,create:create,update:update});
+=======
+  {
+  preload:preload,
+  create:create,
+  //update:update,
+  //render:render
+  });
+>>>>>>> 8735ad418f7a360d0a0d091abaf4714108912d3a:js/game.js
 
 var background;
 
@@ -11,7 +20,9 @@ function preload() {
   game.load.image("greenblock", "assets/greensquare.png",72,72);
   game.load.image("orangeblock", "assets/orangesquare.png",72,72);
 
+  console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
+
 function create() {
   // Add physics
   
