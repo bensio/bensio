@@ -72,14 +72,14 @@ function create() {
     //block.body.velocity.x = 1000;
     //block.body.velocity.y = 1000;
 
-    /*
+    
     block.body.damping = 0;
     block.body.friction = 0;
     block.body.angularDamping = 0;
     block.body.mass = .1;
     block.body.restitution = 1;
 
-   */
+   
     //block.body.velocity.setTo(game.rnd.integerInRange(0,360),game.rnd.integerInRange(100,500));
     //block.body.collideWorldBounds = true;
     //block.body.allowRotation = true;
