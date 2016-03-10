@@ -1,7 +1,10 @@
 var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
   {preload:preload,create:create,update:update});
 
-var background;
+var block;
+var blockVelocity = 50;
+var money = 50;
+var bettedMoney = 0;
 
 function preload() {
   game.stage.backgroundColor = '#ffffff';
@@ -31,7 +34,6 @@ function create() {
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
   game.physics.p2.angularDamping = 0;
-  //game.physics.mass = .1;
   game.physics.p2.restitution = 1;
 
 
@@ -61,14 +63,16 @@ function create() {
     //block.body.collideWorldBounds = true; 
     //block.body.bounce.setTo(1,1);
     
-    block.anchor.x = .5;
-    block.anchor.y = .5;
+    block.anchor.x = 0.5;
+    block.anchor.y = 0.5;
 
   
 
     block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
     block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  
     
+
     //block.body.velocity.x = 1000;
     //block.body.velocity.y = 1000;
 
@@ -76,25 +80,38 @@ function create() {
     block.body.damping = 0;
     block.body.friction = 0;
     block.body.angularDamping = 0;
-    block.body.mass = .1;
+    block.body.mass = 0.1;
     block.body.restitution = 1;
 
-   
-    //block.body.velocity.setTo(game.rnd.integerInRange(0,360),game.rnd.integerInRange(100,500));
-    //block.body.collideWorldBounds = true;
-    //block.body.allowRotation = true;
   }, this);
 }
 
-function update () {
+function constrainVelocity(sprite, maxVelocity) {
+  //constraints the block's velocity to a specific number
+  var body = sprite.body
+  var angle, currVelocitySqr, vx, vy;
 
- /* blocks.forEach(function(block) {
-    block.body.velocity.x = 
+  vx = body.data.velocity[0];
+  vy = body.data.velocity[1];
+  
+  currVelocitySqr = vx * vx + vy * vy;
+  
+  angle = Math.atan2(vy, vx);
     
+  vx = Math.cos(angle) * maxVelocity;
+  vy = Math.sin(angle) * maxVelocity;
+    
+  body.data.velocity[0] = vx;
+  body.data.velocity[1] = vy;
+};
 
-  }, this);*/
+function update () {
+  
+  constrainVelocity(redblock,blockVelocity);
+  constrainVelocity(blueblock,blockVelocity);
+  constrainVelocity(orangeblock,blockVelocity);
+  constrainVelocity(greenblock,blockVelocity);
 
-                
 
+  //game.input.onKeyDown
 }
-
