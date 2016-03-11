@@ -13,7 +13,6 @@ WebFontConfig = {
 //  We set a 1 second delay before calling 'createText'.
 //  For some reason if we don't the browser cannot
 // render the text the first time it's created.
-    active: function(){ game.time.events.add(Phaser.Timer.SECOND,promptBet, this); },
   
   //                  //  The Google Fonts we want to load (specify as
   //                 many as you like in the array)
@@ -24,10 +23,9 @@ WebFontConfig = {
   };
 
 var textStyle = {
+
   align: 'center'
-}
-textStyle.fontSize = 20;
-textStyle.font = 'Press Start 2P';
+};
 
 function preload() {
  
@@ -53,10 +51,6 @@ function create() {
   
   //game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  //game.physics.p2.restitution = 1;
-  //game.physics.p2.applyDamping = false; 
-  //game.physics.p2.applyGravity = false;
-  
 
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
 
@@ -81,7 +75,6 @@ function create() {
   greenblock = blocks.create(590, 150, 'greenblock');
   orangeblock = blocks.create(590, 400, 'orangeblock');
 
-  //game.physics.p2.enable(blocks);
   
   blocks.forEach(function(block) {
 
@@ -89,24 +82,8 @@ function create() {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
 
-
-
-    //block.body.collideWorldBounds = true; 
-    //block.body.bounce.setTo(1,1);
-    
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
-
-  
-
-    //block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-    //block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  
-    
-
-    //block.body.velocity.x = 1000;
-    //block.body.velocity.y = 1000;
-
     
     block.body.damping = 0;
     block.body.friction = 0;
@@ -116,8 +93,12 @@ function create() {
 
   }, this);
 
-  game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-  timer = game.add.bitmapText(250, 250, '0', textStyle);
+  //Set timers to start the game and prompt for a bet
+  
+  game.time.events.add(Phaser.Timer.SECOND * 11, startGame, this);
+
+
+  game.time.events.add(Phaser.Timer.SECOND * 1, promptBet, this);
 
 }
 
@@ -132,7 +113,6 @@ function startGame () {
   redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
   redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
-  timer.destroy();
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -157,26 +137,26 @@ function constrainVelocity(sprite, maxVelocity) {
 function promptBet() {
 
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-      "\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n", {
-      fill: "#000000",
-      align: "center"
-  });
+      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Press Start 2P';
   prompt.fontSize = 20;
-}
+  prompt.align = "center";
+};
 
 function updateTimer() {
-  seconds = Math.floor(game.time.time-1 / 1000) % 60;
-  timer.setText(seconds);
-}
+  seconds = Math.floor(game.time.now / 1000 - 1);
+  timeLeft = 10 - seconds;
+  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft); 
+};
 
 function update () {
-  if (game.time.now < 10000) {
+
+  if (game.time.now < 11000 && game.time.now > 2000) {
   updateTimer();
   
   }
-  if (game.time.now > 10500) {
+  if (game.time.now > 11500) {
   constrainVelocity(redblock,blockVelocity);
   constrainVelocity(blueblock,blockVelocity);
   constrainVelocity(orangeblock,blockVelocity);
