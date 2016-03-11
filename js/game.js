@@ -1,12 +1,32 @@
 var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
-  {preload:preload,create:create,update:update});
+  {preload:preload,create:create,update:update,render:render});
 
 var block;
 var blockVelocity = 50;
 var money = 50;
-var bettedMoney = 0;
+var betMoney = 0;
+var timer;
+var startGame;
+
+WebFontConfig = {
+
+//  'active' means all requested fonts have finished loading
+//  We set a 1 second delay before calling 'createText'.
+//  For some reason if we don't the browser cannot
+// render the text the first time it's created.
+    active: function(){ game.time.events.add(Phaser.Timer.SECOND,promptBet, this); },
+  
+  //                  //  The Google Fonts we want to load (specify as
+  //                 many as you like in the array)
+    google: {
+        families: ['Press Start 2P']
+          }
+  
+  };
+
 
 function preload() {
+  game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
   //game.load.image("background","assets/bg.png");
   game.load.image("blueblock", "assets/bluesquare.png",72,72);
@@ -68,8 +88,8 @@ function create() {
 
   
 
-    block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-    block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+    //block.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+    //block.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   
     
 
@@ -84,6 +104,7 @@ function create() {
     block.body.restitution = 1;
 
   }, this);
+
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -105,13 +126,42 @@ function constrainVelocity(sprite, maxVelocity) {
   body.data.velocity[1] = vy;
 };
 
+function promptBet() {
+
+  prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
+      "Place your bets!\n\nRed, Green, Blue, or Orange?\n\n", {
+      fill: "#000000",
+      align: "center"
+  });
+  prompt.anchor.setTo(0.5, 0.5);
+  prompt.font = 'Press Start 2P';
+  prompt.fontSize = 20;
+}
+
+
 function update () {
-  
+ 
+  if (game.time.now == 10000) {
+  redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  greenblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  blueblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  blueblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  orangeblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  orangeblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  }
+  if (game.time.now > 11000) {
   constrainVelocity(redblock,blockVelocity);
   constrainVelocity(blueblock,blockVelocity);
   constrainVelocity(orangeblock,blockVelocity);
   constrainVelocity(greenblock,blockVelocity);
-
+  }
 
   //game.input.onKeyDown
+}
+
+
+function render () {
+
 }
