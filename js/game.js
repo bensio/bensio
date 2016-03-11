@@ -5,9 +5,8 @@ var block;
 var blockVelocity = 50;
 var money = 50;
 var betMoney = 0;
+var prompt;
 var timer;
-var startGame;
-
 WebFontConfig = {
 
 //  'active' means all requested fonts have finished loading
@@ -24,8 +23,18 @@ WebFontConfig = {
   
   };
 
+var textStyle = {
+  align: 'center'
+}
+textStyle.fontSize = 20;
+textStyle.font = 'Press Start 2P';
 
 function preload() {
+ 
+  //Center the game.
+  this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
+
+
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
   //game.load.image("background","assets/bg.png");
@@ -38,6 +47,8 @@ function preload() {
 }
 
 function create() {
+  
+  
   // Add physics
   
   //game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -66,9 +77,9 @@ function create() {
 
   //create blocks
   blueblock = blocks.create(200, 150, 'blueblock');
-  redblock = blocks.create(200, 300, 'redblock');
-  greenblock = blocks.create(400, 150, 'greenblock');
-  orangeblock = blocks.create(400, 300, 'orangeblock');
+  redblock = blocks.create(200, 400, 'redblock');
+  greenblock = blocks.create(590, 150, 'greenblock');
+  orangeblock = blocks.create(590, 400, 'orangeblock');
 
   //game.physics.p2.enable(blocks);
   
@@ -105,6 +116,23 @@ function create() {
 
   }, this);
 
+  game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
+  timer = game.add.bitmapText(250, 250, '0', textStyle);
+
+}
+
+function startGame () {
+  
+  greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  orangeblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  blueblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  greenblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  orangeblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  blueblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  prompt.destroy();
+  timer.destroy();
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -129,7 +157,7 @@ function constrainVelocity(sprite, maxVelocity) {
 function promptBet() {
 
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-      "Place your bets!\n\nRed, Green, Blue, or Orange?\n\n", {
+      "\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n", {
       fill: "#000000",
       align: "center"
   });
@@ -138,20 +166,17 @@ function promptBet() {
   prompt.fontSize = 20;
 }
 
+function updateTimer() {
+  seconds = Math.floor(game.time.time-1 / 1000) % 60;
+  timer.setText(seconds);
+}
 
 function update () {
- 
-  if (game.time.now == 10000) {
-  redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  greenblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  blueblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  blueblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  orangeblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  orangeblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  if (game.time.now < 10000) {
+  updateTimer();
+  
   }
-  if (game.time.now > 11000) {
+  if (game.time.now > 10500) {
   constrainVelocity(redblock,blockVelocity);
   constrainVelocity(blueblock,blockVelocity);
   constrainVelocity(orangeblock,blockVelocity);
