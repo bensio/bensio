@@ -6,7 +6,8 @@ var blockVelocity = 50;
 var money = 50;
 var betMoney = 0;
 var prompt;
-var timer;
+var blocks
+
 WebFontConfig = {
 
 //  'active' means all requested fonts have finished loading
@@ -23,7 +24,6 @@ WebFontConfig = {
   };
 
 var textStyle = {
-
   align: 'center'
 };
 
@@ -51,11 +51,15 @@ function create() {
   
   //game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
+  
+  game.physics.p2.setImpactEvents(true);
 
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
 
-  game.physics.p2.updateBoundsCollisionGroup();
+  var wallCollisionGroup = game.physics.p2.updateBoundsCollisionGroup();
 
+  
+  
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
   game.physics.p2.angularDamping = 0;
@@ -71,16 +75,18 @@ function create() {
 
   //create blocks
   blueblock = blocks.create(200, 150, 'blueblock');
-  redblock = blocks.create(200, 400, 'redblock');
-  greenblock = blocks.create(590, 150, 'greenblock');
-  orangeblock = blocks.create(590, 400, 'orangeblock');
-
+  redblock = blocks.create(200, 472, 'redblock');
+  greenblock = blocks.create(600, 150, 'greenblock');
+  orangeblock = blocks.create(600, 472, 'orangeblock');
   
+
   blocks.forEach(function(block) {
 
 
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
+
+    block.body.onBeginContact.add(hitBlock, this);
 
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
@@ -90,20 +96,27 @@ function create() {
     block.body.angularDamping = 0;
     block.body.mass = 0.1;
     block.body.restitution = 1;
+    
+    block.health = 20;
+    block.isAlive = true;
 
   }, this);
-
-  //Set timers to start the game and prompt for a bet
-  
   game.time.events.add(Phaser.Timer.SECOND * 11, startGame, this);
-
-
   game.time.events.add(Phaser.Timer.SECOND * 1, promptBet, this);
+}
 
+function hitBlock (body,body2) {
+  if (body) {
+    body.sprite.health -= 1;
+    if (body.sprite.health < 1) {
+      body.sprite.destroy();
+    }
+  } else {
+    console.log("WALL.");
+  }
 }
 
 function startGame () {
-  
   greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
   orangeblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
   blueblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
@@ -153,17 +166,16 @@ function updateTimer() {
 function update () {
 
   if (game.time.now < 11000 && game.time.now > 2000) {
-  updateTimer();
+    updateTimer();
   
+
   }
   if (game.time.now > 11500) {
-  constrainVelocity(redblock,blockVelocity);
-  constrainVelocity(blueblock,blockVelocity);
-  constrainVelocity(orangeblock,blockVelocity);
-  constrainVelocity(greenblock,blockVelocity);
+      
+    blocks.forEach(function(block) {
+      constrainVelocity(block,blockVelocity);
+    }, this);
   }
-
-  //game.input.onKeyDown
 }
 
 
