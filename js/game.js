@@ -46,7 +46,7 @@ function preload() {
 
 function create() {
   
-  
+  game.stage.disableVisibilityChange = true; 
   // Add physics
   
   //game.physics.startSystem(Phaser.Physics.ARCADE);
