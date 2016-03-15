@@ -57,14 +57,10 @@ function create() {
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
 
   var wallCollisionGroup = game.physics.p2.updateBoundsCollisionGroup();
-
-  
-  
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
   game.physics.p2.angularDamping = 0;
   game.physics.p2.restitution = 1;
-
 
   //background = game.add.tileSprite(0,0,320,568,"background");
   
@@ -79,6 +75,10 @@ function create() {
   greenblock = blocks.create(600, 150, 'greenblock');
   orangeblock = blocks.create(600, 472, 'orangeblock');
   
+  //create walls
+  createWall();
+
+
 
   blocks.forEach(function(block) {
 
@@ -87,6 +87,7 @@ function create() {
     block.body.collides(blockCollisionGroup);
 
     block.body.onBeginContact.add(hitBlock, this);
+    //block.body.createBodyCallback(
 
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
@@ -115,6 +116,25 @@ function hitBlock (body,body2) {
     console.log("WALL.");
   }
 }
+
+function createWall () {
+    // Define a block using bitmap data rather than an image sprite
+    var wallShape = game.add.bitmapData(game.world.width, 50);
+
+    // Fill the block with black color
+    wallShape.ctx.rect(0, 0, game.world.width, 50);
+    wallShape.ctx.fillStyle = '000';
+    wallShape.ctx.fill();
+
+    // Create a new sprite using the bitmap data
+    wall = game.add.sprite(100, 0, wallShape);
+
+    // Enable P2 Physics and set the block not to move
+    game.physics.p2.enable(wall);
+    wall.body.static = true;
+    wall.anchor.setTo(0, 0);
+}
+
 
 function startGame () {
   greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
