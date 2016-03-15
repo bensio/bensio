@@ -6,22 +6,9 @@ var blockVelocity = 50;
 var money = 50;
 var betMoney = 0;
 var prompt;
-var blocks
+var blocks;
+var constrain = false; 
 
-WebFontConfig = {
-
-//  'active' means all requested fonts have finished loading
-//  We set a 1 second delay before calling 'createText'.
-//  For some reason if we don't the browser cannot
-// render the text the first time it's created.
-  
-  //                  //  The Google Fonts we want to load (specify as
-  //                 many as you like in the array)
-    google: {
-        families: ['Press Start 2P']
-          }
-  
-  };
 
 var textStyle = {
   align: 'center'
@@ -31,8 +18,6 @@ function preload() {
  
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
-
-
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
   //game.load.image("background","assets/bg.png");
@@ -56,12 +41,15 @@ function create() {
 
   var blockCollisionGroup = game.physics.p2.createCollisionGroup();
 
-  var wallCollisionGroup = game.physics.p2.updateBoundsCollisionGroup();
+  var wall = game.physics.p2.updateBoundsCollisionGroup();
+  
+  wall.body.onBeginContact.add(hitBlock, this);
+  
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
   game.physics.p2.angularDamping = 0;
   game.physics.p2.restitution = 1;
-
+  
   //background = game.add.tileSprite(0,0,320,568,"background");
   
   blocks = game.add.group();
@@ -76,7 +64,7 @@ function create() {
   orangeblock = blocks.create(600, 472, 'orangeblock');
   
   //create walls
-  createWall();
+  //createWall();
 
 
 
@@ -87,7 +75,6 @@ function create() {
     block.body.collides(blockCollisionGroup);
 
     block.body.onBeginContact.add(hitBlock, this);
-    //block.body.createBodyCallback(
 
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
@@ -98,7 +85,7 @@ function create() {
     block.body.mass = 0.1;
     block.body.restitution = 1;
     
-    block.health = 20;
+    block.health = 2;
     block.isAlive = true;
 
   }, this);
@@ -120,9 +107,8 @@ function hitBlock (body,body2) {
 function createWall () {
     // Define a block using bitmap data rather than an image sprite
     var wallShape = game.add.bitmapData(game.world.width, 50);
-
     // Fill the block with black color
-    wallShape.ctx.rect(0, 0, game.world.width, 50);
+    wallShape.ctx.rect(0, 0, game.world.width, 0);
     wallShape.ctx.fillStyle = '000';
     wallShape.ctx.fill();
 
@@ -131,7 +117,7 @@ function createWall () {
 
     // Enable P2 Physics and set the block not to move
     game.physics.p2.enable(wall);
-    wall.body.static = true;
+    wall.body.static  = true;
     wall.anchor.setTo(0, 0);
 }
 
@@ -146,6 +132,7 @@ function startGame () {
   redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
   redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
+  constrain = true;
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -172,7 +159,7 @@ function promptBet() {
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
       "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10");
   prompt.anchor.setTo(0.5, 0.5);
-  prompt.font = 'Press Start 2P';
+  prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
 };
@@ -185,13 +172,10 @@ function updateTimer() {
 
 function update () {
 
-  if (game.time.now < 11000 && game.time.now > 2000) {
+  if (constrain != true) {
     updateTimer();
-  
-
   }
-  if (game.time.now > 11500) {
-      
+  else {
     blocks.forEach(function(block) {
       constrainVelocity(block,blockVelocity);
     }, this);
