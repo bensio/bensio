@@ -8,7 +8,7 @@ var betMoney = 0;
 var prompt;
 var blocks;
 var constrain = false; 
-
+var timerOn = true;
 
 var textStyle = {
   align: 'center'
@@ -39,11 +39,12 @@ function create() {
   
   game.physics.p2.setImpactEvents(true);
 
-  var blockCollisionGroup = game.physics.p2.createCollisionGroup();
+  var blockCollisionGroup = game.physics.p2.createCollisionGroup(); 
 
-  var wall = game.physics.p2.updateBoundsCollisionGroup();
+  game.physics.p2.updateBoundsCollisionGroup();
+
   
-  wall.body.onBeginContact.add(hitBlock, this);
+  //wall.body.onBeginContact.add(hitBlock, this);
   
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
@@ -63,10 +64,6 @@ function create() {
   greenblock = blocks.create(600, 150, 'greenblock');
   orangeblock = blocks.create(600, 472, 'orangeblock');
   
-  //create walls
-  //createWall();
-
-
 
   blocks.forEach(function(block) {
 
@@ -84,43 +81,27 @@ function create() {
     block.body.angularDamping = 0;
     block.body.mass = 0.1;
     block.body.restitution = 1;
-    
-    block.health = 2;
+    block.health = 20;
     block.isAlive = true;
 
   }, this);
-  game.time.events.add(Phaser.Timer.SECOND * 11, startGame, this);
-  game.time.events.add(Phaser.Timer.SECOND * 1, promptBet, this);
+  game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
+  promptBet();
 }
 
-function hitBlock (body,body2) {
+function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body) {
     body.sprite.health -= 1;
     if (body.sprite.health < 1) {
       body.sprite.destroy();
     }
   } else {
-    console.log("WALL.");
+    equation[0].bodyB.parent.sprite.health -= 1;
+    if (equation[0].bodyB.parent.sprite.health < 1) {
+      equation[0].bodyB.parent.sprite.destroy();
+    }
   }
 }
-
-function createWall () {
-    // Define a block using bitmap data rather than an image sprite
-    var wallShape = game.add.bitmapData(game.world.width, 50);
-    // Fill the block with black color
-    wallShape.ctx.rect(0, 0, game.world.width, 0);
-    wallShape.ctx.fillStyle = '000';
-    wallShape.ctx.fill();
-
-    // Create a new sprite using the bitmap data
-    wall = game.add.sprite(100, 0, wallShape);
-
-    // Enable P2 Physics and set the block not to move
-    game.physics.p2.enable(wall);
-    wall.body.static  = true;
-    wall.anchor.setTo(0, 0);
-}
-
 
 function startGame () {
   greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
@@ -133,6 +114,7 @@ function startGame () {
   redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
   constrain = true;
+  timerOn = false;
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -165,20 +147,33 @@ function promptBet() {
 };
 
 function updateTimer() {
-  seconds = Math.floor(game.time.now / 1000 - 1);
-  timeLeft = 10 - seconds;
+  timeLeft = Math.floor(game.time.events.duration / 1000) + 1;
   prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft); 
 };
+
+function showResults() {
+  prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
+            group.children[0] + " is the winner!");
+  prompt.anchor.setTo(0.5, 0.5);
+  prompt.font = 'Century Schoolbook';
+  prompt.fontSize = 20;
+  prompt.align = "center";
+}
 
 function update () {
 
   if (constrain != true) {
-    updateTimer();
+      updateTimer();
   }
   else {
-    blocks.forEach(function(block) {
-      constrainVelocity(block,blockVelocity);
-    }, this);
+    if (blocks.length === 1) {
+      blocks.forEach(function(block) {
+        constrainVelocity(block,blockVelocity);
+      }, this);
+    } else {
+      showResults();
+
+    }
   }
 }
 
