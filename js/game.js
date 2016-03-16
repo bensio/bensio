@@ -8,7 +8,8 @@ var betMoney = 0;
 var prompt;
 var blocks;
 var constrain = false; 
-var timerOn = true;
+var gameOver = false;
+var showTimer = true;
 
 var textStyle = {
   align: 'center'
@@ -94,12 +95,16 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     body.sprite.health -= 1;
     if (body.sprite.health < 1) {
       body.sprite.destroy();
+      console.log(blocks.children[0]);
     }
   } else {
     equation[0].bodyB.parent.sprite.health -= 1;
     if (equation[0].bodyB.parent.sprite.health < 1) {
       equation[0].bodyB.parent.sprite.destroy();
     }
+  }
+  if (blocks.length === 1) {
+    gameOver = true;
   }
 }
 
@@ -114,7 +119,7 @@ function startGame () {
   redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
   constrain = true;
-  timerOn = false;
+  showTimer = false;
 }
 
 function constrainVelocity(sprite, maxVelocity) {
@@ -137,7 +142,6 @@ function constrainVelocity(sprite, maxVelocity) {
 };
 
 function promptBet() {
-
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
       "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10");
   prompt.anchor.setTo(0.5, 0.5);
@@ -152,8 +156,15 @@ function updateTimer() {
 };
 
 function showResults() {
+  gameOver = false;
+  constrain = false;
+  showTimer = false;
+  blocks.children[0].body.data.velocity[0] = 0;
+  blocks.children[0].body.data.velocity[1] = 0;
+  blocks.children[0].body.angularDamping = .5;
+  
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-            group.children[0] + " is the winner!");
+            blocks.children[0].key + " is the winner!");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
@@ -162,17 +173,16 @@ function showResults() {
 
 function update () {
 
-  if (constrain != true) {
+  if (constrain != true && showTimer === true) {
       updateTimer();
   }
   else {
-    if (blocks.length === 1) {
+    if (gameOver === false && constrain === true){
       blocks.forEach(function(block) {
         constrainVelocity(block,blockVelocity);
       }, this);
-    } else {
+    } else if (gameOver === true)  {
       showResults();
-
     }
   }
 }
