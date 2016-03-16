@@ -3,7 +3,7 @@ var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
 
 var block;
 var blockCollisionGroup;
-var blockVelocity = 50;
+var blockVelocity = 30;
 var money = 50;
 var betMoney = 0;
 var prompt;
@@ -145,9 +145,12 @@ function showResults(result) {
   constrain = false;
   showTimer = false;
   if (result && result === "tie") {
+    if (timer) {
+      timer.destroy();
+    }
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             "Looks like no one is the winner, whoops! No payout!");
-    game.time.events.add(Phaser.Timer.SECOND * 3, resetGame, this);
+    timer = game.time.events.add(Phaser.Timer.SECOND * 3, resetGame, this);
   } else {
     blocks.children[0].body.data.velocity[0] = 0;
     blocks.children[0].body.data.velocity[1] = 0;
@@ -156,16 +159,22 @@ function showResults(result) {
     goingToCenter = true;
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
+    timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
   }
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
-  timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
 }
 
 function resetGame() {
-  blocks.children[0].destroy();
+  if (blocks.children[0]) {
+    blocks.children[0].destroy();
+  }
+  constrain = false; 
+  gameOver = false;
+  showTimer = true;
+  goingToCenter = false;
   prompt.destroy();
   blue = blocks.create(200, 150, 'blue');
   red = blocks.create(200, 472, 'red');
@@ -184,10 +193,6 @@ function resetGame() {
     block.health = 20;
     block.isAlive = true;
   }, this);
-  constrain = false; 
-  gameOver = false;
-  showTimer = true;
-  goingToCenter = false;
   promptBet();
   game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
 }
@@ -209,14 +214,16 @@ function update () {
   if (constrain != true && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
-      
-      if (blocks.children[0] && Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
-            blocks.children[0].body.data.velocity[0] = 0;
-            blocks.children[0].body.data.velocity[1] = 0;
+      if (blocks.children[0]) {  
+        
+        if (Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
+              blocks.children[0].body.data.velocity[0] = 0;
+              blocks.children[0].body.data.velocity[1] = 0;
+        }
       } else {
-            timer.destroy();
             prompt.destroy();
             showResults("tie");
+            goingToCenter = false;
       }
     }
   else {
