@@ -10,6 +10,8 @@ var blocks;
 var constrain = false; 
 var gameOver = false;
 var showTimer = true;
+var goingToCenter = false;
+var distanceToCenter;
 
 var textStyle = {
   align: 'center'
@@ -22,10 +24,10 @@ function preload() {
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
   //game.load.image("background","assets/bg.png");
-  game.load.image("blueblock", "assets/bluesquare.png",72,72);
-  game.load.image("redblock", "assets/redsquare.png",72,72);
-  game.load.image("greenblock", "assets/greensquare.png",72,72);
-  game.load.image("orangeblock", "assets/orangesquare.png",72,72);
+  game.load.image("blue", "assets/bluesquare.png",72,72);
+  game.load.image("red", "assets/redsquare.png",72,72);
+  game.load.image("green", "assets/greensquare.png",72,72);
+  game.load.image("orange", "assets/orangesquare.png",72,72);
 
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
@@ -60,10 +62,10 @@ function create() {
   
 
   //create blocks
-  blueblock = blocks.create(200, 150, 'blueblock');
-  redblock = blocks.create(200, 472, 'redblock');
-  greenblock = blocks.create(600, 150, 'greenblock');
-  orangeblock = blocks.create(600, 472, 'orangeblock');
+  blue = blocks.create(200, 150, 'blue');
+  red = blocks.create(200, 472, 'red');
+  green = blocks.create(600, 150, 'green');
+  orange = blocks.create(600, 472, 'orange');
   
 
   blocks.forEach(function(block) {
@@ -95,7 +97,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     body.sprite.health -= 1;
     if (body.sprite.health < 1) {
       body.sprite.destroy();
-      console.log(blocks.children[0]);
     }
   } else {
     equation[0].bodyB.parent.sprite.health -= 1;
@@ -109,14 +110,14 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
 }
 
 function startGame () {
-  greenblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  orangeblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  blueblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  greenblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  orangeblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  blueblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
-  redblock.body.velocity.x = game.rnd.integerInRange(-1000,1000);
-  redblock.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  green.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  orange.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  blue.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  green.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  orange.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  blue.body.velocity.y = game.rnd.integerInRange(-1000,1000);
+  red.body.velocity.x = game.rnd.integerInRange(-1000,1000);
+  red.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
   constrain = true;
   showTimer = false;
@@ -161,10 +162,11 @@ function showResults() {
   showTimer = false;
   blocks.children[0].body.data.velocity[0] = 0;
   blocks.children[0].body.data.velocity[1] = 0;
-  blocks.children[0].body.angularDamping = .5;
-  accelerateToCenter(blocks.children[0], 30);
+  blocks.children[0].body.angularDamping = 0;
+  accelerateToCenter(blocks.children[0], 300);
+  goingToCenter = true;
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-            blocks.children[0].key + " is the winner!");
+            blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
@@ -173,17 +175,27 @@ function showResults() {
 
 function accelerateToCenter(obj1, speed) {
     if (typeof speed === 'undefined') { speed = 60; }
-    var angle = Math.atan2(game.world.centerY - 150 - obj1.y, game.world.centerX - obj1.x);
+    var angle = Math.atan2(game.world.centerY + 50 - obj1.y, game.world.centerX - obj1.x);
     obj1.body.rotation = angle + game.math.degToRad(90);  // correct angle of angry bullets (depends on the sprite used)
     obj1.body.force.x = Math.cos(angle) * speed;    // accelerateToObject 
     obj1.body.force.y = Math.sin(angle) * speed;
+}
+
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 function update () {
 
   if (constrain != true && showTimer === true) {
       updateTimer();
-  }
+  } else if (goingToCenter === true) {
+      if (Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
+            blocks.children[0].body.data.velocity[0] = 0;
+            blocks.children[0].body.data.velocity[1] = 0;
+            blocks.children[0].body.angularDamping = .3;
+      }
+    }
   else {
     if (gameOver === false && constrain === true){
       blocks.forEach(function(block) {
