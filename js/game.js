@@ -162,13 +162,21 @@ function showResults() {
   blocks.children[0].body.data.velocity[0] = 0;
   blocks.children[0].body.data.velocity[1] = 0;
   blocks.children[0].body.angularDamping = .5;
-  
+  accelerateToCenter(blocks.children[0], 30);
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             blocks.children[0].key + " is the winner!");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
+}
+
+function accelerateToCenter(obj1, speed) {
+    if (typeof speed === 'undefined') { speed = 60; }
+    var angle = Math.atan2(game.world.centerY - 150 - obj1.y, game.world.centerX - obj1.x);
+    obj1.body.rotation = angle + game.math.degToRad(90);  // correct angle of angry bullets (depends on the sprite used)
+    obj1.body.force.x = Math.cos(angle) * speed;    // accelerateToObject 
+    obj1.body.force.y = Math.sin(angle) * speed;
 }
 
 function update () {
