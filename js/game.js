@@ -2,6 +2,7 @@ var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
   {preload:preload,create:create,update:update,render:render});
 
 var block;
+var blockCollisionGroup;
 var blockVelocity = 50;
 var money = 50;
 var betMoney = 0;
@@ -12,6 +13,7 @@ var gameOver = false;
 var showTimer = true;
 var goingToCenter = false;
 var distanceToCenter;
+var timer;
 
 var textStyle = {
   align: 'center'
@@ -33,53 +35,30 @@ function preload() {
 }
 
 function create() {
-  
   game.stage.disableVisibilityChange = true; 
   // Add physics
-  
-  //game.physics.startSystem(Phaser.Physics.ARCADE);
   game.physics.startSystem(Phaser.Physics.P2JS);
-  
   game.physics.p2.setImpactEvents(true);
-
-  var blockCollisionGroup = game.physics.p2.createCollisionGroup(); 
-
+  blockCollisionGroup = game.physics.p2.createCollisionGroup(); 
   game.physics.p2.updateBoundsCollisionGroup();
-
-  
-  //wall.body.onBeginContact.add(hitBlock, this);
-  
   game.physics.p2.damping = 0;
   game.physics.p2.friction = 0;
   game.physics.p2.angularDamping = 0;
   game.physics.p2.restitution = 1;
-  
-  //background = game.add.tileSprite(0,0,320,568,"background");
-  
   blocks = game.add.group();
   blocks.enableBody = true;
   blocks.physicsBodyType = Phaser.Physics.P2JS;
-  
-
   //create blocks
   blue = blocks.create(200, 150, 'blue');
   red = blocks.create(200, 472, 'red');
   green = blocks.create(600, 150, 'green');
   orange = blocks.create(600, 472, 'orange');
-  
-
   blocks.forEach(function(block) {
-
-
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
-
     block.body.onBeginContact.add(hitBlock, this);
-
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
-    
-    block.body.damping = 0;
     block.body.friction = 0;
     block.body.angularDamping = 0;
     block.body.mass = 0.1;
@@ -104,9 +83,14 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       equation[0].bodyB.parent.sprite.destroy();
     }
   }
-  if (blocks.length === 1) {
+  if (blocks.length === 1 || blocks.length === 0) {
     gameOver = true;
   }
+}
+
+function tieGame() {
+
+
 }
 
 function startGame () {
@@ -156,21 +140,56 @@ function updateTimer() {
   prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft); 
 };
 
-function showResults() {
+function showResults(result) {
   gameOver = false;
   constrain = false;
   showTimer = false;
-  blocks.children[0].body.data.velocity[0] = 0;
-  blocks.children[0].body.data.velocity[1] = 0;
-  blocks.children[0].body.angularDamping = 0;
-  accelerateToCenter(blocks.children[0], 300);
-  goingToCenter = true;
-  prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
+  if (result && result === "tie") {
+    prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
+            "Looks like no one is the winner, whoops! No payout!");
+    game.time.events.add(Phaser.Timer.SECOND * 3, resetGame, this);
+  } else {
+    blocks.children[0].body.data.velocity[0] = 0;
+    blocks.children[0].body.data.velocity[1] = 0;
+    blocks.children[0].body.angularDamping = .3;
+    accelerateToCenter(blocks.children[0], 500);
+    goingToCenter = true;
+    prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
+  }
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
+  timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
+}
+
+function resetGame() {
+  blocks.children[0].destroy();
+  prompt.destroy();
+  blue = blocks.create(200, 150, 'blue');
+  red = blocks.create(200, 472, 'red');
+  green = blocks.create(600, 150, 'green');
+  orange = blocks.create(600, 472, 'orange');
+  blocks.forEach(function(block) {
+    block.body.setCollisionGroup(blockCollisionGroup);
+    block.body.collides(blockCollisionGroup);
+    block.body.onBeginContact.add(hitBlock, this);
+    block.anchor.x = 0.5;
+    block.anchor.y = 0.5;
+    block.body.friction = 0;
+    block.body.angularDamping = 0;
+    block.body.mass = 0.1;
+    block.body.restitution = 1;
+    block.health = 20;
+    block.isAlive = true;
+  }, this);
+  constrain = false; 
+  gameOver = false;
+  showTimer = true;
+  goingToCenter = false;
+  promptBet();
+  game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
 }
 
 function accelerateToCenter(obj1, speed) {
@@ -190,10 +209,14 @@ function update () {
   if (constrain != true && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
-      if (Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
+      
+      if (blocks.children[0] && Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
             blocks.children[0].body.data.velocity[0] = 0;
             blocks.children[0].body.data.velocity[1] = 0;
-            blocks.children[0].body.angularDamping = .3;
+      } else {
+            timer.destroy();
+            prompt.destroy();
+            showResults("tie");
       }
     }
   else {
@@ -201,9 +224,11 @@ function update () {
       blocks.forEach(function(block) {
         constrainVelocity(block,blockVelocity);
       }, this);
-    } else if (gameOver === true)  {
+    } else if (gameOver === true && blocks.length === 1)  {
       showResults();
-    }
+    } else if (gameOver === true && blocks.length === 0) {
+      showResults("tie");
+      }
   }
 }
 
