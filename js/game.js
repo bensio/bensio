@@ -1,10 +1,10 @@
-var game = new Phaser.Game(800,600,Phaser.AUTO,'game',
+var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',
   {preload:preload,create:create,update:update,render:render});
 
 var block;
 var blockCollisionGroup;
 var blockVelocity = 30;
-var money = 50;
+var money = 40;
 var betMoney = 0;
 var prompt;
 var blocks;
@@ -14,6 +14,14 @@ var showTimer = true;
 var goingToCenter = false;
 var distanceToCenter;
 var timer;
+var bet = "none";
+var winner = "none";
+var bluebutton;
+var redbutton;
+var greenbutton;
+var orangebutton;
+
+
 
 var textStyle = {
   align: 'center'
@@ -50,15 +58,15 @@ function create() {
   blocks.physicsBodyType = Phaser.Physics.P2JS;
   //create blocks
   blue = blocks.create(200, 150, 'blue');
-  red = blocks.create(200, 472, 'red');
-  green = blocks.create(600, 150, 'green');
-  orange = blocks.create(600, 472, 'orange');
+  red = blocks.create(200, 744, 'red');
+  green = blocks.create(1008, 150, 'green');
+  orange = blocks.create(1008, 744, 'orange');
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
-    block.anchor.x = 0.5;
-    block.anchor.y = 0.5;
+    //block.anchor.x = 0.5;
+    //block.anchor.y = 0.5;
     block.body.friction = 0;
     block.body.angularDamping = 0;
     block.body.mass = 0.1;
@@ -73,11 +81,13 @@ function create() {
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body) {
+    body.sprite.alpha -= .05;
     body.sprite.health -= 1;
     if (body.sprite.health < 1) {
       body.sprite.destroy();
     }
   } else {
+    equation[0].bodyB.parent.sprite.alpha -= .05;
     equation[0].bodyB.parent.sprite.health -= 1;
     if (equation[0].bodyB.parent.sprite.health < 1) {
       equation[0].bodyB.parent.sprite.destroy();
@@ -88,10 +98,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   }
 }
 
-function tieGame() {
-
-
-}
 
 function startGame () {
   green.body.velocity.x = game.rnd.integerInRange(-1000,1000);
@@ -103,6 +109,10 @@ function startGame () {
   red.body.velocity.x = game.rnd.integerInRange(-1000,1000);
   red.body.velocity.y = game.rnd.integerInRange(-1000,1000);
   prompt.destroy();
+  redbutton.destroy();
+  greenbutton.destroy();
+  bluebutton.destroy();
+  orangebutton.destroy();
   constrain = true;
   showTimer = false;
 }
@@ -128,16 +138,33 @@ function constrainVelocity(sprite, maxVelocity) {
 
 function promptBet() {
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10");
+      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
+ 
+  redbutton = game.add.button(164, 708, 'red', betOnBlock, {color: "red"});
+  greenbutton = game.add.button(972, 114, 'green', betOnBlock, {color: "green"});
+  bluebutton = game.add.button(164, 114, 'blue', betOnBlock, {color: "blue"});
+  orangebutton = game.add.button(972, 708, 'orange', betOnBlock, {color: "orange"});
 };
+
+function betOnBlock() {
+  if (bet != "none" && bet != this.color) {
+    bet = this.color;
+    betMoney = 10;
+  } else if (betMoney < money) {
+    bet = this.color;
+    betMoney += 10;
+  }
+
+}
+
 
 function updateTimer() {
   timeLeft = Math.floor(game.time.events.duration / 1000) + 1;
-  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft); 
+  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + "."); 
 };
 
 function showResults(result) {
@@ -145,21 +172,21 @@ function showResults(result) {
   constrain = false;
   showTimer = false;
   if (result && result === "tie") {
-    if (timer) {
-      timer.destroy();
-    }
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             "Looks like no one is the winner, whoops! No payout!");
     timer = game.time.events.add(Phaser.Timer.SECOND * 3, resetGame, this);
+    winner = "none";
+    betMoney = 0;
   } else {
     blocks.children[0].body.data.velocity[0] = 0;
     blocks.children[0].body.data.velocity[1] = 0;
     blocks.children[0].body.angularDamping = .3;
-    accelerateToCenter(blocks.children[0], 500);
+    accelerateToCenter(blocks.children[0], 1000);
     goingToCenter = true;
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
     timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
+    winner = blocks.children[0].key;
   }
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
@@ -171,15 +198,25 @@ function resetGame() {
   if (blocks.children[0]) {
     blocks.children[0].destroy();
   }
+  if (bet === winner) {
+    money = money + betMoney;
+  } else if (winner != "none" && bet != winner) {
+    money = money - betMoney;
+    if (money <= 0) {
+      money = 10;
+    }
+  }
+  betMoney = 0;
+  bet = "none";
+  winner = "none"
   constrain = false; 
   gameOver = false;
-  showTimer = true;
   goingToCenter = false;
-  prompt.destroy();
+  prompt.destroy();  
   blue = blocks.create(200, 150, 'blue');
-  red = blocks.create(200, 472, 'red');
-  green = blocks.create(600, 150, 'green');
-  orange = blocks.create(600, 472, 'orange');
+  red = blocks.create(200, 744, 'red');
+  green = blocks.create(1008, 150, 'green');
+  orange = blocks.create(1008, 744, 'orange');
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
@@ -194,6 +231,7 @@ function resetGame() {
     block.isAlive = true;
   }, this);
   promptBet();
+  showTimer = true;
   game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
 }
 
@@ -211,11 +249,14 @@ String.prototype.capitalizeFirstLetter = function() {
 
 function update () {
 
-  if (constrain != true && showTimer === true) {
+  if (constrain === false && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
-        
+       if (blocks.children[0].alpha < 1) {
+          blocks.children[0].alpha += .01;
+       }
+
         if (Phaser.Math.distance(game.world.centerX, game.world.centerY + 50, blocks.children[0].body.sprite.x, blocks.children[0].body.sprite.y) < 3) {
               blocks.children[0].body.data.velocity[0] = 0;
               blocks.children[0].body.data.velocity[1] = 0;
