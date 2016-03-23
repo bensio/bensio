@@ -10,12 +10,14 @@ h1 {
   font-size: 56px;
 }
 
+a {
+    text-decoration: none;
+}
+
 #header {
     height: 200px;
     width: 400px;
     background: black;
-
-    text-decoration: none;
 
     position: fixed;
     top: 50%;
