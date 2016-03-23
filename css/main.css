@@ -17,11 +17,7 @@ a {
 #header {
     height: 100px;
     width: 275px;
-    background: black;
-
-    padding: 25px;
-    border: 25px solid white;
-    margin: 15px;
+    background: gray;
 
     position: fixed;
     top: 50%;
