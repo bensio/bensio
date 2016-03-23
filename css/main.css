@@ -16,12 +16,12 @@ a {
 
 #header {
     height: 200px;
-    width: 400px;
+    width: 300px;
     background: black;
 
     padding: 25px;
-    border: 25px solid navy;
-    margin: 25px;
+    border: 25px solid white;
+    margin: 15px;
 
     position: fixed;
     top: 50%;
