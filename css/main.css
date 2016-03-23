@@ -10,7 +10,7 @@ h1 {
   font-size: 56px;
 }
 
-div {
+.header {
     height: 200px;
     width: 400px;
     background: black;
