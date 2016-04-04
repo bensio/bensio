@@ -43,6 +43,9 @@ function preload() {
 }
 
 function create() {
+  if (localStorage && localStorage.getItem('money')) {
+    money = parseint(localStorage.getItem('money'))
+  }
   game.stage.disableVisibilityChange = true; 
   // Add physics
   game.physics.startSystem(Phaser.Physics.P2JS);
@@ -206,6 +209,7 @@ function resetGame() {
       money = 10;
     }
   }
+  localStorage.setItem('money', money.toString());
   betMoney = 0;
   bet = "none";
   winner = "none"
