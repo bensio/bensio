@@ -44,7 +44,7 @@ function preload() {
 
 function create() {
   if (localStorage && localStorage.getItem('money')) {
-    money = parseint(localStorage.getItem('money'))
+    money = parseInt(localStorage.getItem('money'))
   }
   game.stage.disableVisibilityChange = true; 
   // Add physics
