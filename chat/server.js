@@ -49,7 +49,7 @@ var server = http.createServer(function(request, response) {
     file = 'public' + request.url;
   }
   var absPath = './' + filePath;
-  serverStatic(request, cache, absPath);
+  serveStatic(request, cache, absPath);
 });
 
 server.listen(3000, function() {
