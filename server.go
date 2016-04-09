@@ -1,9 +1,9 @@
 package main
 
 import (
-	"code.google.com/p/go-uuid/uuid"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
+	"github.com/pborman/uuid"
 	"log"
 	"net/http"
 )
@@ -118,7 +118,7 @@ func main() {
 	r.HandleFunc("/ws", remoteHandler)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./")))
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":8000", r)
 	/*http.HandleFunc("/", serve)
 
 	err := http.ListenAndServe(":80", nil)
