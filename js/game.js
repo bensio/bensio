@@ -27,18 +27,11 @@ var textStyle = {
   align: 'center'
 };
 
-
-
-
-
-
-
-
- var player, //our player
+var player, //our player
         players = {}, //this will hold the list of players
         sock, //this will be player's ws connection
         label,
-        ip = "162.243.216.88"; //ip of our Go server
+        ip = "192.168.1.13"; //ip of our Go server
 
 function preload() {
  
