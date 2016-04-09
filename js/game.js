@@ -1,7 +1,6 @@
 var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',
   {preload:preload,create:create,update:update,render:render});
 
-var socket;
 var block;
 var blockCollisionGroup;
 var blockVelocity = 30;
@@ -21,12 +20,25 @@ var bluebutton;
 var redbutton;
 var greenbutton;
 var orangebutton;
-
+var greeting
 
 
 var textStyle = {
   align: 'center'
 };
+
+
+
+
+
+
+
+
+ var player, //our player
+        players = {}, //this will hold the list of players
+        sock, //this will be player's ws connection
+        label,
+        ip = "162.243.216.88"; //ip of our Go server
 
 function preload() {
  
@@ -44,7 +56,7 @@ function preload() {
 }
 
 function create() {
-  socket = io.connect();
+//  socket = io.listen(8000);
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'))
   }
@@ -66,6 +78,36 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
+  
+  
+  
+  
+  sock = new WebSocket("ws://" + ip + ":80/ws");
+        sock.onopen = function() {
+            var currency = JSON.stringify({
+                money: money,
+                betMoney: 0
+            });
+            sock.send(currency);
+        };
+
+    sock.onmessage = function(message) {
+            var m = JSON.parse(message.data);
+            if (m.New) {
+                players[m.Id] = greet(m);
+                if (localStorage && localStorage.getItem('money')) {
+                    players[m.Id].money = parseInt(localStorage.getItem('money'))
+                 } else {
+                    players[m.Id].money = 40;
+                 }
+            } else if (m.Online === false) {
+                players[m.Id].label.destroy();
+                players[m.Id].destroy();
+            } else {
+                uMoney(m)  
+            }
+        };
+
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
@@ -81,84 +123,27 @@ function create() {
 
   }, this);
   game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-  setEventHandlers();
   promptBet();
 }
 
-function setEventHandlers() {
-  // Socket connection successful
-  socket.on('connect', onSocketConnected)
+function greet(m) {
+   var label = m.Id.match(/(^\w*)-/i)[1];
 
-  // Socket disconnection
-  socket.on('disconnect', onSocketDisconnect)
 
-  // New player message received
-  socket.on('new player', onNewPlayer)
-
-  // Player move message received
-  socket.on('bet block', onBetBlock)
-
-  // Player removed message received
-  socket.on('remove player', onRemovePlayer)
+   if (localStorage && localStorage.getItem('money')) {
+       money = parseInt(localStorage.getItem('money'))
+     } else {
+       money = 40;
+     }
+   game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
+   greeting = game.add.text(game.world.centerX, game.world.centerY + 200, label + " has joined the game with " + money + " Benbux. There are currently " + players.length + " players online.");
+   return label;
 }
 
-function onSocketConnected() {
-  console.log("Welcome to Bens.io, connected player!");
-  socket.emit('new player', { money: player.money });
-}
-
-function onSocketDisconnect() {
-  console.log("I DIDN'T LIKE YOU ANYWAY.");
-}
-
-function onNewPlayer (data) {
-  console.log('New player connected:', data.id)
-
-  // Avoid possible duplicate players
-  var duplicate = playerById(data.id)
-  if (duplicate) {
-    console.log('Duplicate player!')
-    return
+function killGreeting() {
+  if (greeting) {
+    greeting.destroy();
   }
-
-  // Add new player to the remote players array
-  betters.push(new RemotePlayer(data.id, game, player, data.money, data.betMoney))
-}
-
-function playerById (id) {
-  for (var i = 0; i < betters.length; i++) {
-    if (betters[i].player.name === id) {
-      return betters[i]
-    }
-  }
-
-  return false
-}
-
-function onBetBlock (data) {
-  var betBlock = playerById(data.id)
-
-  // Player not found
-  if (!betBlock) {
-    console.log('Player not found: ', data.id)
-    return
-  }
-
-  // Update player position
-  betBlock.player.betMoney = data.betMoney
-  betBlock.player.money = data.money
-}
-function onRemovePlayer (data) {
-  var removePlayer = playerById(data.id)
-
-  // Player not found
-  if (!removePlayer) {
-    console.log('Player not found: ', data.id)
-    return
-  }
-
-  // Remove player from array
-  betters.splice(betters.indexOf(removePlayer), 1)
 }
 
 
@@ -290,7 +275,12 @@ function resetGame() {
     }
   }
   localStorage.setItem('money', money.toString());
-  betMoney = 0;
+  var currency = JSON.stringify({
+     money: money,
+     betMoney: 0
+  });
+  sock.send(currency);
+  betMoney = 0; 
   bet = "none";
   winner = "none"
   constrain = false; 
@@ -332,9 +322,13 @@ String.prototype.capitalizeFirstLetter = function() {
 }
 
 function update () {
-
   if (constrain === false && showTimer === true) {
       updateTimer();
+      var currency = JSON.stringify({
+         money: money,
+         betMoney : betMoney
+      });
+      sock.send(currency);
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
@@ -361,6 +355,11 @@ function update () {
       showResults("tie");
       }
   }
+}
+
+function uMoney(m) { 
+  players[m.Id].money = m.money
+  players[m.Id].betMoney = m.betMoney      
 }
 
 
