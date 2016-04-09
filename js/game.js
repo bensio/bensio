@@ -32,7 +32,7 @@ var player, //our player
         players = {}, //this will hold the list of players
         sock, //this will be player's ws connection
         label,
-        ip = "192.168.1.13"; //ip of our Go server
+        ip = "162.243.216.88"; //ip of our Go server
 
 function preload() {
  
@@ -72,12 +72,8 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
-  
-  
-  
-  
-  sock = new WebSocket("ws://" + ip + ":80/ws");
-        sock.onopen = function() {
+  sock = new WebSocket("ws://" + ip + ":8080/ws");
+  sock.onopen = function() {
             var currency = JSON.stringify({
                 money: money,
                 betMoney: 0

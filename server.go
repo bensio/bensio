@@ -117,8 +117,8 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/ws", remoteHandler)
 
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
-	http.ListenAndServe(":80", r)
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./")))
+	http.ListenAndServe(":8080", r)
 	/*http.HandleFunc("/", serve)
 
 	err := http.ListenAndServe(":80", nil)
