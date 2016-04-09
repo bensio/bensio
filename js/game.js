@@ -20,7 +20,8 @@ var bluebutton;
 var redbutton;
 var greenbutton;
 var orangebutton;
-var greeting
+var greeting;
+var connected = "false";
 
 
 var textStyle = {
@@ -82,6 +83,7 @@ function create() {
                 betMoney: 0
             });
             sock.send(currency);
+            connected = true;
         };
 
     sock.onmessage = function(message) {
@@ -321,7 +323,9 @@ function update () {
          money: money,
          betMoney : betMoney
       });
-      sock.send(currency);
+      if (connected === true) {
+        sock.send(currency);  
+      }
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
@@ -338,7 +342,7 @@ function update () {
       }
     }
   else {
-    if (gameOver === false && constrain === true){
+    if (gameOver === false && constrain === true){ 
       blocks.forEach(function(block) {
         constrainVelocity(block,blockVelocity);
       }, this);
