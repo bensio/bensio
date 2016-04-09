@@ -267,7 +267,6 @@ function update () {
         }
       } else {
             prompt.destroy();
-            showResults("tie");
             goingToCenter = false;
       }
     }
