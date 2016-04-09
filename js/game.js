@@ -1,6 +1,7 @@
 var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',
   {preload:preload,create:create,update:update,render:render});
 
+var socket;
 var block;
 var blockCollisionGroup;
 var blockVelocity = 30;
@@ -43,6 +44,7 @@ function preload() {
 }
 
 function create() {
+  socket = io.connect();
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'))
   }
@@ -79,8 +81,86 @@ function create() {
 
   }, this);
   game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
+  setEventHandlers();
   promptBet();
 }
+
+function setEventHandlers() {
+  // Socket connection successful
+  socket.on('connect', onSocketConnected)
+
+  // Socket disconnection
+  socket.on('disconnect', onSocketDisconnect)
+
+  // New player message received
+  socket.on('new player', onNewPlayer)
+
+  // Player move message received
+  socket.on('bet block', onBetBlock)
+
+  // Player removed message received
+  socket.on('remove player', onRemovePlayer)
+}
+
+function onSocketConnected() {
+  console.log("Welcome to Bens.io, connected player!");
+  socket.emit('new player', { money: player.money });
+}
+
+function onSocketDisconnect() {
+  console.log("I DIDN'T LIKE YOU ANYWAY.");
+}
+
+function onNewPlayer (data) {
+  console.log('New player connected:', data.id)
+
+  // Avoid possible duplicate players
+  var duplicate = playerById(data.id)
+  if (duplicate) {
+    console.log('Duplicate player!')
+    return
+  }
+
+  // Add new player to the remote players array
+  betters.push(new RemotePlayer(data.id, game, player, data.money, data.betMoney))
+}
+
+function playerById (id) {
+  for (var i = 0; i < betters.length; i++) {
+    if (betters[i].player.name === id) {
+      return betters[i]
+    }
+  }
+
+  return false
+}
+
+function onBetBlock (data) {
+  var betBlock = playerById(data.id)
+
+  // Player not found
+  if (!betBlock) {
+    console.log('Player not found: ', data.id)
+    return
+  }
+
+  // Update player position
+  betBlock.player.betMoney = data.betMoney
+  betBlock.player.money = data.money
+}
+function onRemovePlayer (data) {
+  var removePlayer = playerById(data.id)
+
+  // Player not found
+  if (!removePlayer) {
+    console.log('Player not found: ', data.id)
+    return
+  }
+
+  // Remove player from array
+  betters.splice(betters.indexOf(removePlayer), 1)
+}
+
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body) {
