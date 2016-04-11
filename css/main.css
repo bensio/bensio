@@ -27,6 +27,16 @@ iframe {
   margin-top: -100px;
   margin-left: -200px;
 }
+
+.container { position:relative; padding:0 0 0 55px; }
+#sidebar {
+    position:absolute;
+    top:0; bottom:0; left:0;
+    width:50px;
+    background:#000;
+}
+
+
 * {
   -webkit-box-sizing:border-box;
   -moz-box-sizing:border-box;
