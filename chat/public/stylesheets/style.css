@@ -8,7 +8,7 @@ a{
 }
 
 #content {
-  width: 800px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -19,8 +19,8 @@ a{
 }
 
 #messages {
-  width: 690px;
-  height: 300px;
+  width: 790px;
+  height: 400px;
   overflow: auto;
   background-color: #eee;
   margin-bottom: 1em;
@@ -29,8 +29,8 @@ a{
 
 #room-list {
   float: right;
-  width: 100px;
-  height: 300px;
+  width: 200px;
+  height: 400px;
   overflow: auto;
 }
 
@@ -43,7 +43,7 @@ a{
 }
 
 #send-message {
-  width: 700px;
+  width: 800px;
   margin-bottom: 1em;
   margin-right: 1em;
 }
