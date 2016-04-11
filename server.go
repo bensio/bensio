@@ -10,7 +10,7 @@ import (
 
 type Message struct {
 	Money    int    // current money of player
-	Betmoney int    // as above, current money betted
+	BetMoney int    // as above, current money betted
 	Id       string // the id of the player that sent the message
 	New      bool   // true if this player just connected so we know when to
 	// spawn a new sprite on the screens of the other players. for all subsequent
@@ -21,7 +21,7 @@ type Message struct {
 
 type Player struct {
 	Money    int             // Curent net worth of the player
-	Betmoney int             // Current money the player is betting
+	BetMoney int             // Current money the player is betting
 	Id       string          // a unique id to identify the player by the frontend
 	Socket   *websocket.Conn // websocket connection of the player
 }
