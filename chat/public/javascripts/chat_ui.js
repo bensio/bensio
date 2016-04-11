@@ -37,7 +37,7 @@ $(document).ready(function() {
     var message;
 
     if (result.success) {
-      message = 'You are now known as ' + result.name + '.';
+      message = "You're new nickname is " + result.name + '.';
     } else {
       message = result.message;
     }
