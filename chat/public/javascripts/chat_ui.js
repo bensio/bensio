@@ -35,9 +35,17 @@ $(document).ready(function() {
   // Display the results of a name change attempt
   socket.on('nameResult', function(result) {
     var message;
+    
+    var bannedNames = {
+      "" 
+    }
 
     if (result.success) {
-      message = "You're new nickname is " + result.name + '.';
+      if (!(result.name.toLowerCase() in bannedNames)) {
+        message = "You're new nickname is " + result.name + '.';
+      } else {
+        message = "You're name cannot be a banned name.";
+      }
     } else {
       message = result.message;
     }

@@ -127,7 +127,11 @@ function greet(m) {
        money = 40;
      }
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX, game.world.centerY + 200, label + " has joined the game with " + money + " Benbux. There are currently " + players.length + " players online.");
+   greeting = game.add.text(game.world.centerX - 300, game.world.centerY - 400, label + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   prompt.anchor.setTo(0.5, 0.5);
+   prompt.font = 'Century Schoolbook';
+   prompt.fontSize = 20;
+   prompt.align = "center";
    return label;
 }
 
