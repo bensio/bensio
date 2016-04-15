@@ -34,6 +34,8 @@ var player, //our player
         label,
         ip = "162.243.216.88"; //ip of our Go server
 
+fs = require('fs');
+
 function preload() {
  
   //Center the game.
@@ -119,7 +121,7 @@ function create() {
 
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
-
+   
 
    if (localStorage && localStorage.getItem('money')) {
        money = parseInt(localStorage.getItem('money'))
@@ -127,11 +129,11 @@ function greet(m) {
        money = 40;
      }
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX - 300, game.world.centerY - 400, label + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
-   prompt.anchor.setTo(0.5, 0.5);
-   prompt.font = 'Century Schoolbook';
-   prompt.fontSize = 20;
-   prompt.align = "center";
+   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, label + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting.anchor.setTo(0.5, 0.5);
+   greeting.font = 'Century Schoolbook';
+   greeting.fontSize = 20;
+   greeting.align = "center";
    return label;
 }
 
