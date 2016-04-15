@@ -9,25 +9,28 @@ import (
 )
 
 type Message struct {
-	Money    int    // current money of player
-	BetMoney int    // as above, current money betted
-	Id       string // the id of the player that sent the message
-	New      bool   // true if this player just connected so we know when to
+	Money      int    // current money of player
+	BetMoney   int    // as above, current money betted
+	PlayerName string // Set name of the current player
+	Id         string // the id of the player that sent the message
+	New        bool   // true if this player just connected so we know when to
 	// spawn a new sprite on the screens of the other players. for all subsequent
 	// messages it's false
 	Online bool // true if the player is no longer connected so the frontend
 	// will remove it from the roster
+
 }
 
 type Player struct {
-	Money    int             // Curent net worth of the player
-	BetMoney int             // Current money the player is betting
-	Id       string          // a unique id to identify the player by the frontend
-	Socket   *websocket.Conn // websocket connection of the player
+	Money      int             // Curent net worth of the player
+	BetMoney   int             // Current money the player is betting
+	Id         string          // a unique id to identify the player by the frontend
+	PlayerName string          // self explanatory
+	Socket     *websocket.Conn // websocket connection of the player
 }
 
 func (p *Player) currency(new bool) Message {
-	return Message{Money: p.Money, BetMoney: p.BetMoney, Id: p.Id, New: new, Online: true}
+	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, New: new, Online: true}
 }
 
 // a slice of *Players which will store the list of connected players

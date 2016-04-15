@@ -22,7 +22,7 @@ var greenbutton;
 var orangebutton;
 var greeting;
 var connected = "false";
-
+var playerName
 
 var textStyle = {
   align: 'center'
@@ -34,7 +34,7 @@ var player, //our player
         label,
         ip = "162.243.216.88"; //ip of our Go server
 
-fs = require('fs');
+//fs = require('fs');
 
 function preload() {
  
@@ -55,6 +55,9 @@ function create() {
 //  socket = io.listen(8000);
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'))
+  }
+  if (localStorage && localStorage.getItem('name')) {
+    playerName = localStorage.getItem('name')
   }
   game.stage.disableVisibilityChange = true; 
   // Add physics
@@ -105,8 +108,6 @@ function create() {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
-    //block.anchor.x = 0.5;
-    //block.anchor.y = 0.5;
     block.body.friction = 0;
     block.body.angularDamping = 0;
     block.body.mass = 0.1;
@@ -115,13 +116,28 @@ function create() {
     block.isAlive = true;
 
   }, this);
-  game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-  promptBet();
+  if (playerName != null) {
+    game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
+    promptBet();
+  } else {
+    playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
+    localStorage.setItem('name', playerName); 
+    game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
+    promptBet();
+  }
 }
+
+/*function askName() {
+   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bens.io! \n\n\n Type in a username you'd like to attach to this computer here:");   
+   greeting.anchor.setTo(0.5, 0.5);
+   greeting.font = 'Century Schoolbook';
+   greeting.fontSize = 20;
+   greeting.align = "center";
+
+} */
 
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
-   
 
    if (localStorage && localStorage.getItem('money')) {
        money = parseInt(localStorage.getItem('money'))
@@ -129,7 +145,7 @@ function greet(m) {
        money = 40;
      }
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, label + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.Name + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
