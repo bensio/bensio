@@ -54,7 +54,6 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 	player := new(Player)
 	player.Id = uuid.New()
 	player.Socket = ws
-
 	// we broadcast the position of the new player to alredy connected
 	// players (if any) and viceversa, we tell the player where to spawn already
 	// existing players

@@ -29,7 +29,7 @@ var textStyle = {
 };
 
 var player, //our player
-        players = {}, //this will hold the list of players
+        players = [], //this will hold the list of players
         sock, //this will be player's ws connection
         label,
         ip = "162.243.216.88"; //ip of our Go server
@@ -91,19 +91,12 @@ function create() {
 
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
-            if (m.New) {
-                players[m.Id] = greet(m);
-                if (localStorage && localStorage.getItem('money')) {
-                    players[m.Id].money = parseInt(localStorage.getItem('money'))
-                 } else {
-                    players[m.Id].money = 40;
-                 }
-            } else if (m.Online === false) {
-                players[m.Id].label.destroy();
-                players[m.Id].destroy();
-            } else {
-                uMoney(m)
-                player[m.Id].playerName = playerName;
+            if (m.Money != 0) {
+              if (m.New && m.PlayerName != playerName) {
+                  greet(m); 
+              } else {
+                  uMoney(m);
+             }
             }
         };
 
@@ -136,11 +129,12 @@ function create() {
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.playerName + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
    greeting.align = "center";
+   console.log(m);
    return label;
 }
 
