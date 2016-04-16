@@ -92,7 +92,7 @@ function create() {
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
             if (m.Money != 0) {
-              if (m.New && m.PlayerName == playerName) {
+              if (m.New) {
                   greet(m); 
               } else {
                 //  uMoney(m);
