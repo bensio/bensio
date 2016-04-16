@@ -95,7 +95,7 @@ function create() {
               if (m.New && m.PlayerName == playerName) {
                   greet(m); 
               } else {
-                  uMoney(m);
+                //  uMoney(m);
              }
             }
         };
@@ -225,6 +225,14 @@ function betOnBlock() {
     betMoney += 10;
   }
 
+
+  var currency = JSON.stringify({
+      money: money,
+      betMoney : betMoney
+  });
+  if (connected === true) {
+    sock.send(currency);  
+  }
 }
 
 
@@ -322,13 +330,6 @@ String.prototype.capitalizeFirstLetter = function() {
 function update () {
   if (constrain === false && showTimer === true) {
       updateTimer();
-      var currency = JSON.stringify({
-         money: money,
-         betMoney : betMoney
-      });
-      if (connected === true) {
-        sock.send(currency);  
-      }
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
@@ -358,8 +359,8 @@ function update () {
 }
 
 function uMoney(m) { 
-  players[m.Id].money = m.money
-  players[m.Id].betMoney = m.betMoney      
+  /*total.money = m.Money
+  players[m.Id].betMoney = m.BetMoney +*/       
 }
 
 
