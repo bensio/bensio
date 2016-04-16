@@ -90,13 +90,14 @@ function create() {
             connected = true;
         };
     
-    game.time.events.add(Phaser.Timer.SECOND * 10, startMessages, this);
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
             console.log(m);
-            if (m.Money != 0 && takeMessages == true) {
-              if (m.New) {
-                players.push(m.PlayerName); 
+            if (connected == true) {
+              if (m.New && m.Money != 0) {
+                if (!players.indexOf(m.PlayerName)) {
+                  players.push(m.PlayerName); 
+                }
                 greet(m)
               }
             }

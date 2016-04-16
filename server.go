@@ -99,7 +99,7 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 		go func() {
 			for _, p := range Players {
 				if p.Socket.RemoteAddr() != player.Socket.RemoteAddr() {
-					if err = p.Socket.WriteJSON(player.currency(false)); err != nil {
+					if err = p.Socket.WriteJSON(player.currency(true)); err != nil {
 						log.Println(err)
 					}
 				}
