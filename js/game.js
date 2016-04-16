@@ -22,7 +22,7 @@ var greenbutton;
 var orangebutton;
 var greeting;
 var connected = "false";
-var playerName
+var playerName;
 
 var textStyle = {
   align: 'center'
@@ -42,7 +42,6 @@ function preload() {
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
-  //game.load.image("background","assets/bg.png");
   game.load.image("blue", "assets/bluesquare.png",72,72);
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
@@ -52,12 +51,14 @@ function preload() {
 }
 
 function create() {
-//  socket = io.listen(8000);
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'))
   }
   if (localStorage && localStorage.getItem('name')) {
     playerName = localStorage.getItem('name')
+  } else {
+    playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
+    localStorage.setItem('name', playerName);
   }
   game.stage.disableVisibilityChange = true; 
   // Add physics
@@ -81,7 +82,8 @@ function create() {
   sock.onopen = function() {
             var currency = JSON.stringify({
                 money: money,
-                betMoney: 0
+                betMoney: 0,
+                playerName: playerName
             });
             sock.send(currency);
             connected = true;
@@ -100,7 +102,8 @@ function create() {
                 players[m.Id].label.destroy();
                 players[m.Id].destroy();
             } else {
-                uMoney(m)  
+                uMoney(m)
+                player[m.Id].playerName = playerName;
             }
         };
 
@@ -116,15 +119,9 @@ function create() {
     block.isAlive = true;
 
   }, this);
-  if (playerName != null) {
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet();
-  } else {
-    playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
-    localStorage.setItem('name', playerName); 
-    game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-    promptBet();
-  }
+  
 }
 
 /*function askName() {
@@ -138,14 +135,8 @@ function create() {
 
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
-
-   if (localStorage && localStorage.getItem('money')) {
-       money = parseInt(localStorage.getItem('money'))
-     } else {
-       money = 40;
-     }
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.Name + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.playerName + " has joined the game with " + money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;

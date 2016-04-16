@@ -70,3 +70,222 @@
 2016/04/15 19:31:56 Publishing current net worths
 2016/04/15 19:32:50 got websocket conn from 24.224.72.38:56177
 2016/04/15 19:32:50 Publishing current net worths
+2016/04/15 19:41:33 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:41:33 destroy player &{40 0 debd063a-5535-4a18-ad30-140e8d04b0e0 0xc21006cf00}
+2016/04/15 19:41:33 Number of players still connected ... 1
+2016/04/15 19:41:34 got websocket conn from 24.224.72.38:50951
+2016/04/15 19:41:34 Publishing current net worths
+2016/04/15 19:41:40 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:41:40 destroy player &{40 0 38e37651-dcda-437b-89e8-83ed4d39bd2f 0xc21006ca00}
+2016/04/15 19:41:40 Number of players still connected ... 1
+2016/04/15 19:41:40 got websocket conn from 24.224.72.38:56210
+2016/04/15 19:41:40 Publishing current net worths
+2016/04/15 19:42:29 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:42:29 destroy player &{40 0 200de914-5a78-44f8-b805-96d6782fb5a9 0xc21006cc00}
+2016/04/15 19:42:29 Number of players still connected ... 1
+2016/04/15 19:42:29 got websocket conn from 24.224.72.38:50962
+2016/04/15 19:42:29 Publishing current net worths
+2016/04/15 19:42:36 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:42:36 destroy player &{40 0 6ebb29bf-72b8-4e3b-b11d-f66a5c762d76 0xc21006c700}
+2016/04/15 19:42:36 Number of players still connected ... 1
+2016/04/15 19:42:36 got websocket conn from 24.224.72.38:50967
+2016/04/15 19:42:36 Publishing current net worths
+2016/04/15 19:42:59 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:42:59 destroy player &{40 0 e6aa0683-a8b8-4d28-9295-3cd3ba946ca3 0xc21006c800}
+2016/04/15 19:42:59 Number of players still connected ... 1
+2016/04/15 19:42:59 got websocket conn from 24.224.72.38:50973
+2016/04/15 19:42:59 Publishing current net worths
+2016/04/15 19:45:25 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:45:25 destroy player &{40 0 96bde76c-127e-4e8f-ab7c-72f1788c8b2d 0xc21006c900}
+2016/04/15 19:45:25 Number of players still connected ... 1
+2016/04/15 19:45:52 got websocket conn from 24.224.72.38:50986
+2016/04/15 19:45:52 Publishing current net worths
+2016/04/15 19:45:56 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:45:56 destroy player &{40 0 2e0ddb69-1c6b-4c4e-8eb2-68483c4202dd 0xc21006c500}
+2016/04/15 19:45:56 Number of players still connected ... 1
+2016/04/15 19:45:57 got websocket conn from 24.224.72.38:50990
+2016/04/15 19:45:57 Publishing current net worths
+2016/04/15 19:46:53 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:46:53 destroy player &{40 0 28dd68e8-723a-4c1d-83a7-e6d39eb4fa90 0xc21006c600}
+2016/04/15 19:46:53 Number of players still connected ... 1
+2016/04/15 19:46:54 got websocket conn from 24.224.72.38:51002
+2016/04/15 19:46:54 Publishing current net worths
+2016/04/15 19:46:58 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:46:58 destroy player &{40 0 fe730112-96b0-4df8-947f-60ec910e3d75 0xc21006c200}
+2016/04/15 19:46:58 Number of players still connected ... 1
+2016/04/15 19:46:59 got websocket conn from 24.224.72.38:51006
+2016/04/15 19:46:59 Publishing current net worths
+2016/04/15 19:47:03 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:47:03 destroy player &{40 0 8fcc94d3-eeef-4c4a-9786-dced45d8a2d6 0xc21006cb00}
+2016/04/15 19:47:03 Number of players still connected ... 1
+2016/04/15 19:47:03 got websocket conn from 24.224.72.38:56222
+2016/04/15 19:47:03 Publishing current net worths
+2016/04/15 19:48:53 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:48:53 destroy player &{40 0 740183e1-a47f-43dc-9835-efc0c013c8be 0xc21006c400}
+2016/04/15 19:48:53 Number of players still connected ... 1
+2016/04/15 19:48:54 got websocket conn from 24.224.72.38:51014
+2016/04/15 19:48:54 Publishing current net worths
+2016/04/15 19:49:30 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:49:30 destroy player &{40 0 6fee87c3-6d48-459d-b250-76459bfa9586 0xc21006c100}
+2016/04/15 19:49:30 Number of players still connected ... 1
+2016/04/15 19:49:31 got websocket conn from 24.224.72.38:51020
+2016/04/15 19:49:31 Publishing current net worths
+2016/04/15 19:50:49 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:50:49 destroy player &{40 0 89f98e0f-df89-4e03-8a98-e9335b52b602 0xc21006c000}
+2016/04/15 19:50:49 Number of players still connected ... 1
+2016/04/15 19:50:50 got websocket conn from 24.224.72.38:51028
+2016/04/15 19:50:50 Publishing current net worths
+2016/04/15 19:51:02 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:51:02 destroy player &{40 0 53f8ca3d-93c8-46dd-9549-1ebce9aed0b5 0xc21006c100}
+2016/04/15 19:51:02 Number of players still connected ... 1
+2016/04/15 19:51:02 got websocket conn from 24.224.72.38:51034
+2016/04/15 19:51:02 Publishing current net worths
+2016/04/15 19:51:05 Player Disconnected waiting websocket: close 1001 (going away)
+2016/04/15 19:51:05 destroy player &{40 0 83d5743d-4bfb-4ef6-a766-92dd88ae7bf8 0xc21006cc00}
+2016/04/15 19:51:05 Number of players still connected ... 1
+2016/04/15 19:51:05 got websocket conn from 24.224.72.38:51038
+2016/04/15 19:51:05 Publishing current net worths
+panic: concurrent write to websocket connection
+
+goroutine 32805 [running]:
+runtime.panic(0x5fab20, 0xc21000af70)
+	/usr/lib/go/src/pkg/runtime/panic.c:266 +0xb6
+github.com/gorilla/websocket.(*Conn).flushFrame(0xc21006c200, 0xc21006c201, 0x0, 0x0, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:450 +0x3fd
+github.com/gorilla/websocket.(*Conn).NextWriter(0xc21006c200, 0x1, 0x5bb1a0, 0xc21009db40, 0x28, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:378 +0x79
+github.com/gorilla/websocket.(*Conn).WriteJSON(0xc21006c200, 0x684120, 0xc21009db40, 0xc21009d630, 0x24)
+	/home/admin/go/src/github.com/gorilla/websocket/json.go:22 +0x30
+main.func·002()
+	/home/admin/repos/bensio/server.go:100 +0x20c
+created by main.remoteHandler
+	/home/admin/repos/bensio/server.go:106 +0xbeb
+
+goroutine 1 [IO wait]:
+net.runtime_pollWait(0x7f35f25b63d8, 0x72, 0x0)
+	/usr/lib/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210051680, 0x72, 0x7f35f25b50e8, 0xb)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210051680, 0xb, 0x7f35f25b50e8)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).accept(0xc210051620, 0x735dc0, 0x0, 0x7f35f25b50e8, 0xb)
+	/usr/lib/go/src/pkg/net/fd_unix.go:382 +0x2c2
+net.(*TCPListener).AcceptTCP(0xc210000260, 0x45402b, 0x7f35f2415de0, 0x45402b)
+	/usr/lib/go/src/pkg/net/tcpsock_posix.go:233 +0x47
+net.(*TCPListener).Accept(0xc210000260, 0x7f35f25b6480, 0xc2100d11f0, 0xc210060780, 0x0)
+	/usr/lib/go/src/pkg/net/tcpsock_posix.go:243 +0x27
+net/http.(*Server).Serve(0xc21001f500, 0x7f35f25b5438, 0xc210000260, 0x0, 0x0)
+	/usr/lib/go/src/pkg/net/http/server.go:1622 +0x91
+net/http.(*Server).ListenAndServe(0xc21001f500, 0xc21001f500, 0x7f35f25b53b8)
+	/usr/lib/go/src/pkg/net/http/server.go:1612 +0xa0
+net/http.ListenAndServe(0x6ae2a0, 0x5, 0x7f35f25b53b8, 0xc21001f410, 0x2, ...)
+	/usr/lib/go/src/pkg/net/http/server.go:1677 +0x6d
+main.main()
+	/home/admin/repos/bensio/server.go:121 +0x194
+
+goroutine 31555 [IO wait]:
+net.runtime_pollWait(0x7f35f25b61e0, 0x72, 0x0)
+	/usr/lib/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210051d80, 0x72, 0x7f35f25b50e8, 0xb)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210051d80, 0xb, 0x7f35f25b50e8)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210051d20, 0xc210093000, 0x400, 0x400, 0x0, ...)
+	/usr/lib/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100d11f0, 0xc210093000, 0x400, 0x400, 0x0, ...)
+	/usr/lib/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100af780)
+	/usr/lib/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100af780, 0xc2100efa18, 0x2, 0x8, 0x2, ...)
+	/usr/lib/go/src/pkg/bufio/bufio.go:159 +0x1a4
+github.com/gorilla/websocket.(*Conn).readFull(0xc21006c200, 0xc2100efa18, 0x2, 0x8, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:617 +0xac
+github.com/gorilla/websocket.(*Conn).advanceFrame(0xc21006c200, 0x401f20, 0xc2100fe8c0, 0x419c89)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:641 +0x12b
+github.com/gorilla/websocket.(*Conn).NextReader(0xc21006c200, 0x419ad3, 0x0, 0x0, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:780 +0x67
+github.com/gorilla/websocket.(*Conn).ReadJSON(0xc21006c200, 0x5e25e0, 0xc2100d12b8, 0x0, 0x0)
+	/home/admin/go/src/github.com/gorilla/websocket/json.go:45 +0x27
+main.remoteHandler(0x7f35f25b65d8, 0xc210010be0, 0xc2100b6a90)
+	/home/admin/repos/bensio/server.go:79 +0x4c2
+net/http.HandlerFunc.ServeHTTP(0x733ca0, 0x7f35f25b65d8, 0xc210010be0, 0xc2100b6a90)
+	/usr/lib/go/src/pkg/net/http/server.go:1220 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc21001f410, 0x7f35f25b65d8, 0xc210010be0, 0xc2100b6a90)
+	/home/admin/go/src/github.com/gorilla/mux/mux.go:103 +0x1fb
+net/http.serverHandler.ServeHTTP(0xc21001f500, 0x7f35f25b65d8, 0xc210010be0, 0xc2100b6a90)
+	/usr/lib/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc210060780)
+	/usr/lib/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/lib/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 600 [finalizer wait]:
+runtime.park(0x40c490, 0x96ebc0, 0x96c9c8)
+	/usr/lib/go/src/pkg/runtime/proc.c:1342 +0x66
+runfinq()
+	/usr/lib/go/src/pkg/runtime/mgc0.c:2279 +0x84
+runtime.goexit()
+	/usr/lib/go/src/pkg/runtime/proc.c:1394
+
+goroutine 25916 [IO wait]:
+net.runtime_pollWait(0x7f35f25b6288, 0x72, 0x0)
+	/usr/lib/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210051fb0, 0x72, 0x7f35f25b50e8, 0xb)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210051fb0, 0xb, 0x7f35f25b50e8)
+	/usr/lib/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210051f50, 0xc210048800, 0x400, 0x400, 0x0, ...)
+	/usr/lib/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100d1208, 0xc210048800, 0x400, 0x400, 0x0, ...)
+	/usr/lib/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100af180)
+	/usr/lib/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100af180, 0xc2100ef548, 0x2, 0x8, 0x2, ...)
+	/usr/lib/go/src/pkg/bufio/bufio.go:159 +0x1a4
+github.com/gorilla/websocket.(*Conn).readFull(0xc21006c300, 0xc2100ef548, 0x2, 0x8, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:617 +0xac
+github.com/gorilla/websocket.(*Conn).advanceFrame(0xc21006c300, 0x401f20, 0xc2100fe200, 0x419c89)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:641 +0x12b
+github.com/gorilla/websocket.(*Conn).NextReader(0xc21006c300, 0x419ad3, 0x0, 0x0, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:780 +0x67
+github.com/gorilla/websocket.(*Conn).ReadJSON(0xc21006c300, 0x5e25e0, 0xc2100d1298, 0x0, 0x0)
+	/home/admin/go/src/github.com/gorilla/websocket/json.go:45 +0x27
+main.remoteHandler(0x7f35f25b65d8, 0xc210010e60, 0xc210041dd0)
+	/home/admin/repos/bensio/server.go:79 +0x4c2
+net/http.HandlerFunc.ServeHTTP(0x733ca0, 0x7f35f25b65d8, 0xc210010e60, 0xc210041dd0)
+	/usr/lib/go/src/pkg/net/http/server.go:1220 +0x40
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc21001f410, 0x7f35f25b65d8, 0xc210010e60, 0xc210041dd0)
+	/home/admin/go/src/github.com/gorilla/mux/mux.go:103 +0x1fb
+net/http.serverHandler.ServeHTTP(0xc21001f500, 0x7f35f25b65d8, 0xc210010e60, 0xc210041dd0)
+	/usr/lib/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc210060a80)
+	/usr/lib/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/lib/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 32804 [syscall]:
+syscall.Syscall(0x1, 0x8, 0xc210021d8c, 0x62, 0x4228ae, ...)
+	/usr/lib/go/src/pkg/syscall/asm_linux_amd64.s:18 +0x5
+syscall.write(0x8, 0xc210021d8c, 0x62, 0x402, 0x77, ...)
+	/usr/lib/go/src/pkg/syscall/zsyscall_linux_amd64.go:1228 +0x72
+syscall.Write(0x8, 0xc210021d8c, 0x62, 0x402, 0x0, ...)
+	/usr/lib/go/src/pkg/syscall/syscall_unix.go:151 +0x5c
+net.(*netFD).Write(0xc210051d20, 0xc210021d8c, 0x62, 0x402, 0x0, ...)
+	/usr/lib/go/src/pkg/net/fd_unix.go:289 +0x22a
+net.(*conn).Write(0xc2100d11f0, 0xc210021d8c, 0x62, 0x402, 0x0, ...)
+	/usr/lib/go/src/pkg/net/net.go:130 +0xc5
+github.com/gorilla/websocket.(*Conn).write(0xc21006c200, 0x1, 0x0, 0x0, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:295 +0x1b5
+github.com/gorilla/websocket.(*Conn).flushFrame(0xc21006c200, 0xc210082001, 0x0, 0x0, 0x0, ...)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:454 +0x510
+github.com/gorilla/websocket.messageWriter.Close(0xc21006c200, 0x28e, 0x0, 0xc2100820b0)
+	/home/admin/go/src/github.com/gorilla/websocket/conn.go:579 +0x6d
+github.com/gorilla/websocket.(*messageWriter).Close(0xc21000af60, 0x684120, 0xc21009db10)
+	/home/admin/go/src/github.com/gorilla/websocket/client.go:1 +0x90
+github.com/gorilla/websocket.(*Conn).WriteJSON(0xc21006c200, 0x684120, 0xc21009db10, 0xc21009d630, 0x24)
+	/home/admin/go/src/github.com/gorilla/websocket/json.go:27 +0x116
+main.func·002()
+	/home/admin/repos/bensio/server.go:100 +0x20c
+created by main.remoteHandler
+	/home/admin/repos/bensio/server.go:106 +0xbeb
+exit status 2
