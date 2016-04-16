@@ -23,6 +23,7 @@ var orangebutton;
 var greeting;
 var connected = "false";
 var playerName;
+var takeMessages;
 
 var textStyle = {
   align: 'center'
@@ -88,15 +89,16 @@ function create() {
             sock.send(currency);
             connected = true;
         };
-
+    
+    game.time.events.add(Phaser.Timer.SECOND * 10, startMessages, this);
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
-            if (m.Money != 0) {
+            console.log(m);
+            if (m.Money != 0 && takeMessages == true) {
               if (m.New) {
-                  greet(m); 
-              } else {
-                //  uMoney(m);
-             }
+                players.push(m.PlayerName); 
+                greet(m)
+              }
             }
         };
 
@@ -126,6 +128,10 @@ function create() {
 
 } */
 
+function startMessages() {
+  takeMessages = true;
+}
+
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
@@ -134,7 +140,7 @@ function greet(m) {
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
    greeting.align = "center";
-   console.log(m);
+   label.greeted = true;
    return label;
 }
 
