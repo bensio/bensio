@@ -62,9 +62,9 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 	go func() {
 		for _, p := range Players {
 			if p.Socket.RemoteAddr() != player.Socket.RemoteAddr() {
-				/*if err = player.Socket.WriteJSON(p.currency(true)); err != nil {
+				if err = player.Socket.WriteJSON(p.currency(true)); err != nil {
 					log.Println(err)
-				}*/
+				}
 				if err = p.Socket.WriteJSON(player.currency(true)); err != nil {
 					log.Println(err)
 				}
@@ -88,6 +88,7 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 					if err = p.Socket.WriteJSON(Message{Online: false, Id: player.Id}); err != nil {
 						log.Println(err)
 					}
+
 				}
 			}
 			log.Println("Number of players still connected ...", len(Players))
