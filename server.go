@@ -122,10 +122,10 @@ func main() {
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./")))
 	http.ListenAndServe(":8000", r)
-	/*http.HandleFunc("/", serve)
+	http.HandleFunc("/", serve)
 
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {
 		log.Fatal(err)
-	} */
+	}
 }
