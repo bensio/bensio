@@ -97,10 +97,10 @@ function create() {
               if (m.Money != 0) {
                 if (!players.indexOf(m.PlayerName)) {
                   players.push(m.PlayerName);
-                  greet(m);
-                } else if (m.Online == false) {
+                } /*else if (m.Online == false) {
                   players.splice(players.indexOf(m.PlayerName, 1));
-                }
+                }*/
+                greet(m);
               }
             }
         };
@@ -148,7 +148,7 @@ function greet(m) {
 }
 
 function killGreeting() {
-  while (greeting) {
+  if (greeting) {
     greeting.destroy();
   }
 }
