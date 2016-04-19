@@ -12,6 +12,7 @@ func serve(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	http.HandleFunc("/", serve)
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {
 		log.Fatal(err)
