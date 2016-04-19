@@ -95,11 +95,11 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (!players.indexOf(m.PlayerName)) {
-                  players.push(m.PlayerName);
-                } /*else if (m.Online == false) {
+                if (players.indexOf(m.PlayerName) && m.Online === false) {
                   players.splice(players.indexOf(m.PlayerName, 1));
-                }*/
+                } else {
+                  players.push(m.PlayerName)
+                }
                 greet(m);
               }
             }
