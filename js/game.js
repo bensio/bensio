@@ -94,11 +94,13 @@ function create() {
             var m = JSON.parse(message.data);
             console.log(m);
             if (connected == true) {
-              if (m.New && m.Money != 0) {
+              if (m.Money != 0) {
                 if (!players.indexOf(m.PlayerName)) {
-                  players.push(m.PlayerName); 
+                  players.push(m.PlayerName);
+                  greet(m);
+                } else if (m.Online == false) {
+                  players.splice(players.indexOf(m.PlayerName, 1));
                 }
-                greet(m)
               }
             }
         };
@@ -146,7 +148,7 @@ function greet(m) {
 }
 
 function killGreeting() {
-  if (greeting) {
+  while (greeting) {
     greeting.destroy();
   }
 }
