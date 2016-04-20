@@ -55,7 +55,7 @@ function create() {
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'))
   }
-  if (localStorage && localStorage.getItem('name')) {
+  if (localStorage && localStorage.getItem('name') && localStorage.getItem('name') !== "null") {
     playerName = localStorage.getItem('name')
   } else {
     playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
@@ -149,7 +149,7 @@ function greet(m) {
 }
 
 function killGreeting() {
-  greeting.destroy();
+  greeting.setText("");
 }
 
 
