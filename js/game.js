@@ -1,5 +1,5 @@
 var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',
-  {preload:preload,create:create,update:update,render:render});
+  {preload:preload,create:create,update:update});
 
 var block;
 var blockCollisionGroup;
@@ -336,7 +336,7 @@ String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-function update () {
+function update() {
   if (constrain === false && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
@@ -367,12 +367,15 @@ function update () {
   }
 }
 
+
+/*
 function uMoney(m) { 
-  /*total.money = m.Money
-  players[m.Id].betMoney = m.BetMoney +*/       
+  total.money = m.Money
+  players[m.Id].betMoney = m.BetMoney +       
 }
 
 
 function render () {
 
 }
+*/
