@@ -119,7 +119,7 @@ function create() {
   }, this);
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet();  
-    greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio," + playerName + ".");      
+    greeting = game.add.text(game.world.centerX - 200, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
@@ -139,7 +139,7 @@ function startMessages() {
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
