@@ -138,7 +138,12 @@ function startMessages() {
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   if (greeting) {
+      greeting = game.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   } else { 
+      greeting = game.add.text(game.world.centerX, game.world.centerY - 300, m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   }
+   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
