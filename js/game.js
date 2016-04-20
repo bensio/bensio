@@ -119,7 +119,7 @@ function create() {
   }, this);
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet();  
-    greeting = game.add.text(game.world.centerX - 200, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+    greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
