@@ -1,5 +1,4 @@
-var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',
-  {preload:preload,create:create,update:update});
+var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',{preload:preload,create:create,update:update,render:render});
 
 var block;
 var blockCollisionGroup;
@@ -54,7 +53,7 @@ function create() {
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'));
   }
-  if (localStorage.getItem('name')) { 
+  if (localStorage && localStorage.getItem('name')) { 
     playerName = localStorage.getItem('name');
   } else {
     playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
@@ -370,8 +369,8 @@ function uMoney(m) {
   players[m.Id].betMoney = m.BetMoney +       
 }
 
-
-function render () {
+*/
+function render() {
 
 }
-*/
+
