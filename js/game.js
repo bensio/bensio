@@ -54,7 +54,7 @@ function create() {
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'));
   }
-  if (localStorage && localStorage.getItem('name')) { 
+  if (localStorage.getItem('name')) { 
     playerName = localStorage.getItem('name');
   } else {
     playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
