@@ -37,8 +37,7 @@ var player, //our player
 
 //fs = require('fs');
 
-function preload() {
- 
+function preload() { 
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -217,7 +216,6 @@ function promptBet() {
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
- 
   redbutton = game.add.button(164, 708, 'red', betOnBlock, {color: "red"});
   greenbutton = game.add.button(972, 114, 'green', betOnBlock, {color: "green"});
   bluebutton = game.add.button(164, 114, 'blue', betOnBlock, {color: "blue"});
