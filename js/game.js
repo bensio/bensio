@@ -97,13 +97,12 @@ function create() {
                 if (players.indexOf(m.PlayerName) && m.Online === false) {
                   players.splice(players.indexOf(m.PlayerName, 1));
                 } else {
-                  players.push(m.PlayerName)
+                  players.push(m.PlayerName);
                 }
                 greet(m);
               }
             }
         };
-
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
