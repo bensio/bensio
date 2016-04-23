@@ -3,7 +3,6 @@ body {
   text-align: center;
   padding: 0px;
   margin: 0px;
-  background-image: url("assets/space.jpg")
 }
 
 h1 {
@@ -24,6 +23,7 @@ a {
     left: 0;
     width: 240px;
 }
+
 #main {
     position: relative;
     margin-left: 250px;
