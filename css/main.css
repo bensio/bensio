@@ -6,13 +6,6 @@ body {
   background-image: url("assets/space.jpg")
 }
 
-.left {
-    position:absolute;
-    left:0;
-    bottom: 0;
-    width: 178px;
-}
-
 h1 {
   color: white;
   background-color: #333333;
@@ -24,3 +17,14 @@ a {
   text-decoration: none;
 }
 
+#sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 240px;
+}
+#main {
+    position: relative;
+    margin-left: 250px;
+}

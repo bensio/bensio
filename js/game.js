@@ -56,7 +56,7 @@ function create() {
   if (localStorage && localStorage.getItem('name')) { 
     playerName = localStorage.getItem('name');
   } else {
-    playerName = prompt("Welcome to Bensio! Enter a name for this computer here:", "Name");    
+    playerName = prompt("Welcome to Bensio! Enter a name for this computer here:","Name");    
     localStorage.setItem('name', playerName);
   }
   game.stage.disableVisibilityChange = true; 
