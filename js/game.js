@@ -82,7 +82,8 @@ function create() {
             var currency = JSON.stringify({
                 money: money,
                 betMoney: 0,
-                playerName: playerName
+                playerName: playerName,
+                online: true
             });
             sock.send(currency);
             connected = true;
