@@ -117,6 +117,10 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet();  
     greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+    greeting.anchor.setTo(0.5, 0.5);
+    greeting.font = 'Century Schoolbook';
+    greeting.fontSize = 20;
+    greeting.align = "center";
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
@@ -228,11 +232,10 @@ function betOnBlock() {
     bet = this.color;
     betMoney += 10;
   }
-
-
   var currency = JSON.stringify({
       money: money,
-      betMoney : betMoney
+      betMoney : betMoney,
+      online: false 
   });
   if (connected === true) {
     sock.send(currency);  
@@ -263,7 +266,9 @@ function showResults(result) {
     goingToCenter = true;
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
             blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
-    timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
+    if (!result) {
+        timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
+    }
     winner = blocks.children[0].key;
   }
   prompt.anchor.setTo(0.5, 0.5);
@@ -287,7 +292,8 @@ function resetGame() {
   localStorage.setItem('money', money.toString());
   var currency = JSON.stringify({
      money: money,
-     betMoney: 0
+     betMoney: 0,
+     online: false
   });
   sock.send(currency);
   betMoney = 0; 
