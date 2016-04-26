@@ -110,7 +110,7 @@ function create() {
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
                   }
                 } else {
-                  players.push(m.PlayerName);
+                  //players.push(m.PlayerName);
                   greet(m);
                 }
               }
