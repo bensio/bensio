@@ -94,7 +94,7 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (players.indexOf(m.PlayerName)) {
+                if (m.Online == false) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney > 100) {
                     if (greeted = false) {
