@@ -24,6 +24,7 @@ var connected = "false";
 var playerName;
 var takeMessages;
 var greeted = false;
+var online;
 var textStyle = {
   align: 'center'
 };
@@ -78,7 +79,7 @@ function create() {
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
   sock = new WebSocket("ws://" + ip + ":8000/ws");
-  sock.onconnect = function() {
+  sock.onopen = function() {
             var currency = JSON.stringify({
                 money: money,
                 betMoney: 0,
@@ -87,6 +88,7 @@ function create() {
             });
             sock.send(currency);
             connected = true;
+            online = false;
         };
     
     sock.onmessage = function(message) {
@@ -252,7 +254,7 @@ function betOnBlock() {
   var currency = JSON.stringify({
       money: money,
       betMoney : betMoney,
-      online: false 
+      online: online
   });
   if (connected === true) {
     sock.send(currency);  
@@ -310,7 +312,7 @@ function resetGame() {
   var currency = JSON.stringify({
      money: money,
      betMoney: 0,
-     online: false
+     online: online
   });
   sock.send(currency);
   betMoney = 0; 
