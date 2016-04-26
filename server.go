@@ -15,16 +15,17 @@ type Message struct {
 	Id         string // the id of the player that sent the message
 	// spawn a new sprite on the screens of the other players. for all subsequent
 	// messages it's false
-	Online bool // true if the player is no longer connected so the frontend
+	New bool // true if the player is no longer connected so the frontend
 	// will remove it from the roster
 
 }
 
 type Player struct {
-	Money      int             // Curent net worth of the player
-	BetMoney   int             // Current money the player is betting
-	Id         string          // a unique id to identify the player by the frontend
-	PlayerName string          // self explanatory
+	Money      int    // Curent net worth of the player
+	BetMoney   int    // Current money the player is betting
+	Id         string // a unique id to identify the player by the frontend
+	PlayerName string // self explanatory
+	New        string
 	Socket     *websocket.Conn // websocket connection of the player
 }
 
