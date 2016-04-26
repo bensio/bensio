@@ -94,7 +94,7 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (players.indexOf(m.PlayerName)) {
+                if (!players.indexOf(m.PlayerName)) {
                   if (m.BetMoney > 100) {
                     if (greeted = false) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
