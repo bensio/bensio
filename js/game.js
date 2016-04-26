@@ -23,7 +23,7 @@ var greeting;
 var connected = "false";
 var playerName;
 var takeMessages;
-
+var greeted = false;
 var textStyle = {
   align: 'center'
 };
@@ -94,9 +94,22 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (!players[m.PlayerName]) {
-                  players.push(m.PlayerName);
+                if (players.indexOf(m.PlayerName) === 1) {
+                  if (m.BetMoney > 100) {
+                    if (greeted = false) {
+                      greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
+                      greeted = true;
+                    } else {
+                      greeting.setText(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");   
+                    }
+                    greeting.anchor.setTo(0.5, 0.5);
+                    greeting.font = 'Century Schoolbook';
+                    greeting.fontSize = 20;
+                    greeting.align = "center";
+                    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
+                  }
                 } else {
+                  players.push(m.PlayerName);
                   greet(m);
                 }
               }
@@ -115,12 +128,15 @@ function create() {
 
   }, this);
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-    promptBet();  
-    greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+    promptBet();
+    if (greeted == false) {
+      greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+    }
     greeting.anchor.setTo(0.5, 0.5);
     greeting.font = 'Century Schoolbook';
     greeting.fontSize = 20;
     greeting.align = "center";
+    greeted = true;
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
