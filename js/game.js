@@ -108,7 +108,7 @@ function create() {
                     greeting.align = "center";
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
                   }
-                } else if (playerName != m.PlayerName) {
+                } else {
                   players.push(m.PlayerName);
                   greet(m);
                 }
