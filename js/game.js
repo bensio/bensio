@@ -95,6 +95,7 @@ function create() {
             if (connected == true) {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName)) {
+                  console.log("Player found in current players list.");
                   if (m.BetMoney > 100) {
                     if (greeted = false) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
