@@ -25,7 +25,7 @@ type Player struct {
 	BetMoney   int    // Current money the player is betting
 	Id         string // a unique id to identify the player by the frontend
 	PlayerName string // self explanatory
-	New        string
+	Online     int
 	Socket     *websocket.Conn // websocket connection of the player
 }
 
