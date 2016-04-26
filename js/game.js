@@ -24,7 +24,7 @@ var connected = "false";
 var playerName;
 var takeMessages;
 var greeted = false;
-var online;
+var online = 0;
 var textStyle = {
   align: 'center'
 };
@@ -84,11 +84,11 @@ function create() {
                 money: money,
                 betMoney: 0,
                 playerName: playerName,
-                online: true
+                online: 0
             });
             sock.send(currency);
             connected = true;
-            online = false;
+            online = 1;
         };
     
     sock.onmessage = function(message) {
@@ -96,7 +96,7 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (m.Online == false) {
+                if (m.Online == 0) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney > 100) {
                     if (greeted = false) {

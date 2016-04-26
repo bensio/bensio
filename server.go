@@ -15,7 +15,7 @@ type Message struct {
 	Id         string // the id of the player that sent the message
 	// spawn a new sprite on the screens of the other players. for all subsequent
 	// messages it's false
-	Online bool // true if the player is no longer connected so the frontend
+	Online int // true if the player is no longer connected so the frontend
 	// will remove it from the roster
 
 }
@@ -30,7 +30,7 @@ type Player struct {
 }
 
 func (p *Player) currency(new bool) Message {
-	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: false}
+	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: p.Online}
 }
 
 // a slice of *Players which will store the list of connected players
