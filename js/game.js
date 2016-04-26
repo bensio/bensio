@@ -77,7 +77,7 @@ function create() {
   blue = blocks.create(200, 150, 'blue');
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
-  orange = blocks.create(1008, 744, 'orange');
+i  orange = blocks.create(1008, 744, 'orange');
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
