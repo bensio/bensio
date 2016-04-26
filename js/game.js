@@ -94,12 +94,9 @@ function create() {
             console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
-                if (!players.indexOf(m.PlayerName) && m.Online === false) {
-                  players.splice(players.indexOf(m.PlayerName, 1));
-                } else {
+                if (!players[m.PlayerName]) {
                   players.push(m.PlayerName);
-                }
-                if (m.Online != false) {
+                } else {
                   greet(m);
                 }
               }
