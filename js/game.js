@@ -78,9 +78,11 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
+  barCollisionGroup = game.physics.p2.createCollisionGroup();
   menubar = game.add.sprite(game.world.centerX, game.world.centerY+405, 'menubar');
   game.physics.p2.enable(menubar);
   menubar.body.kinematic = true;
+  menubar.body.setCollisionGroup(barCollisionGroup);
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
@@ -124,6 +126,8 @@ function create() {
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
+    block.body.collides(barCollisionGroup);
+    block.body.collides(menubar);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
