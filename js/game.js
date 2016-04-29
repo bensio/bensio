@@ -78,7 +78,7 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
-  menubar = game.add.sprite(game.world.centerX+600, game.world.centerY+360, 'menubar');
+  menubar = game.add.sprite(game.world.centerX+300, game.world.centerY+360, 'menubar');
   game.physics.p2.enable(menubar);
   menubar.body.kinematic = true;
   sock = new WebSocket("ws://" + ip + ":8000/ws");
