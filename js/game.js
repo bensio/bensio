@@ -79,8 +79,8 @@ function create() {
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
   menubar = game.add.sprite(game.world.centerX-600, game.world.centerY+360, 'menubar');
-  menubar.enableBody = true;
-  menubar.physicsBodyType = Phaser.Physics.P2JS;
+  game.physics.p2.enable(menubar);
+  menubar.body.kinematic = true;
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
