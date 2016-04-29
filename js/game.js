@@ -46,7 +46,7 @@ function preload() {
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
   game.load.image("orange", "assets/orangesquare.png",72,72);
-
+  game.load.image("menubar","assets/greenishbar.jpg",1200,90);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
@@ -78,6 +78,9 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
+  menubar = game.add.sprite(game.world.centerX-600, game.world.centerY-360, 'menubar');
+  menubar.enableBody = true;
+  menubar.physicsBodyType = Phaser.Physics.P2JS;
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
@@ -121,6 +124,7 @@ function create() {
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
+    block.body.collides(menubar);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -175,10 +179,12 @@ function killGreeting() {
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body) {
-    body.sprite.alpha -= .05;
-    body.sprite.health -= 1;
-    if (body.sprite.health < 1) {
-      body.sprite.destroy();
+    if (body != menubar.body) {
+      body.sprite.alpha -= .05;
+      body.sprite.health -= 1;
+      if (body.sprite.health < 1) {
+        body.sprite.destroy();
+      }
     }
   } else {
     equation[0].bodyB.parent.sprite.alpha -= .05;
