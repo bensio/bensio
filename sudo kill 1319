@@ -1,0 +1,73 @@
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Apr22 ?        00:00:03 /sbin/init
+root         2     0  0 Apr22 ?        00:00:00 [kthreadd]
+root         3     2  0 Apr22 ?        00:00:00 [ksoftirqd/0]
+root         5     2  0 Apr22 ?        00:00:00 [kworker/0:0H]
+root         6     2  0 Apr22 ?        00:00:06 [kworker/u2:0]
+root         7     2  0 Apr22 ?        00:00:05 [rcu_sched]
+root         8     2  0 Apr22 ?        00:00:06 [rcuos/0]
+root         9     2  0 Apr22 ?        00:00:00 [rcu_bh]
+root        10     2  0 Apr22 ?        00:00:00 [rcuob/0]
+root        11     2  0 Apr22 ?        00:00:00 [migration/0]
+root        12     2  0 Apr22 ?        00:00:05 [watchdog/0]
+root        13     2  0 Apr22 ?        00:00:00 [khelper]
+root        14     2  0 Apr22 ?        00:00:00 [kdevtmpfs]
+root        15     2  0 Apr22 ?        00:00:00 [netns]
+root        16     2  0 Apr22 ?        00:00:00 [writeback]
+root        17     2  0 Apr22 ?        00:00:00 [kintegrityd]
+root        18     2  0 Apr22 ?        00:00:00 [bioset]
+root        19     2  0 Apr22 ?        00:00:00 [kworker/u3:0]
+root        20     2  0 Apr22 ?        00:00:00 [kblockd]
+root        21     2  0 Apr22 ?        00:00:00 [ata_sff]
+root        22     2  0 Apr22 ?        00:00:00 [khubd]
+root        23     2  0 Apr22 ?        00:00:00 [md]
+root        24     2  0 Apr22 ?        00:00:00 [devfreq_wq]
+root        25     2  0 Apr22 ?        00:00:17 [kworker/0:1]
+root        27     2  0 Apr22 ?        00:00:00 [khungtaskd]
+root        28     2  0 Apr22 ?        00:00:03 [kswapd0]
+root        29     2  0 Apr22 ?        00:00:00 [vmstat]
+root        30     2  0 Apr22 ?        00:00:00 [ksmd]
+root        31     2  0 Apr22 ?        00:00:00 [fsnotify_mark]
+root        32     2  0 Apr22 ?        00:00:00 [ecryptfs-kthrea]
+root        33     2  0 Apr22 ?        00:00:00 [crypto]
+root        45     2  0 Apr22 ?        00:00:00 [kthrotld]
+root        46     2  0 Apr22 ?        00:00:00 [kworker/u2:1]
+root        47     2  0 Apr22 ?        00:00:00 [vballoon]
+root        48     2  0 Apr22 ?        00:00:00 [scsi_eh_0]
+root        49     2  0 Apr22 ?        00:00:00 [scsi_eh_1]
+root        70     2  0 Apr22 ?        00:00:00 [deferwq]
+root        71     2  0 Apr22 ?        00:00:00 [charger_manager]
+root       116     2  0 Apr22 ?        00:00:00 [scsi_eh_2]
+root       119     2  0 Apr22 ?        00:00:00 [kpsmoused]
+root       120     2  0 Apr22 ?        00:00:00 [kworker/0:2]
+root       127     2  0 Apr22 ?        00:00:03 [jbd2/vda1-8]
+root       128     2  0 Apr22 ?        00:00:00 [ext4-rsv-conver]
+root       336     1  0 Apr22 ?        00:00:00 upstart-udev-bridge --daemon
+root       343     1  0 Apr22 ?        00:00:00 /lib/systemd/systemd-udevd --daemon
+root       541     2  0 Apr22 ?        00:00:00 [ttm_swap]
+root       575     2  0 Apr22 ?        00:00:00 [kvm-irqfd-clean]
+root       626     1  0 Apr22 ?        00:00:00 upstart-socket-bridge --daemon
+message+   705     1  0 Apr22 ?        00:00:00 dbus-daemon --system --fork
+root       757     1  0 Apr22 ?        00:00:00 /lib/systemd/systemd-logind
+syslog     758     1  0 Apr22 ?        00:00:06 rsyslogd
+root       784     1  0 Apr22 ?        00:00:00 upstart-file-bridge --daemon
+root       838     1  0 Apr22 tty4     00:00:00 /sbin/getty -8 38400 tty4
+root       841     1  0 Apr22 tty5     00:00:00 /sbin/getty -8 38400 tty5
+root       846     1  0 Apr22 tty2     00:00:00 /sbin/getty -8 38400 tty2
+root       847     1  0 Apr22 tty3     00:00:00 /sbin/getty -8 38400 tty3
+root       850     1  0 Apr22 tty6     00:00:00 /sbin/getty -8 38400 tty6
+root       879     1  0 Apr22 ?        00:00:06 /usr/sbin/sshd -D
+root       883     1  0 Apr22 ?        00:00:00 acpid -c /etc/acpi/events -s /var/run/acpid.socket
+root       884     1  0 Apr22 ?        00:00:01 cron
+daemon     885     1  0 Apr22 ?        00:00:00 atd
+mysql      968     1  0 Apr22 ?        00:03:42 /usr/sbin/mysqld
+root       998     1  0 Apr22 tty1     00:00:00 /sbin/getty -8 38400 tty1
+root      1143     2  0 Apr22 ?        00:00:00 [kauditd]
+root      1241     2  0 Apr22 ?        00:00:00 [kworker/u3:1]
+root      1277     1  0 Apr22 ?        00:00:20 /tmp/go-build862641290/command-line-arguments/_obj/exe/startup
+admin     1319     1  0 Apr22 ?        00:00:04 /tmp/go-build784503816/command-line-arguments/_obj/exe/server
+root     30708   879  0 17:23 ?        00:00:00 sshd: admin [priv]  
+admin    30786 30708  0 17:23 ?        00:00:00 sshd: admin@pts/1   
+admin    30787 30786  0 17:23 pts/1    00:00:00 -bash
+admin    30872 30787  0 17:25 pts/1    00:00:00 ps -ef
+admin    30873 30787  0 17:25 pts/1    00:00:00 less -r
