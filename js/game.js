@@ -82,6 +82,7 @@ function create() {
   menubar = game.add.sprite(game.world.centerX, game.world.centerY+405, 'menubar');
   menubar.enableBody = true;
   menubar.physicsBodyType = Phaser.Physics.P2JS;
+  game.physics.p2.enable(menubar);
   menubar.body.kinematic = true;
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
