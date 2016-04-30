@@ -83,7 +83,7 @@ function create() {
   menubar.enableBody = true;
   game.physics.p2.enable(menubar);
   menubar.body.kinematic = true;
-  //menubar.body.setCollisionGroup(barCollisionGroup);
+  menubar.body.setCollisionGroup(barCollisionGroup);
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
