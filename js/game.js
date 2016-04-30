@@ -182,13 +182,12 @@ function killGreeting() {
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body) {
-    if (body != menubar.body) {
+      console.log(body);
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
       }
-    }
   } else {
     equation[0].bodyB.parent.sprite.alpha -= .05;
     equation[0].bodyB.parent.sprite.health -= 1;
