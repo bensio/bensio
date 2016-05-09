@@ -71,6 +71,7 @@ function create() {
   game.physics.p2.angularDamping = 0;
   game.physics.p2.restitution = 1;
   blocks = game.add.group();
+  game.physics.p2.enable(blocks);
   blocks.enableBody = true;
   blocks.physicsBodyType = Phaser.Physics.P2JS;
   //create blocks
