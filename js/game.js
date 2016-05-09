@@ -93,7 +93,7 @@ function create() {
  
   redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
   game.physics.p2.enable(redCircle);
-  recCircle.body.setCircle(36);
+  redCircle.body.setCircle(36);
 
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
