@@ -129,7 +129,8 @@ function create() {
         };
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
-    block.body.collides(blockCollisionGroup, menuCollisionGroup);
+    block.body.collides(blockCollisionGroup);
+    block.body.collides(menuCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
