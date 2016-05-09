@@ -186,7 +186,7 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  if (body) {
+  if (body && body.kinematic == false) {
       console.log(body);
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
