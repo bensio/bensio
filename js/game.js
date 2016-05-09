@@ -127,7 +127,7 @@ function create() {
         };
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
-    block.body.collides(blockCollisionGroup, menubar);
+    block.body.collides(blockCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -304,7 +304,7 @@ function showResults(result) {
   prompt.fontSize = 20;
   prompt.align = "center";
 }
-
+/* did white people ruin america? find out tonight on CNN at 12 */ 
 function resetGame() {
   if (blocks.children[0]) {
     blocks.children[0].destroy();
