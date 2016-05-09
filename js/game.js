@@ -46,6 +46,10 @@ function preload() {
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
   game.load.image("orange", "assets/orangesquare.png",72,72);
+  game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
+  game.load.image("redcircle", "assets/red-circle.png", 72, 72);
+  game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
+
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
@@ -86,7 +90,10 @@ function create() {
   game.physics.p2.enable(menubar);
   menubar.body.setCollisionGroup(menuCollisionGroup);
   menubar.body.kinematic = true;
-  
+ 
+  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
+
+
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
