@@ -79,11 +79,12 @@ function create() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
-  
+ 
+  menuCollisionGroup = game.physics.p2.createCollisionGroup();
   menubar = game.add.sprite(game.world.centerX, game.world.centerY+405, 'menubar');
   menubar.enableBody = true;
-  menubar.physicsBodyType = Phaser.Physics.P2JS;
   game.physics.p2.enable(menubar);
+  menubar.body.setCollisionGroup(menuCollisionGroup);
   menubar.body.kinematic = true;
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
@@ -128,7 +129,7 @@ function create() {
         };
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
-    block.body.collides(blockCollisionGroup);
+    block.body.collides(blockCollisionGroup, menuCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -138,6 +139,8 @@ function create() {
     block.isAlive = true;
 
   }, this);
+    menubar.body.collides(blockCollisionGroup);
+    menubar.body.onBeginContact.add(hitBlock, this);
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet();
     if (greeted == false) {
