@@ -345,6 +345,7 @@ function resetGame() {
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
+    block.body.collides(menuCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
@@ -355,6 +356,7 @@ function resetGame() {
     block.health = 20;
     block.isAlive = true;
   }, this);
+
   promptBet();
   showTimer = true;
   game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
