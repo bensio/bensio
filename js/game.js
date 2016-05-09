@@ -138,12 +138,11 @@ function create() {
     block.body.restitution = 1;
     block.health = 20;
     block.isAlive = true;
-
   }, this);
     menubar.body.collides(blockCollisionGroup);
     menubar.body.onBeginContact.add(hitBlock, this);
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
-    promptBet();
+    promptBet(); 
     if (greeted == false) {
       greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
     }
