@@ -194,10 +194,12 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
         body.sprite.destroy();
       }
   } else {
-    equation[0].bodyB.parent.sprite.alpha -= .05;
-    equation[0].bodyB.parent.sprite.health -= 1;
-    if (equation[0].bodyB.parent.sprite.health < 1) {
-      equation[0].bodyB.parent.sprite.destroy();
+    if (equation[0].bodyB.parent.sprite) {
+      equation[0].bodyB.parent.sprite.alpha -= .05;
+      equation[0].bodyB.parent.sprite.health -= 1;
+      if (equation[0].bodyB.parent.sprite.health < 1) {
+        equation[0].bodyB.parent.sprite.destroy();
+      }
     }
   }
   if (blocks.length === 1 || blocks.length === 0) {
