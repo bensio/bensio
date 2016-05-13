@@ -407,7 +407,7 @@ String.prototype.capitalizeFirstLetter = function() {
 function update() {
   if (constrain === false && showTimer === true) {
       updateTimer();
-      checkOutOfBounds(redCircle);
+      //checkOutOfBounds(redCircle);
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
