@@ -163,7 +163,7 @@ function create() {
     
     redCircle.inputEnabled = true;
     redCircle.input.enableDrag();
-    redCircle.input.enableSnap(32,32,true,true);
+    //redCircle.input.enableSnap(32,32,true,true);
     
   
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
