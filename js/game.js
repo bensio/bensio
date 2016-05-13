@@ -186,7 +186,6 @@ function checkOutOfBounds(circle) {
         circle.body.setCollisionGroup(redCircleCollisionGroup);
         circle.body.collides(blockCollisionGroup);        
         circle.body.kinematic = true;
-        circle.body.onBeginContact.add(hitBlock, this);
         
         if (redCircles.children.indexOf(circle) > -1) {          
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
