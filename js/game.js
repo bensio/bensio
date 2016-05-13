@@ -331,9 +331,7 @@ function updateTimer() {
 };
 
 function showResults(result) { 
-  redCircles.forEach(function(redCircle) {
-  redCircle.destroy();
-  }, this);
+  redCircles.remove(redCircle);
   gameOver = false;
   constrain = false;
   showTimer = false;
@@ -360,9 +358,6 @@ function showResults(result) {
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
-  redCircles.forEach(function(redCircle) {
-  redCircle.destroy();
-  }, this);
 }
 /* did white people ruin america? find out tonight on CNN at 12 */ 
 function resetGame() {
