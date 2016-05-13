@@ -331,7 +331,7 @@ function updateTimer() {
 };
 
 function showResults(result) { 
-  redCircles.remove(redCircle);
+  redCircles.removeAll();
   gameOver = false;
   constrain = false;
   showTimer = false;
