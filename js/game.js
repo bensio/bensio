@@ -159,6 +159,12 @@ function create() {
     greeting.fontSize = 20;
     greeting.align = "center";
     greeted = true;
+    
+    redCircle.inputEnabled = true;
+    redCircle.input.enableDrag();
+    redCircle.input.enableSnap(32,32,true,true);
+    
+  
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
@@ -170,6 +176,22 @@ function create() {
    greeting.align = "center";
 
 } */
+
+function checkOutOfBounds(circle) {
+      //var dx = circle.body.x-menubar.body.x;  //distance ship X to enemy X
+      //var dy = circle.body.y-menubar.body.y;  //distance ship Y to enemy Y
+      //var dist = Math.sqrt(dx*dx + dy*dy);     //pythagoras ^^  (get the distance to each other)
+      if (circle.body.y - circle.diameter/2 <== game.world.y+315 || circle.body.x + circle.diameter/2 >== game.world.center.x+600 || circle.body.x - circle.diameter/2 <== game.world.center.x-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
+        resetObstacle(circle);
+      }                                                       
+}
+
+function resetObstacle(obstacle) {
+ if (obstacle == redCircle) {
+    obstacle.body.x = game.world.center.x
+    obstacle.body.y = game.world.center.y+405
+ }
+}
 
 function startMessages() {
   takeMessages = true;
@@ -384,6 +406,7 @@ String.prototype.capitalizeFirstLetter = function() {
 function update() {
   if (constrain === false && showTimer === true) {
       updateTimer();
+      checkOutOfBounds(redCircle);
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
