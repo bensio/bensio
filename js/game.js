@@ -360,7 +360,9 @@ function showResults(result) {
 }
 /* did white people ruin america? find out tonight on CNN at 12 */ 
 function resetGame() {
-  redCircles.children.destroy();
+  redCircles.forEach(function(redCircle) {
+  redCircle.destroy();
+  }, this);
   if (blocks.children[0]) {
     blocks.children[0].destroy();
   }
