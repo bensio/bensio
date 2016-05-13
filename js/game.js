@@ -189,8 +189,8 @@ function checkOutOfBounds(circle) {
 
 function resetObstacle(obstacle) {
  if (obstacle == redCircle) {
-    obstacle.body.x = game.world.center.x
-    obstacle.body.y = game.world.center.y+405
+    obstacle.body.x = game.world.centerX
+    obstacle.body.y = game.world.centerY+405
  }
 }
 
