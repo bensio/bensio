@@ -92,13 +92,13 @@ function create() {
   menubar.body.setCollisionGroup(menuCollisionGroup);
   menubar.body.kinematic = true;
  
-  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+200, 'redcircle');
-  //game.physics.p2.enable(redCircle);
+  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
+  game.physics.p2.enable(redCircle);
   //405
-  //redCircle.body.setCircle(36);
+  redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
-  //redCircle.events.onDragStop.add(checkOutOfBounds, this);
+  redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
