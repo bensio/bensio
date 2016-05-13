@@ -93,15 +93,15 @@ function create() {
   menubar.body.kinematic = true;
  
   redCircles = game.add.group();
-  redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   //game.physics.p2.enable(redCircle);
   //405
   //redCircle.body.setCircle(36);
-  redCircle.inputEnabled = true;
-  redCircle.input.enableDrag();
-  redCircle.anchor.x = .5
-  redCircle.anchor.y = .5
-  redCircle.events.onDragStop.add(checkOutOfBounds, this);
+  redCircles.inputEnabled = true;
+  redCircles.input.enableDrag();
+  redCircles.anchor.x = .5
+  redCircles.anchor.y = .5
+  redCircles.events.onDragStop.add(checkOutOfBounds, this);
+  redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
@@ -357,6 +357,7 @@ function showResults(result) {
 }
 /* did white people ruin america? find out tonight on CNN at 12 */ 
 function resetGame() {
+  redCircles.children[0:].destroy();
   if (blocks.children[0]) {
     blocks.children[0].destroy();
   }
@@ -386,6 +387,7 @@ function resetGame() {
   red = blocks.create(200, 744, 'red');
   green = blocks.create(1008, 150, 'green');
   orange = blocks.create(1008, 744, 'orange');
+  redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
