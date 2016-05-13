@@ -92,9 +92,9 @@ function create() {
   menubar.body.setCollisionGroup(menuCollisionGroup);
   menubar.body.kinematic = true;
  
-  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
+  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+300, 'redcircle');
   //game.physics.p2.enable(redCircle);
-  
+  //405
   //redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
