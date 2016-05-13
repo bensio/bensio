@@ -95,7 +95,7 @@ function create() {
   redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
   //game.physics.p2.enable(redCircle);
   
-  redCircle.body.setCircle(36);
+  //redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
   redCircle.input.enableSnap(true);
