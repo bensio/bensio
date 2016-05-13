@@ -98,6 +98,8 @@ function create() {
   //redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
+  redCircle.anchor.x = .5
+  redCircle.anchor.y = .5
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
@@ -181,7 +183,7 @@ function checkOutOfBounds(circle) {
       //var dx = circle.body.x-menubar.body.x;  //distance ship X to enemy X
       //var dy = circle.body.y-menubar.body.y;  //distance ship Y to enemy Y
       //var dist = Math.sqrt(dx*dx + dy*dy);     //pythagoras ^^  (get the distance to each other)
-      if (circle.body.y - circle.diameter/2 <= game.world.centerY+315 || circle.body.x + circle.diameter/2 >= game.world.centerX+600 || circle.body.x - circle.diameter/2 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
+      if (circle.body.y - 32 <= game.world.centerY+315 || circle.body.x + 32 >= game.world.centerX+600 || circle.body.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       }                                                       
 }
