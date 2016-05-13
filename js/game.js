@@ -400,6 +400,7 @@ function resetGame() {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
     block.body.collides(menuCollisionGroup);
+    block.body.collides(redCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
