@@ -94,10 +94,13 @@ function create() {
  
   redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
   game.physics.p2.enable(redCircle);
+  
   redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
   redCircle.input.enableSnap(true);
+  redCircle.events.onDragStop.add(checkOutOfBounds, this);
+  
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
@@ -162,10 +165,6 @@ function create() {
     greeting.fontSize = 20;
     greeting.align = "center";
     greeted = true;
-    
-    redCircle.inputEnabled = true;
-    redCircle.input.enableDrag();
-    //redCircle.input.enableSnap(32,32,true,true);
     
   
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
@@ -409,7 +408,6 @@ String.prototype.capitalizeFirstLetter = function() {
 function update() {
   if (constrain === false && showTimer === true) {
       updateTimer();
-      //checkOutOfBounds(redCircle);
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
        if (blocks.children[0].alpha < 1) {
