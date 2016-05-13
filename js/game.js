@@ -100,8 +100,8 @@ function create() {
   redCircles.setAll('anchor.x', .5);
   redCircles.setAll('anchor.y', .5);
   redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
-  //redCircle.anchor.x = .5;
-  //redCircle.anchor.y = .5;
+  redCircle.anchor.x = .5;
+  redCircle.anchor.y = .5;
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
