@@ -92,7 +92,8 @@ function create() {
   menubar.body.setCollisionGroup(menuCollisionGroup);
   menubar.body.kinematic = true;
  
-  redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
+  redCircles = game.add.group();
+  redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   //game.physics.p2.enable(redCircle);
   //405
   //redCircle.body.setCircle(36);
@@ -185,11 +186,23 @@ function checkOutOfBounds(circle) {
       //var dist = Math.sqrt(dx*dx + dy*dy);     //pythagoras ^^  (get the distance to each other)
       if (circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
-      }                                                       
+      } else {
+        if (redCircles.children.indexOf(circle) > -1) {          
+          redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
+          //game.physics.p2.enable(redCircle);
+          //405
+          //redCircle.body.setCircle(36);
+          redCircle.inputEnabled = true;
+          redCircle.input.enableDrag();
+          redCircle.anchor.x = .5
+          redCircle.anchor.y = .5
+          redCircle.events.onDragStop.add(checkOutOfBounds, this);
+        }
+      }
 }
 
 function resetObstacle(obstacle) {
- if (obstacle == redCircle) {
+ if (redCircles.children.indexOf(obstacle) > -1) {
     obstacle.x = game.world.centerX
     obstacle.y = game.world.centerY+405
  }
