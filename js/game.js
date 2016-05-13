@@ -330,7 +330,10 @@ function updateTimer() {
   prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + "."); 
 };
 
-function showResults(result) {
+function showResults(result) { 
+  redCircles.forEach(function(redCircle) {
+  redCircle.destroy();
+  }, this);
   gameOver = false;
   constrain = false;
   showTimer = false;
@@ -360,9 +363,6 @@ function showResults(result) {
 }
 /* did white people ruin america? find out tonight on CNN at 12 */ 
 function resetGame() {
-  redCircles.forEach(function(redCircle) {
-  redCircle.destroy();
-  }, this);
   if (blocks.children[0]) {
     blocks.children[0].destroy();
   }
@@ -395,6 +395,8 @@ function resetGame() {
   
   
   redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
+  redCircle.anchor.x = .5;
+  redCircle.anchor.y = .5;
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
