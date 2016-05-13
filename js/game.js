@@ -2,6 +2,7 @@ var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',{preload:preload,create:c
 
 var block;
 var blockCollisionGroup;
+var redCircleCollisionGroup;
 var blockVelocity = 30;
 var money = 40;
 var betMoney = 0;
@@ -96,9 +97,7 @@ function create() {
   //game.physics.p2.enable(redCircle);
   //405
   //redCircle.body.setCircle(36);
-  
-  redCircles.setAll('anchor.x', .5);
-  redCircles.setAll('anchor.y', .5);
+  redCircleCollisionGroup = game.physics.p2.createCollisionGroup();
   redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   redCircle.anchor.x = .5;
   redCircle.anchor.y = .5;
@@ -149,6 +148,7 @@ function create() {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
     block.body.collides(menuCollisionGroup);
+    block.body.collides(redCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -174,15 +174,6 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
 }
 
-/*function askName() {
-   greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bens.io! \n\n\n Type in a username you'd like to attach to this computer here:");   
-   greeting.anchor.setTo(0.5, 0.5);
-   greeting.font = 'Century Schoolbook';
-   greeting.fontSize = 20;
-   greeting.align = "center";
-
-} */
-
 function checkOutOfBounds(circle) {
       //var dx = circle.body.x-menubar.body.x;  //distance ship X to enemy X
       //var dy = circle.body.y-menubar.body.y;  //distance ship Y to enemy Y
@@ -190,6 +181,13 @@ function checkOutOfBounds(circle) {
       if (circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       } else {
+        game.physics.p2.enable(circle);
+        circle.body.setCircle(36);
+        circle.body.setCollisionGroup(redCircleCollisionGroup);
+        circle.body.collides(blockCollisionGroup);        
+        circle.body.kinematic = true;
+        circle.body.onBeginContact.add(hitBlock, this);
+        
         if (redCircles.children.indexOf(circle) > -1) {          
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           //game.physics.p2.enable(redCircle);
@@ -234,7 +232,6 @@ function killGreeting() {
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body && body.kinematic == false) {
-      console.log(body);
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
