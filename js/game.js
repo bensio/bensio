@@ -19,6 +19,7 @@ var bluebutton;
 var redbutton;
 var greenbutton;
 var orangebutton;
+var redCircle;
 var greeting;
 var connected = "false";
 var playerName;
@@ -181,7 +182,7 @@ function checkOutOfBounds(circle) {
       //var dx = circle.body.x-menubar.body.x;  //distance ship X to enemy X
       //var dy = circle.body.y-menubar.body.y;  //distance ship Y to enemy Y
       //var dist = Math.sqrt(dx*dx + dy*dy);     //pythagoras ^^  (get the distance to each other)
-      if (circle.body.y - circle.diameter/2 <== game.world.y+315 || circle.body.x + circle.diameter/2 >== game.world.center.x+600 || circle.body.x - circle.diameter/2 <== game.world.center.x-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
+      if (circle.body.y - circle.diameter/2 <= game.world.y+315 || circle.body.x + circle.diameter/2 >= game.world.center.x+600 || circle.body.x - circle.diameter/2 <= game.world.center.x-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       }                                                       
 }
