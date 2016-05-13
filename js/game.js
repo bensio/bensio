@@ -98,8 +98,7 @@ function create() {
   //redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
-  redCircle.input.enableSnap(true);
-  redCircle.events.onDragStop.add(checkOutOfBounds, this);
+  //redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
@@ -116,7 +115,6 @@ function create() {
     
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
-            console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
                 if (m.Online == 0) {
