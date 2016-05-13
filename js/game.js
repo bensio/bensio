@@ -96,11 +96,12 @@ function create() {
   //game.physics.p2.enable(redCircle);
   //405
   //redCircle.body.setCircle(36);
+  
+  redCircles.setAll('anchor.x', .5);
+  redCircles.setAll('anchor.x', .5);
   redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
-  redCircles.setAll('anchor.x', .5);
-  redCircles.setAll('anchor.x', .5);
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
   sock = new WebSocket("ws://" + ip + ":8000/ws");
