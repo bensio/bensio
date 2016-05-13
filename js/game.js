@@ -93,7 +93,7 @@ function create() {
   menubar.body.kinematic = true;
  
   redCircle = game.add.sprite(game.world.centerX, game.world.centerY+405, 'redcircle');
-  game.physics.p2.enable(redCircle);
+  //game.physics.p2.enable(redCircle);
   
   redCircle.body.setCircle(36);
   redCircle.inputEnabled = true;
