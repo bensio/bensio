@@ -140,9 +140,7 @@ function create() {
                   }
                 } else {
                   players.push(m.PlayerName);
-                  if (m.Online == 1) {
-                    greet(m);
-                  }
+                  greet(m);
                 }
               }
             }
