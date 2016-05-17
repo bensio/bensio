@@ -30,7 +30,7 @@ var online = 0;
 var textStyle = {
   align: 'center'
 };
-
+var players
 var player, //our player
         players = [], //this will hold the list of players
         sock, //this will be player's ws connection
@@ -122,7 +122,7 @@ function create() {
             var m = JSON.parse(message.data);
             if (connected == true) {
               if (m.Money != 0) {
-                if (m.Online == 0) {
+                if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney > 100) {
                     if (greeted = false) {
@@ -138,7 +138,7 @@ function create() {
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
                   }
                 } else {
-                  //players.push(m.PlayerName);
+                  players.push(m.PlayerName);
                   greet(m);
                 }
               }
