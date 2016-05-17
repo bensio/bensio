@@ -37,28 +37,26 @@ var player, //our player
         label,
         ip = "162.243.216.88"; //ip of our Go server
 
-//fs = require('fs');
-
 function preload() { 
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-  game.stage.backgroundColor = '#ffffff';
+  game.stage.backgroundColor = '#00CCFF';
   game.load.image("blue", "assets/bluesquare.png",72,72);
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
   game.load.image("orange", "assets/orangesquare.png",72,72);
-  game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
+  //game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
   game.load.image("redcircle", "assets/red-circle.png", 72, 72);
-  game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
+  //game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
 
-  game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
+  //game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
 function create() {
-  background = game.add.tileSprite(0,0,1200,900,"background");
+  //background = game.add.tileSprite(0,0,1200,900,"background");
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'));
   }
