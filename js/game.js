@@ -192,11 +192,8 @@ function checkOutOfBounds(circle) {
             circle.destroy();
           } else {
             money -= 5;
-          }
+          } 
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
-          //game.physics.p2.enable(redCircle);
-          //405
-          //redCircle.body.setCircle(36);
           redCircle.inputEnabled = true;
           redCircle.input.enableDrag();
           redCircle.anchor.x = .5
