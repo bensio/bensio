@@ -321,7 +321,7 @@ function betOnBlock() {
     sock.send(currency); 
     console.log(currency);
   }
-}
+};
 
 
 function updateTimer() {
@@ -357,8 +357,11 @@ function showResults(result) {
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
   prompt.align = "center";
-}
+};
+
 /* did white people ruin america? find out tonight on CNN at 12 */ 
+/* Donnovan pls */
+
 function resetGame() {
   if (blocks.children[0]) {
     blocks.children[0].destroy();
