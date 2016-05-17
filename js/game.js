@@ -120,7 +120,7 @@ function create() {
     
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
-            console.log(message);
+            console.log(m);
             if (connected == true) {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName) !== -1) {
