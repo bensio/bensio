@@ -120,6 +120,7 @@ function create() {
     
     sock.onmessage = function(message) {
             var m = JSON.parse(message.data);
+            console.log(message);
             if (connected == true) {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName) !== -1) {
@@ -139,7 +140,9 @@ function create() {
                   }
                 } else {
                   players.push(m.PlayerName);
-                  greet(m);
+                  if () {
+                    greet(m);
+                  }
                 }
               }
             }
