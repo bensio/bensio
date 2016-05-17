@@ -188,6 +188,11 @@ function checkOutOfBounds(circle) {
         circle.body.kinematic = true;
         
         if (redCircles.children.indexOf(circle) > -1) {          
+          if (money - betMoney < 5) {
+            circle.destroy();
+          } else {
+            money -= 5;
+          }
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           //game.physics.p2.enable(redCircle);
           //405
@@ -197,6 +202,7 @@ function checkOutOfBounds(circle) {
           redCircle.anchor.x = .5
           redCircle.anchor.y = .5
           redCircle.events.onDragStop.add(checkOutOfBounds, this);
+          
         }
       }
 }
