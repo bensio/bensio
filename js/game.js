@@ -41,7 +41,7 @@ function preload() {
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
-  game.stage.backgroundColor = '#00CCFF';
+  game.stage.backgroundColor = '#999999';
   game.load.image("blue", "assets/bluesquare.png",72,72);
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
