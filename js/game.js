@@ -140,7 +140,7 @@ function create() {
                   }
                 } else {
                   players.push(m.PlayerName);
-                  if (greeted == true)
+                  if (greeted == true) {
                     greet(m);
                   }
                 }
@@ -166,14 +166,11 @@ function create() {
     promptBet(); 
     if (greeted == false) {
       greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
-      
     }
     greeting.anchor.setTo(0.5, 0.5);
     greeting.font = 'Century Schoolbook';
     greeting.fontSize = 20;
     greeting.align = "center";
-    
-  
     game.time.events.add(Phaser.Timer.SECOND * 10, killGreeting, this);
 }
 
