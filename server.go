@@ -15,7 +15,7 @@ type Message struct {
 	Id         string // the id of the player that sent the message
 	// spawn a new sprite on the screens of the other players. for all subsequent
 	// messages it's false
-	Online int // true if the player is no longer connected so the frontend
+	Online bool // true if the player is no longer connected so the frontend
 	// will remove it from the roster
 
 }
@@ -25,12 +25,12 @@ type Player struct {
 	BetMoney   int    // Current money the player is betting
 	Id         string // a unique id to identify the player by the frontend
 	PlayerName string // self explanatory
-	Online     int
+	Online     bool
 	Socket     *websocket.Conn // websocket connection of the player
 }
 
 func (p *Player) currency(new bool) Message {
-	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: p.Online}
+	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: new}
 }
 
 // a slice of *Players which will store the list of connected players
@@ -104,7 +104,7 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 		go func() {
 			for _, p := range Players {
 				if p.Socket.RemoteAddr() != player.Socket.RemoteAddr() {
-					if err = p.Socket.WriteJSON(player.currency(false)); err != nil {
+					if err = p.Socket.WriteJSON(player.currency(true)); err != nil {
 						log.Println(err)
 					}
 				}
