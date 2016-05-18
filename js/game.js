@@ -126,7 +126,7 @@ function create() {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney > 100) {
-                    if (greeted = false) {
+                    if (greeted == false) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
                     } else {
@@ -140,7 +140,9 @@ function create() {
                   }
                 } else {
                   players.push(m.PlayerName);
-                  greet(m);
+                  if (greeted == true)
+                    greet(m);
+                  }
                 }
               }
             }
@@ -164,15 +166,15 @@ function create() {
     promptBet(); 
     if (greeted == false) {
       greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+      
     }
     greeting.anchor.setTo(0.5, 0.5);
     greeting.font = 'Century Schoolbook';
     greeting.fontSize = 20;
     greeting.align = "center";
-    greeted = true;
     
   
-    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
+    game.time.events.add(Phaser.Timer.SECOND * 10, killGreeting, this);
 }
 
 function checkOutOfBounds(circle) {
@@ -230,6 +232,7 @@ function greet(m) {
 
 function killGreeting() {
   greeting.setText("");
+  greeted = true;
 }
 
 
