@@ -342,6 +342,7 @@ function showResults(result) {
     winner = "none";
     betMoney = 0;
   } else {
+    blocks.children[0].health = 100;
     blocks.children[0].body.data.velocity[0] = 0;
     blocks.children[0].body.data.velocity[1] = 0;
     blocks.children[0].body.angularDamping = .3;
