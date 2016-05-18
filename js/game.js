@@ -26,7 +26,7 @@ var connected = "false";
 var playerName;
 var takeMessages;
 var greeted = false;
-var online = 0;
+var online = false;
 var textStyle = {
   align: 'center'
 };
@@ -111,11 +111,11 @@ function create() {
                 money: money,
                 betMoney: 0,
                 playerName: playerName,
-                online: 0
+                online: false
             });
             sock.send(currency);
             connected = true;
-            online = 1;
+            online = true;
         };
     
     sock.onmessage = function(message) {
