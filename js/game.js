@@ -428,6 +428,13 @@ function resetGame() {
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
+  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
+  blueCircle.anchor.x = .5;
+  blueCircle.anchor.y = .5;
+  blueCircle.inputEnabled = true;
+  blueCircle.input.enableDrag();
+  blueCircle.events.onDragStop.add(checkOutOfBounds, this);
+
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
