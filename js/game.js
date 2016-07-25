@@ -105,6 +105,14 @@ function create() {
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
+  blueCircles = game.add.group();
+  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'redcircle');
+  blueCircle.anchor.x = .5;
+  blueCircle.anchor.y = .5;
+  blueCircle.inputEnabled = true;
+  blueCircle.input.enableDrag();
+  blueCircle.events.onDragStop.add(checkOutOfBounds, this);
+  
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
@@ -183,22 +191,36 @@ function checkOutOfBounds(circle) {
       } else {
         game.physics.p2.enable(circle);
         circle.body.setCircle(36);
-        circle.body.setCollisionGroup(redCircleCollisionGroup);
-        circle.body.collides(blockCollisionGroup);        
-        circle.body.kinematic = true;
         
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
             money -= 5;
-          } 
+          }
+          circle.body.setCollisionGroup(redCircleCollisionGroup);
+          circle.body.collides(blockCollisionGroup);        
+          circle.body.kinematic = true;
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           redCircle.inputEnabled = true;
           redCircle.input.enableDrag();
           redCircle.anchor.x = .5
           redCircle.anchor.y = .5
           redCircle.events.onDragStop.add(checkOutOfBounds, this);
+        }
+
+        if (blueCircles.children.indexOf(circle) > -1) {          
+          if (money - betMoney < 5) {
+            circle.destroy();
+          } else {
+            money -= 5;
+          } 
+          blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
+          blueCircle.inputEnabled = true;
+          blueCircle.input.enableDrag();
+          blueCircle.anchor.x = .5
+          blueCircle.anchor.y = .5
+          blueCircle.events.onDragStop.add(checkOutOfBounds, this);
           
         }
       }

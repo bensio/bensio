@@ -92,7 +92,6 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 					if err = p.Socket.WriteJSON(p.currency(false)); err != nil {
 						log.Println(err)
 					}
-
 				}
 			}
 			log.Println("Number of players still connected ...", len(Players))
