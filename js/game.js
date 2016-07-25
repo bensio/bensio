@@ -493,7 +493,7 @@ function update() {
   else {
     if (gameOver === false && constrain === true){ 
       blocks.forEach(function(block) {
-        if (block.sprite.frozen == false) {
+        if (block.frozen == false) {
           constrainVelocity(block,blockVelocity);
         } else {
           constrainVelocity(block,0);
