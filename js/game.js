@@ -216,6 +216,7 @@ function checkOutOfBounds(circle) {
             money -= 5;
           } 
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
+          blueCircle.body.kinematic = true;
           blueCircle.inputEnabled = true;
           blueCircle.input.enableDrag();
           blueCircle.anchor.x = .5
@@ -271,6 +272,9 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
+      } else if (blueCircles.children.indexOf(body) > -1) {
+        equation[0].bodyB.parent.sprite.frozen = true;
+        body.sprite.destroy();
       }
     }
   }
@@ -489,7 +493,11 @@ function update() {
   else {
     if (gameOver === false && constrain === true){ 
       blocks.forEach(function(block) {
-        constrainVelocity(block,blockVelocity);
+        if (block.sprite.frozen == false) {
+          constrainVelocity(block,blockVelocity);
+        } else {
+          constrainVelocity(block,0);
+        }
       }, this);
     } else if (gameOver === true && blocks.length === 1)  {
       showResults();
