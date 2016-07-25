@@ -167,6 +167,7 @@ function create() {
     block.body.restitution = 1;
     block.health = 20;
     block.isAlive = true;
+    block.frozen = false;
   }, this);
     menubar.body.collides(blockCollisionGroup);
     menubar.body.onBeginContact.add(hitBlock, this);
@@ -453,6 +454,7 @@ function resetGame() {
     block.body.restitution = 1;
     block.health = 20;
     block.isAlive = true;
+    block.frozen = false;
   }, this);
 
   promptBet();
