@@ -261,6 +261,10 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
+  if (blueCircles.children.indexOf(body) > -1) {
+        equation[0].bodyB.parent.sprite.frozen = true;
+        body.sprite.destroy();
+      }
   if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
@@ -273,9 +277,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
-      } else if (blueCircles.children.indexOf(body) > -1) {
-        equation[0].bodyB.parent.sprite.frozen = true;
-        body.sprite.destroy();
       }
     }
   }
