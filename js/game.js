@@ -46,7 +46,7 @@ function preload() {
   game.load.image("red", "assets/redsquare.png",72,72);
   game.load.image("green", "assets/greensquare.png",72,72);
   game.load.image("orange", "assets/orangesquare.png",72,72);
-  //game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
+  game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
   game.load.image("redcircle", "assets/red-circle.png", 72, 72);
   //game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
 
@@ -106,7 +106,7 @@ function create() {
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
   blueCircles = game.add.group();
-  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'redcircle');
+  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
   blueCircle.anchor.x = .5;
   blueCircle.anchor.y = .5;
   blueCircle.inputEnabled = true;
