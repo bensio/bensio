@@ -230,6 +230,9 @@ function resetObstacle(obstacle) {
  if (redCircles.children.indexOf(obstacle) > -1) {
     obstacle.x = game.world.centerX
     obstacle.y = game.world.centerY+405
+ } else if (blueCircles.children.indexOf(obstacle) > -1) {
+    obstacle.x = game.world.centerX + 100
+    obstacle.y = game.world.centerY + 405
  }
 }
 
