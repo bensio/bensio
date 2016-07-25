@@ -3,6 +3,7 @@ var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',{preload:preload,create:c
 var block;
 var blockCollisionGroup;
 var redCircleCollisionGroup;
+var blueCircleCollisionGroup;
 var blockVelocity = 30;
 var money = 40;
 var betMoney = 0;
@@ -160,6 +161,7 @@ function create() {
     block.body.collides(blockCollisionGroup);
     block.body.collides(menuCollisionGroup);
     block.body.collides(redCircleCollisionGroup);
+    block.body.collides(blueCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -216,8 +218,10 @@ function checkOutOfBounds(circle) {
           } else {
             money -= 5;
           } 
+          circle.body.setCollisionGroup(blueCircleCollisionGroup);
+          circle.body.collides(blockCollisionGroup);
+          circle.body.kinematic == true;
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
-          blueCircle.body.kinematic = true;
           blueCircle.inputEnabled = true;
           blueCircle.input.enableDrag();
           blueCircle.anchor.x = .5
@@ -446,6 +450,7 @@ function resetGame() {
     block.body.collides(blockCollisionGroup);
     block.body.collides(menuCollisionGroup);
     block.body.collides(redCircleCollisionGroup);
+    block.body.collides(blueCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
