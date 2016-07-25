@@ -105,7 +105,8 @@ function create() {
   redCircle.inputEnabled = true;
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
-  
+ 
+  blueCircleCollisionGroup = game.physics.p2.createCollisionGroup();
   blueCircles = game.add.group();
   blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
   blueCircle.anchor.x = .5;
