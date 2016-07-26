@@ -271,10 +271,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
-        if (body.sprite.key == "bluecircle") {
-          equation[0].bodyB.parent.sprite.frozen = true;
-          console.log("Yay.");
-        }
         body.sprite.destroy();
         console.log("Is it this?");
       }
@@ -285,6 +281,8 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
         console.log("Or this?");
+      } else if (body && body.sprite.key == "bluecircle") {
+        equation[0].bodyB.parent.sprite.frozen = true;
       }
     }
   }
