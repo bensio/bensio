@@ -272,7 +272,7 @@ function unfreeze(block) {
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body && body.sprite.key == "bluecircle") {
     equation[0].bodyB.parent.sprite.frozen = true;
-    game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this);
+    game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
   else if (body && body.kinematic == false) {
