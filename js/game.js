@@ -267,12 +267,15 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  if (body && body.kinematic == false) {
+  if (body && body.sprite.key == "bluecircle") {
+    equation[0].bodyB.parent.sprite.frozen = true;
+    body.sprite.destroy();
+  }
+  else if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
-        console.log("Is it this?");
       }
   } else {
     if (equation[0].bodyB.parent.sprite) {
@@ -280,9 +283,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
-        console.log("Or this?");
-      } else if (body && body.sprite.key == "bluecircle") {
-        equation[0].bodyB.parent.sprite.frozen = true;
       }
     }
   }
