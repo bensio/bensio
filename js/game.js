@@ -276,6 +276,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
+        console.log("Is it this?");
       }
   } else {
     if (equation[0].bodyB.parent.sprite) {
@@ -283,6 +284,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
+        console.log("Or this?");
       }
     }
   }
