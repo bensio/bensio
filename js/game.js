@@ -221,7 +221,7 @@ function checkOutOfBounds(circle) {
           } 
           circle.body.setCollisionGroup(blueCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);
-          circle.body.kinematic == true;
+          circle.body.kinematic = true;
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
           blueCircle.inputEnabled = true;
           blueCircle.input.enableDrag();
