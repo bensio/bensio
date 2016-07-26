@@ -266,9 +266,9 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  if (redCircles.children.indexOf(body) > -1) {
-        equation[0].bodyB.parent.sprite.frozen = true;
-        body.sprite.destroy();
+  if (redCircles.children.indexOf(equation[0].bodyB.parent.sprite) > -1) {
+        body.sprite.frozen = true;
+        equation[0].bodyB.parent.sprite.destroy();
       }
   if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
