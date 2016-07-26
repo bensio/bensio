@@ -266,7 +266,9 @@ function killGreeting() {
 }
 
 function unfreeze(block) {
-  block.frozen = false;
+  if (block) {
+    block.frozen = false;
+  }
 }
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) { 
