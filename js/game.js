@@ -204,7 +204,6 @@ function checkOutOfBounds(circle) {
           }
           circle.body.setCollisionGroup(redCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);        
-          circle.body.onBeginContact.add(hitBlock, this);
           circle.body.kinematic = true;          
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           redCircle.inputEnabled = true;
@@ -222,6 +221,7 @@ function checkOutOfBounds(circle) {
           } 
           circle.body.setCollisionGroup(blueCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);
+          circle.body.onBeginContact.add(hitBlock, this);
           circle.body.kinematic = true;
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
           blueCircle.inputEnabled = true;
