@@ -108,7 +108,7 @@ function create() {
  
   blueCircleCollisionGroup = game.physics.p2.createCollisionGroup();
   blueCircles = game.add.group();
-  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
+  blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
   blueCircle.anchor.x = .5;
   blueCircle.anchor.y = .5;
   blueCircle.inputEnabled = true;
@@ -368,6 +368,7 @@ function updateTimer() {
 
 function showResults(result) { 
   redCircles.destroy(true,true);
+  blueCircles.destroy(true,true);
   gameOver = false;
   constrain = false;
   showTimer = false;
@@ -439,7 +440,7 @@ function resetGame() {
   redCircle.input.enableDrag();
   redCircle.events.onDragStop.add(checkOutOfBounds, this);
   
-  blueCircle = redCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
+  blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
   blueCircle.anchor.x = .5;
   blueCircle.anchor.y = .5;
   blueCircle.inputEnabled = true;
