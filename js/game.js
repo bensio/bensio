@@ -5,7 +5,7 @@ var blockCollisionGroup;
 var redCircleCollisionGroup;
 var blueCircleCollisionGroup;
 var blockVelocity = 30;
-var money = 40;
+var money = 100;
 var betMoney = 0;
 var prompt;
 var blocks;
