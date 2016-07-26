@@ -277,6 +277,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       if (body.sprite.health < 1) {
         if (body == blueCircle) {
           equation[0].bodyB.parent.sprite.frozen = true;
+          console.log("Yay.");
         }
         body.sprite.destroy();
         console.log("Is it this?");
