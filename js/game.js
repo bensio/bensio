@@ -267,7 +267,7 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  console.log(body);
+  console.log(body.sprite);
   if (blueCircles.children.indexOf(equation[0].bodyB.parent.sprite) > -1) {
         body.sprite.frozen = true;
         equation[0].bodyB.parent.sprite.destroy();
