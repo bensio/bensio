@@ -265,10 +265,14 @@ function killGreeting() {
   greeted = true;
 }
 
+function unfreeze(block) {
+  block.frozen = false;
+}
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (body && body.sprite.key == "bluecircle") {
     equation[0].bodyB.parent.sprite.frozen = true;
+    game.time.events.add(2000, this.unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
   else if (body && body.kinematic == false) {
