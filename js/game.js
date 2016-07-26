@@ -269,8 +269,8 @@ function unfreeze(block) {
   block.frozen = false;
 }
 
-function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  if (body && body.sprite.key == "bluecircle") {
+function hitBlock (body,bodyB,shapeA,shapeB,equation) { 
+  if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
     equation[0].bodyB.parent.sprite.frozen = true;
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
