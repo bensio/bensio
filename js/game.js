@@ -269,6 +269,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
   if (blueCircles.children.indexOf(equation[0].bodyB.parent.sprite) > -1) {
         body.sprite.frozen = true;
         equation[0].bodyB.parent.sprite.destroy();
+        console.log("Success!");
       }
   if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
