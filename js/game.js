@@ -267,16 +267,11 @@ function killGreeting() {
 
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) {
-  if (body.sprite.key == "bluecircle") {
-        equation[0].bodyB.parent.sprite.frozen = true;
-        body.sprite.destroy();
-        console.log("Success!");
-      }
   if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
-        if (body == blueCircle) {
+        if (body.sprite.key == "bluecircle") {
           equation[0].bodyB.parent.sprite.frozen = true;
           console.log("Yay.");
         }
