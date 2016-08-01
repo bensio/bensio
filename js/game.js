@@ -189,7 +189,7 @@ function create() {
     greeting.font = 'Century Schoolbook';
     greeting.fontSize = 20;
     greeting.align = "center";
-    game.time.events.add(Phaser.Timer.SECOND * 10, killGreeting, this);
+    game.time.events.add(Phaser.Timer.SECOND * 1, killGreeting, this);
 }
 
 function spawnObstacle(x,y,type) {
@@ -375,7 +375,7 @@ function constrainVelocity(sprite, maxVelocity) {
 
 function promptBet() {
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".");
+      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy while the game is going on!");
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
