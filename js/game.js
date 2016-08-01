@@ -146,7 +146,7 @@ function create() {
                     greeting.align = "center";
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
                     highStakes = true;
-                  } if (m.ObsX && m.ObsY && goingToCenter == false) {
+                  } if (m.ObsX && m.ObsY && showTimer == false && goingToCenter == false) {
                       if (m.Type == 'redCircle') {
                           spawnObstacle(m.ObsX, m.ObsY, 'redCircle')
                       } else if (m.Type == 'blueCircle') {
@@ -193,10 +193,6 @@ function create() {
 }
 
 function spawnObstacle(x,y,type) {
-
-        game.physics.p2.enable(circle);
-        circle.body.setCircle(36);
-        
         if (type == 'redCircle') {          
           redCircle = redCircles.create(x, y, 'redcircle');
           redCircle.anchor.x = .5
