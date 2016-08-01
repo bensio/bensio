@@ -261,13 +261,13 @@ function checkOutOfBounds(circle) {
           blueCircle.events.onDragStop.add(checkOutOfBounds, this);
           type = "blueCircle"
         }  
-        var currency = JSON.stringify({
+        var obstacle = JSON.stringify({
           online: true,
           obsX: circle.x,
           obsY: circle.y,
           type: type
         });
-        sock.send(currency);
+        sock.send(obstacle);
       }
 }
 
