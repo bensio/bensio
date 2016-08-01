@@ -356,10 +356,10 @@ function betOnBlock() {
       betMoney : betMoney,
       online: online
   });
-  //if (connected === true) {
+  if (connected === true) {
     sock.send(currency); 
     console.log(currency);
-  //}
+  }
 };
 
 
