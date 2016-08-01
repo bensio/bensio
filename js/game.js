@@ -133,7 +133,7 @@ function create() {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney >= 100) {
-                    if (greeted == false) {
+                    if (greeted == false && m.PlayerName != playerName) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
                     } else {
@@ -144,6 +144,12 @@ function create() {
                     greeting.fontSize = 20;
                     greeting.align = "center";
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
+                  } else if (m.ObsX && m.ObsY && goingToCenter == false) {
+                      if (m.Type == 'redCircle') {
+                          spawnObstacle(m.ObsX, m.ObsY, 'redCircle')
+                      } else if (m.Type == 'blueCircle') {
+                          spawnObstacle(m.ObsX, m.ObsY, 'blueCircle')
+                      }
                   }
                 } else {
                   players.push(m.PlayerName);
@@ -184,13 +190,41 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 10, killGreeting, this);
 }
 
+function spawnObstacle(x,y,type) {
+
+        game.physics.p2.enable(circle);
+        circle.body.setCircle(36);
+        
+        if (type == 'redCircle') {          
+          redCircle = redCircles.create(x, y, 'redcircle');
+          redCircle.anchor.x = .5
+          redCircle.anchor.y = .5
+          game.physics.p2.enable(redCircle);
+          redCircle.body.setCircle(36);
+          redCircle.body.setCollisionGroup(redCircleCollisionGroup);
+          redCircle.body.collides(blockCollisionGroup);        
+          redCircle.body.kinematic = true;          
+        }
+
+        else if (type = 'blueCircle') {          
+          blueCircle = blueCircles.create(x, y, 'bluecircle');
+          blueCircle.anchor.x = .5
+          blueCircle.anchor.y = .5
+          game.physics.p2.enable(blueCircle);
+          blueCircle.body.setCircle(36);
+          blueCircle.body.setCollisionGroup(blueCircleCollisionGroup);
+          blueCircle.body.collides(blockCollisionGroup);
+          blueCircle.body.onBeginContact.add(hitBlock, this);
+          blueCircle.body.kinematic = true;
+        }
+}
+
 function checkOutOfBounds(circle) {
       if (showTimer == true || circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       } else {
         game.physics.p2.enable(circle);
         circle.body.setCircle(36);
-        
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
@@ -206,13 +240,14 @@ function checkOutOfBounds(circle) {
           redCircle.anchor.x = .5
           redCircle.anchor.y = .5
           redCircle.events.onDragStop.add(checkOutOfBounds, this);
+          type = "redCircle"
         }
 
         if (blueCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
-            money -= 5;
+            money -= 10;
           } 
           circle.body.setCollisionGroup(blueCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);
@@ -224,8 +259,15 @@ function checkOutOfBounds(circle) {
           blueCircle.anchor.x = .5
           blueCircle.anchor.y = .5
           blueCircle.events.onDragStop.add(checkOutOfBounds, this);
-          
-        }
+          type = "blueCircle"
+        }  
+        var currency = JSON.stringify({
+          online: true,
+          obsX: circle.x,
+          obsY: circle.y,
+          type: type
+        });
+        sock.send(currency);
       }
 }
 

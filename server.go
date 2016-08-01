@@ -17,7 +17,9 @@ type Message struct {
 	// messages it's false
 	Online bool // true if the player is no longer connected so the frontend
 	// will remove it from the roster
-
+	ObsX int    //x coords of obs
+	ObsY int    //y coords of obs, obvsly
+	Type string // Type of obstacle being sent through.
 }
 
 type Player struct {
@@ -26,11 +28,14 @@ type Player struct {
 	Id         string // a unique id to identify the player by the frontend
 	PlayerName string // self explanatory
 	Online     bool
+	ObsX       int
+	ObsY       int
+	Type       string
 	Socket     *websocket.Conn // websocket connection of the player
 }
 
 func (p *Player) currency(new bool) Message {
-	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: p.Online}
+	return Message{Money: p.Money, BetMoney: p.BetMoney, PlayerName: p.PlayerName, Id: p.Id, Online: p.Online, ObsX: p.ObsX, ObsY: p.ObsY, Type: p.Type}
 }
 
 // a slice of *Players which will store the list of connected players
