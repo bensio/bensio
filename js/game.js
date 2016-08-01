@@ -408,7 +408,7 @@ function betOnBlock() {
 
 function updateTimer() {
   timeLeft = Math.floor(game.time.events.duration / 1000) + 1;
-  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + "."); 
+  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy obstacles while the game is going on!"); 
 };
 
 function showResults(result) { 
