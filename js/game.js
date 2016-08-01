@@ -95,9 +95,6 @@ function create() {
   menubar.body.kinematic = true;
  
   redCircles = game.add.group();
-  //game.physics.p2.enable(redCircle);
-  //405
-  //redCircle.body.setCircle(36);
   redCircleCollisionGroup = game.physics.p2.createCollisionGroup();
   redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
   redCircle.anchor.x = .5;
@@ -359,10 +356,10 @@ function betOnBlock() {
       betMoney : betMoney,
       online: online
   });
-  if (connected === true) {
+  //if (connected === true) {
     sock.send(currency); 
     console.log(currency);
-  }
+  //}
 };
 
 
