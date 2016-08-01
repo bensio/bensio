@@ -31,7 +31,8 @@ var online = false;
 var textStyle = {
   align: 'center'
 };
-var players
+var players;
+var highStakes = false;
 var player, //our player
         players = [], //this will hold the list of players
         sock, //this will be player's ws connection
@@ -133,7 +134,7 @@ function create() {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
                   if (m.BetMoney >= 100) {
-                    if (greeted == false && m.PlayerName != playerName) {
+                    if (highStakes == false && greeted == false && m.PlayerName != playerName) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
                     } else {
@@ -144,7 +145,8 @@ function create() {
                     greeting.fontSize = 20;
                     greeting.align = "center";
                     game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
-                  } else if (m.ObsX && m.ObsY && goingToCenter == false) {
+                    highStakes = true;
+                  } if (m.ObsX && m.ObsY && goingToCenter == false) {
                       if (m.Type == 'redCircle') {
                           spawnObstacle(m.ObsX, m.ObsY, 'redCircle')
                       } else if (m.Type == 'blueCircle') {
@@ -300,6 +302,9 @@ function greet(m) {
 function killGreeting() {
   greeting.setText("");
   greeted = true;
+  if (highStakes == true) {
+    highStakes = false;
+  }
 }
 
 function unfreeze(block) {
