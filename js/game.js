@@ -132,7 +132,7 @@ function create() {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
-                  if (m.BetMoney > 100) {
+                  if (m.BetMoney >= 100) {
                     if (greeted == false) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
@@ -356,10 +356,10 @@ function betOnBlock() {
       betMoney : betMoney,
       online: online
   });
-  if (connected === true) {
+  //if (online === true) {
     sock.send(currency); 
     console.log(currency);
-  }
+  //}
 };
 
 
