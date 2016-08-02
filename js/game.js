@@ -133,7 +133,7 @@ function create() {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
-                  if (m.BetMoney >= 100) {
+                  if (m.BetMoney >= 100 && m.BetMoney > m.Money / 2) {
                     if (highStakes == false && greeted == false && m.PlayerName != playerName) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
@@ -285,7 +285,7 @@ function startMessages() {
 
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
-   game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this);
+   game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this); 
    greeting.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
