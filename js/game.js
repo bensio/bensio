@@ -133,7 +133,7 @@ function create() {
               if (m.Money != 0) {
                 if (players.indexOf(m.PlayerName) !== -1) {
                   console.log("Player found in current players list.");
-                  if (m.BetMoney >= 100 && m.BetMoney > m.Money / 2) {
+                  if (m.BetMoney >= 100 && m.BetMoney >= m.Money / 2) {
                     if (highStakes == false && greeted == false && m.PlayerName != playerName) {
                       greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
                       greeted = true;
