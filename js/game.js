@@ -54,12 +54,17 @@ function preload() {
 
   //game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
-  
+  game.load.image("starbackground","assets/stars1.png",1200,900);
+  game.load.image("sunsetbackground","assets/sunset3.png",1200,900);
+  game.load.image("westbackground", "assets/west2.png", 1200,900);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
 function create() {
-  //background = game.add.tileSprite(0,0,1200,900,"background");
+
+  var backgrounds = Array("starbackground","sunsetbackground","westbackground", "null");
+  background = game.add.tileSprite(0,0,1200,900, backgrounds[Math.floor(Math.random()*backgrounds.length)]);
+  
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'));
   }
@@ -564,13 +569,6 @@ function update() {
 }
 
 
-/*
-function uMoney(m) { 
-  total.money = m.Money
-  players[m.Id].betMoney = m.BetMoney +       
-}
-
-*/
 function render() {
 
 }
