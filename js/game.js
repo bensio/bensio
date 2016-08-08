@@ -30,6 +30,7 @@ var greeted = false;
 var online = false;
 var textStyle = {
   align: 'center'
+  fill: "#000000"
 };
 var players;
 var highStakes = false;
@@ -63,8 +64,12 @@ function preload() {
 function create() {
 
   var backgrounds = Array("starbackground","sunsetbackground","westbackground");
-  background = game.add.tileSprite(0,0,1200,900, backgrounds[Math.floor(Math.random()*backgrounds.length)]);
-  
+  var backgroundchoice = backgrounds[Math.floor(Math.random()*backgrounds.length)]
+  background = game.add.tileSprite(0,0,1200,900, backgroundchoice);
+  if (backgroundchoice = "starbackground") {
+    textStyle.fill = "#ffffff"
+  }
+
   if (localStorage && localStorage.getItem('money')) {
     money = parseInt(localStorage.getItem('money'));
   }
@@ -141,10 +146,10 @@ function create() {
                   console.log("Player found in current players list.");
                   if (m.BetMoney >= 100 && m.BetMoney >= m.Money / 2) {
                     if (greeted == false && m.PlayerName != playerName) {
-                      greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");      
+                      greeting = game.add.text(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!", textStyle);      
                       greeted = true;
                     } else {
-                      greeting.setText(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!");   
+                      greeting.setText(m.PlayerName + " has bet " + m.BetMoney + " Benbux. \n\n\n High stakes!", textStyle);   
                     }
                     greeting.anchor.setTo(0.5, 0.5);
                     greeting.font = 'Century Schoolbook';
@@ -189,7 +194,7 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 10, startGame, this);
     promptBet(); 
     if (greeted == false) {
-      greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".");      
+      greeting = game.add.text(game.world.centerX, game.world.centerY - 300, "Welcome to Bensio, " + playerName + ".",textStyle);      
     }
     greeting.anchor.setTo(0.5, 0.5);
     greeting.font = 'Century Schoolbook';
@@ -292,7 +297,7 @@ function startMessages() {
 function greet(m) {
    var label = m.Id.match(/(^\w*)-/i)[1];
    game.time.events.add(Phaser.Timer.SECOND * 3, killGreeting, this); 
-   greeting.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.");   
+   greeting.setText(m.PlayerName + " has joined the game with " + m.Money + " Benbux. \n\n\n There are currently " + players.length + " players online.", textStyle);   
    greeting.anchor.setTo(0.5, 0.5);
    greeting.font = 'Century Schoolbook';
    greeting.fontSize = 20;
@@ -381,7 +386,7 @@ function constrainVelocity(sprite, maxVelocity) {
 
 function promptBet() {
   prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy while the game is going on!");
+      "\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n10\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy while the game is going on!",textStyle);
   prompt.anchor.setTo(0.5, 0.5);
   prompt.font = 'Century Schoolbook';
   prompt.fontSize = 20;
@@ -414,7 +419,7 @@ function betOnBlock() {
 
 function updateTimer() {
   timeLeft = Math.floor(game.time.events.duration / 1000) + 1;
-  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy obstacles while the game is going on!"); 
+  prompt.setText("\n\n\nPlace your bets!\n\nRed, Green, Blue, or Orange?\n\n" + timeLeft + "\n\n\n\nYou currently have " + money + " dollars.\n\nYou're betting " + betMoney + " dollars on " + bet + ".\n\nRed Circles cost 5, blue 10. Buy obstacles while the game is going on!", textStyle); 
 };
 
 function showResults(result) { 
@@ -425,7 +430,7 @@ function showResults(result) {
   showTimer = false;
   if (result && result === "tie") {
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-            "Looks like no one is the winner, whoops! No payout!");
+            "Looks like no one is the winner, whoops! No payout!",textStyle);
     timer = game.time.events.add(Phaser.Timer.SECOND * 3, resetGame, this);
     winner = "none";
     betMoney = 0;
