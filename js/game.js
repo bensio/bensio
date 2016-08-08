@@ -442,7 +442,7 @@ function showResults(result) {
     accelerateToCenter(blocks.children[0], 1000);
     goingToCenter = true;
     prompt = game.add.text(game.world.centerX, game.world.centerY - 50,
-            blocks.children[0].key.capitalizeFirstLetter() + " is the winner!");
+            blocks.children[0].key.capitalizeFirstLetter() + " is the winner!",textStyle);
     if (!result) {
         timer = game.time.events.add(Phaser.Timer.SECOND * 10, resetGame, this);
     }
