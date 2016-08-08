@@ -54,9 +54,9 @@ function preload() {
 
   //game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
-  game.load.image("starbackground","assets/stars1.png",1200,900);
-  game.load.image("sunsetbackground","assets/sunset3.png",1200,900);
-  game.load.image("westbackground", "assets/west2.png", 1200,900);
+  game.load.image("starbackground","assets/stars1.png",2560,1840);
+  game.load.image("sunsetbackground","assets/sunset3.png",2560,1840);
+  game.load.image("westbackground", "assets/west2.png", 2560,1840);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
