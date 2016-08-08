@@ -29,7 +29,7 @@ var takeMessages;
 var greeted = false;
 var online = false;
 var textStyle = {
-  align: 'center'
+  align: 'center',
   fill: "#000000"
 };
 var players;
