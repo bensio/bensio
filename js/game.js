@@ -62,11 +62,8 @@ function preload() {
 }
 
 function create() {
-  
-
-
-  var backgroundstrings = Array("starbackground","sunsetbackground","westbackground");
-  var backgroundchoice = backgroundstrings[Math.floor(Math.random()*backgrounds.length)]
+  var backgrounds = Array("starbackground","sunsetbackground","westbackground");
+  var backgroundchoice = backgrounds[Math.floor(Math.random()*backgrounds.length)]
   background = game.add.tileSprite(0,0,1280,920, backgroundchoice);
   if (backgroundchoice == "starbackground") {
     textStyle.fill = "#ffffff";
