@@ -57,7 +57,7 @@ function preload() {
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
   game.load.image("starbackground","assets/stars1.png",2560,1840);
   game.load.image("sunsetbackground","assets/sunset3.png",2560,1840);
-  game.load.image("westbackground", "assets/west2.png", 2560,1840);
+  game.load.image("westbackground", "assets/west2.png", 1280,920);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
@@ -65,7 +65,7 @@ function create() {
 
   var backgrounds = Array("starbackground","sunsetbackground","westbackground");
   var backgroundchoice = backgrounds[Math.floor(Math.random()*backgrounds.length)]
-  background = game.add.tileSprite(0,0,1200,900, backgroundchoice);
+  background = game.add.tileSprite(0,0,1280,920, backgroundchoice);
   if (backgroundchoice == "starbackground") {
     textStyle.fill = "#ffffff";
   }
