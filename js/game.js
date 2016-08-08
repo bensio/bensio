@@ -62,7 +62,7 @@ function preload() {
 
 function create() {
 
-  var backgrounds = Array("starbackground","sunsetbackground","westbackground", "null");
+  var backgrounds = Array("starbackground","sunsetbackground","westbackground");
   background = game.add.tileSprite(0,0,1200,900, backgrounds[Math.floor(Math.random()*backgrounds.length)]);
   
   if (localStorage && localStorage.getItem('money')) {
