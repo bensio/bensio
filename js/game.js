@@ -54,6 +54,7 @@ function preload() {
 
   //game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
+  
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
 }
 
