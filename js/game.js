@@ -630,8 +630,8 @@ function update() {
           constrainVelocity(block,0);
         }
         if (Phaser.Circle.intersectsRectangle(purpleCircle, block)) {
-          block.health += 1;
-          block.alpha += .05;
+          block.health += 10;
+          block.alpha += .5;
         }
       }, this);
       purpleCircles.forEach(function(purpleCircle) {
