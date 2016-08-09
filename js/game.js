@@ -214,8 +214,8 @@ function create() {
 
 
 function checkOverlap(circle, rectangle) {
-        console.log(circle);
-        console.log(rectangle);
+        circle = circle.getBounds();
+        rectangle = rectangle.getBounds();
         return Phaser.Circle.intersectsRectangle(circle, rectangle);
         console.log(Phaser.Circle.intersectsRectangle(circle, rectangle));
 }
