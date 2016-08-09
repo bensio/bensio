@@ -24,6 +24,7 @@ var greenbutton;
 var orangebutton;
 var redCircle;
 var purpleCircles;
+var purpleCircle;
 var greeting;
 var connected = "false";
 var playerName;
