@@ -214,7 +214,7 @@ function create() {
 
 
 function checkOverlap(spriteA, spriteB) {
-      if (spriteA, spriteB) {
+      if (spriteA && spriteB) {
         var boundsA = spriteA.getBounds();
         var boundsB = spriteB.getBounds();
 
