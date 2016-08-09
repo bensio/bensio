@@ -396,16 +396,17 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
         body.sprite.destroy();
       }
   } else {
-    if (equation[0].bodyB.parent.sprite) {
+    if (equation[0] && equation[0].bodyB.parent.sprite) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
       }
-    } if (body && body.sprite.key == "purplecircle") {
+       if (body && body.sprite.key == "purplecircle") {
       equation[0].bodyB.parent.sprite.alpha = 1;
       equation[0].bodyB.parent.sprite.health += 2;
      }
+    }
   }
   if (blocks.length === 1 || blocks.length === 0) {
     gameOver = true;
