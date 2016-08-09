@@ -264,7 +264,7 @@ function checkOutOfBounds(circle) {
       if (showTimer == true || circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       } else {
-        console.loc(circle);
+        console.log(circle);
         circle.body.setCircle(36);        
         game.physics.p2.enable(circle);
         if (redCircles.children.indexOf(circle) > -1) {          
