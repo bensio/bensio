@@ -257,10 +257,12 @@ function spawnObstacle(x,y,type) {
           purpleCircle.anchor.y = .5;
           purpleCircle.body.setCircle(36);
           purpleCircle.alpha = 1;
-          while (purpleCircle.scale < 3) {
+          var purpleChange = 0;
+          while (purpleChange < 20) {
             purpleCircle.scale.x += .1;
             purpleCircle.scale.y += .1;
             purpleCircle.alpha -= .01;
+            purpleChange += 1;
           }
         }
 }
@@ -315,17 +317,19 @@ function checkOutOfBounds(circle) {
           } else {
             money -= 5
           }
-          purpleCircle = purpleCircles.create(game.world.centerX + 100, game.world.centerY+405, 'purplecircle');
+          purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
           purpleCircle.input.enableDrag();
           purpleCircle.anchor.x = .5;
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
           purpleCircle.alpha = 1;
-          while (circle && circle.scale < 3) {
+          var purpleChange = 0;
+          while (circle && purpleChange < 20) {
             circle.scale.x += .1;
             circle.scale.y += .1;
             circle.alpha -= .01;
+            purpleChange += 1;
           }
           type = "purpleCircle";
       }
@@ -565,6 +569,14 @@ function resetGame() {
   blueCircle.inputEnabled = true;
   blueCircle.input.enableDrag();
   blueCircle.events.onDragStop.add(checkOutOfBounds, this);
+
+  purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
+  purpleCircle.anchor.x = .5;
+  purpleCircle.anchor.y = .5;
+  purpleCircle.inputEnabled = true;
+  purpleCircle.input.enableDrag();
+  purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
+
 
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
