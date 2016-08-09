@@ -122,7 +122,7 @@ function create() {
   blueCircle.input.enableDrag();
   blueCircle.events.onDragStop.add(checkOutOfBounds, this);
  
-  
+  purpleCircleCollisionGroup = game.physics.p2.createCollisionGroup();
   purpleCircles = game.add.group();
   purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
   purpleCircle.anchor.x = .5;
@@ -130,7 +130,7 @@ function create() {
   purpleCircle.inputEnabled = true;
   purpleCircle.input.enableDrag();
   purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
-
+  purpleCircle.sensor = true;
 
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
@@ -190,6 +190,7 @@ function create() {
     block.body.collides(menuCollisionGroup);
     block.body.collides(redCircleCollisionGroup);
     block.body.collides(blueCircleCollisionGroup);
+    block.body.collides(purpleCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.body.friction = 0;
     block.body.angularDamping = 0;
@@ -254,11 +255,13 @@ function spawnObstacle(x,y,type) {
           purpleCircle.body.setCircle(36);
           purpleCircle.alpha = 1;
           purpleCircle.activated = true;
-          while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
-            purpleCircle.scale.x += .1;
-            purpleCircle.scale.y += .1;
-            purpleCircle.alpha -= .01;
-          }
+          game.physics.p2.enable(purpleCircle);
+          purpleCircle.body.setCircle(36);
+          purpleCircle.body.setCollisionGroup(purpleCircleCollisionGroup);
+          purpleCircle.body.collides(blockCollisionGroup);
+          purpleCircle.body.onBeginContact.add(hitblock, this);
+          purpleCircle.body.kinematic = true;
+          purpleCircle.sensor = true;
         }
 }
 
@@ -275,7 +278,7 @@ function checkOutOfBounds(circle) {
             money -= 5; 
             circle.body.setCollisionGroup(redCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);        
-            circle.body.kinematic = true;          
+            circle.body.kinematic = true;
           }
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           redCircle.inputEnabled = true;
@@ -312,6 +315,10 @@ function checkOutOfBounds(circle) {
             money -= 5
             circle.active = true;
             circle.body.kinematic = true;
+            circle.body.setCollisionGroup(blueCircleCollisionGroup);
+            circle.body.collides(blockCollisionGroup);
+            circle.body.onBeginContact.add(hitBlock, this);
+            circle.sensor = true;
           }
           purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
@@ -395,7 +402,10 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
       }
-    }
+    } if (body.sprite.key == "purplecircle")
+      equation[0].bodyB.parent.sprite.alpha = 1;
+      equation[0].bodyB.parent.sprite.health += 2;
+     }
   }
   if (blocks.length === 1 || blocks.length === 0) {
     gameOver = true;
@@ -565,7 +575,7 @@ function resetGame() {
   purpleCircle.inputEnabled = true;
   purpleCircle.input.enableDrag();
   purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
-
+  purpleCircle.sensor = true;
 
   blocks.forEach(function(block) {
     block.body.setCollisionGroup(blockCollisionGroup);
@@ -573,6 +583,7 @@ function resetGame() {
     block.body.collides(menuCollisionGroup);
     block.body.collides(redCircleCollisionGroup);
     block.body.collides(blueCircleCollisionGroup);
+    block.body.collides(purpleCircleCollisionGroup);
     block.body.onBeginContact.add(hitBlock, this);
     block.anchor.x = 0.5;
     block.anchor.y = 0.5;
@@ -628,10 +639,6 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Circle.intersectsRectangle(purpleCircle.getBounds, block.getBounds)) {
-          block.health += 10;
-          block.alpha += .5;
-        }
       }, this);
       purpleCircles.forEach(function(purpleCircle) {
         if (purpleCircle.active == true) {
@@ -639,7 +646,7 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
-              }
+            }
           }
         }, this);
     } else if (gameOver === true && blocks.length === 1)  {
