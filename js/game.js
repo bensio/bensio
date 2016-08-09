@@ -637,7 +637,7 @@ function update() {
           while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
               purpleCircle.scale.x += .01;
               purpleCircle.scale.y += .01;
-              purpleCircle.alpha -= .001;
+              //purpleCircle.alpha -= .001;
               }
           }
         }, this);
