@@ -628,9 +628,9 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Circle.intersectsRectangle(purpleCircle, )) {
+        //if (Phaser.Circle.intersectsRectangle(purpleCircle, )) {
 
-        }
+        //}
       }, this);
       purpleCircles.forEach(function(purpleCircle) {
         if (purpleCircle.active == true) {
