@@ -428,7 +428,6 @@ function constrainVelocity(sprite, maxVelocity) {
 
   vx = body.data.velocity[0];
   vy = body.data.velocity[1];
-  
   currVelocitySqr = vx * vx + vy * vy;
   
   angle = Math.atan2(vy, vx);
@@ -629,7 +628,7 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Rectangle.intersects(redCircle.body.bounds, block.body.bounds)) {
+        if (Phaser.Circle.intersectsRectangle(purpleCircle.getBounds, block.getBounds)) {
           block.health += 10;
           block.alpha += .5;
         }
