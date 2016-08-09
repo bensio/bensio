@@ -248,13 +248,14 @@ function spawnObstacle(x,y,type) {
 
         else if (type = 'purpleCircle') {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
-          purpleCircle.anchor.x = .5
-          purpleCircle.anchor.y = .5
+          purpleCircle.anchor.x = .5;
+          purpleCircle.anchor.y = .5;
           purpleCircle.body.setCircle(36);
-          purpleCircle.alpha = 1
+          purpleCircle.alpha = 1;
           while (purpleCircle.scale < 3) {
-            purpleCircle.scale += .1
-            purpleCircle.alpha -= .01
+            purpleCircle.scale.x += .1;
+            purpleCircle.scale.y += .1;
+            purpleCircle.alpha -= .01;
           }
         }
 }
@@ -280,7 +281,7 @@ function checkOutOfBounds(circle) {
           redCircle.anchor.x = .5
           redCircle.anchor.y = .5
           redCircle.events.onDragStop.add(checkOutOfBounds, this);
-          type = "redCircle"
+          type = "redCircle";
         }
 
         if (blueCircles.children.indexOf(circle) > -1) {          
@@ -297,10 +298,10 @@ function checkOutOfBounds(circle) {
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
           blueCircle.inputEnabled = true;
           blueCircle.input.enableDrag();
-          blueCircle.anchor.x = .5
-          blueCircle.anchor.y = .5
+          blueCircle.anchor.x = .5;
+          blueCircle.anchor.y = .5;
           blueCircle.events.onDragStop.add(checkOutOfBounds, this);
-          type = "blueCircle"
+          type = "blueCircle";
         }  
 
       if (purpleCircles.children.indexOf(circle) > -1) {
@@ -312,15 +313,16 @@ function checkOutOfBounds(circle) {
           purpleCircle = purpleCircles.create(game.world.centerX + 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
           purpleCircle.input.enableDrag();
-          purpleCircle.anchor.x = .5
-          purpleCircle.anchor.y = .5
+          purpleCircle.anchor.x = .5;
+          purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
-          purpleCircle.alpha = 1
+          purpleCircle.alpha = 1;
           while (purpleCircle.scale < 3) {
-            purpleCircle.scale += .1
-            purpleCircle.alpha -= .01
+            purpleCircle.scale.x += .1;
+            purpleCircle.scale.y += .1;
+            purpleCircle.alpha -= .01;
           }
-          type = "purpleCircle"
+          type = "purpleCircle";
       }
 
         var obstacle = JSON.stringify({
