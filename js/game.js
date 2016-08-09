@@ -492,6 +492,7 @@ function updateTimer() {
 function showResults(result) { 
   redCircles.destroy(true,true);
   blueCircles.destroy(true,true);
+  purpleCircles.destroy(true,true);
   gameOver = false;
   constrain = false;
   showTimer = false;
