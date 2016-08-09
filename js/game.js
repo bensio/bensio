@@ -39,7 +39,7 @@ var player, //our player
         sock, //this will be player's ws connection
         label,
         ip = "162.243.216.88"; //ip of our Go server
-
+var purpleCircle;
 function preload() { 
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
@@ -51,9 +51,7 @@ function preload() {
   game.load.image("orange", "assets/orangesquare.png",72,72);
   game.load.image("bluecircle", "assets/blue-circle.png", 72, 72);
   game.load.image("redcircle", "assets/red-circle.png", 72, 72);
-  //game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
-
-  //game.load.image("background", "assets/spacebackground.jpg", 1200, 900);
+  game.load.image("purplecircle", "assets/purple-circle.png", 72, 72);
   game.load.image("menubar","assets/greenishbar.jpg",1200,90);
   starbackground = game.load.image("starbackground","assets/stars1.png",1280,920);
   sunsetbackground = game.load.image("sunsetbackground","assets/sunset3.png",1280,920);
@@ -123,6 +121,15 @@ function create() {
   blueCircle.input.enableDrag();
   blueCircle.events.onDragStop.add(checkOutOfBounds, this);
   
+  purpleCircles = game.add.group();
+  purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
+  purpleCircle.anchor.x = .5;
+  purpleCircle.anchor.y = .5;
+  purpleCircle.inputEnabled = true;
+  purpleCircle.input.enableDrag();
+  purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
+
+
   sock = new WebSocket("ws://" + ip + ":8000/ws");
   sock.onopen = function() {
             var currency = JSON.stringify({
@@ -158,9 +165,11 @@ function create() {
                     highStakes = true;
                   } if (m.ObsX && m.ObsY && showTimer == false && goingToCenter == false) {
                       if (m.Type == 'redCircle') {
-                          spawnObstacle(m.ObsX, m.ObsY, 'redCircle')
+                          spawnObstacle(m.ObsX, m.ObsY, 'redCircle');
                       } else if (m.Type == 'blueCircle') {
-                          spawnObstacle(m.ObsX, m.ObsY, 'blueCircle')
+                          spawnObstacle(m.ObsX, m.ObsY, 'blueCircle');
+                      } else if (m.Type == 'purpleCircle') {
+                          spawnObstacle(m.ObsX, m.ObsY, 'purpleCircle');
                       }
                   }
                 } else {
@@ -225,20 +234,32 @@ function spawnObstacle(x,y,type) {
           blueCircle.body.onBeginContact.add(hitBlock, this);
           blueCircle.body.kinematic = true;
         }
+
+        else if (type = 'purpleCircle') {
+          purpleCircle = purpleCircles.create(x, y, 'purplecircle');
+          purpleCircle.anchor.x = .5
+          purpleCircle.anchor.y = .5
+          purpleCircle.body.setCircle(36);
+          purpleCircle.alpha = 1
+          while (purpleCircle.scale < 3) {
+            purpleCircle.scale += .1
+            purpleCircle.alpha -= .01
+          }
+        }
 }
 
 function checkOutOfBounds(circle) {
       if (showTimer == true || circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       } else {
-        game.physics.p2.enable(circle);
         circle.body.setCircle(36);
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
             money -= 5;
-          }
+          } 
+          game.physics.p2.enable(circle);
           circle.body.setCollisionGroup(redCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);        
           circle.body.kinematic = true;          
@@ -252,11 +273,12 @@ function checkOutOfBounds(circle) {
         }
 
         if (blueCircles.children.indexOf(circle) > -1) {          
-          if (money - betMoney < 5) {
+          if (money - betMoney < 10) {
             circle.destroy();
           } else {
             money -= 10;
           } 
+          game.physics.p2.enable(circle);
           circle.body.setCollisionGroup(blueCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);
           circle.body.onBeginContact.add(hitBlock, this);
@@ -269,6 +291,27 @@ function checkOutOfBounds(circle) {
           blueCircle.events.onDragStop.add(checkOutOfBounds, this);
           type = "blueCircle"
         }  
+
+      if (purpleCircles.children.indexOf(circle) > -1) {
+          if (money - betMoney < 5) {
+            circle.destroy();
+          } else {
+            money -= 5
+          }
+          purpleCircle = purpleCircles.create(game.world.centerX + 100, game.world.centerY+405, 'purplecircle');
+          purpleCircle.inputEnabled = true;
+          purpleCircle.input.enableDrag();
+          purpleCircle.anchor.x = .5
+          purpleCircle.anchor.y = .5
+          purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
+          purpleCircle.alpha = 1
+          while (purpleCircle.scale < 3) {
+            purpleCircle.scale += .1
+            purpleCircle.alpha -= .01
+          }
+          type = "purpleCircle"
+      }
+
         var obstacle = JSON.stringify({
           online: true,
           obsX: circle.x,
@@ -325,14 +368,14 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
-  else if (body && body.kinematic == false) {
+  else if (body && body.kinematic == false && checkOverlap(equation[0].bodyB.parent.sprite, purpleCircle) == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
       }
   } else {
-    if (equation[0].bodyB.parent.sprite) {
+    if (equation[0].bodyB.parent.sprite && checkOverlap(equation[0].bodyB.parent.sprite, purpleCircle) == false) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
