@@ -122,7 +122,7 @@ function create() {
   blueCircle.input.enableDrag();
   blueCircle.events.onDragStop.add(checkOutOfBounds, this);
  
-
+  
   purpleCircles = game.add.group();
   purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
   purpleCircle.anchor.x = .5;
@@ -311,6 +311,7 @@ function checkOutOfBounds(circle) {
           } else {
             money -= 5
             circle.active = true;
+            circle.body.kinematic = true;
           }
           purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
@@ -628,7 +629,7 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Circle.intersectsRectangle(purpleCircle, block.body)) {
+        if (Phaser.Rectangle.intersects(purpleCircle.bounds, block.bounds)) {
           block.health += 10;
           block.alpha += .5;
         }
