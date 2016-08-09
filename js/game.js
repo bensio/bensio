@@ -219,6 +219,7 @@ function checkOverlap(spriteA, spriteB) {
         var boundsB = spriteB.getBounds();
 
         return Phaser.Circle.intersects(boundsA, boundsB);
+        console.log(Phaser.Circle.intersects(boundsA, boundsB));
       }
 
       else {
