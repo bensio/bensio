@@ -264,14 +264,14 @@ function checkOutOfBounds(circle) {
       if (showTimer == true || circle.y >= game.world.centerY+315 || circle.y <= game.world.centerY-450 || circle.x + 32 >= game.world.centerX+600 || circle.x - 32 <= game.world.centerX-600){  // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
         resetObstacle(circle);
       } else {
-        circle.body.setCircle(36);
+        circle.body.setCircle(36);        
+        game.physics.p2.enable(circle);
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
             money -= 5;
           } 
-          game.physics.p2.enable(circle);
           circle.body.setCollisionGroup(redCircleCollisionGroup);
           circle.body.collides(blockCollisionGroup);        
           circle.body.kinematic = true;          
@@ -337,10 +337,13 @@ function checkOutOfBounds(circle) {
 
 function resetObstacle(obstacle) {
  if (redCircles.children.indexOf(obstacle) > -1) {
-    obstacle.x = game.world.centerX
-    obstacle.y = game.world.centerY+405
+    obstacle.x = game.world.centerX;
+    obstacle.y = game.world.centerY+405;
  } else if (blueCircles.children.indexOf(obstacle) > -1) {
-    obstacle.x = game.world.centerX + 100
+    obstacle.x = game.world.centerX + 100;
+    obstacle.y = game.world.centerY + 405;
+ } else if (purpleCircles.children.indexOf(obstacle) > -1) {
+    obstacle.x = game.world.centerX - 100;
     obstacle.y = game.world.centerY + 405
  }
 }
