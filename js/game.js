@@ -214,17 +214,17 @@ function create() {
 
 
 function checkOverlap(spriteA, spriteB) {
-      if (spriteA && spriteB) {
+      //if (spriteA && spriteB) {
         var boundsA = spriteA.getBounds();
         var boundsB = spriteB.getBounds();
 
         return Phaser.Circle.intersects(boundsA, boundsB);
         console.log(Phaser.Circle.intersects(boundsA, boundsB));
-      }
+      //}
 
-      else {
-        return false;
-      }
+     // else {
+       // return false;
+     //}
 }
 
 
