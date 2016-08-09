@@ -211,6 +211,17 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 1, killGreeting, this);
 }
 
+
+function checkOverlap(spriteA, spriteB) {
+
+      var boundsA = spriteA.getBounds();
+      var boundsB = spriteB.getBounds();
+
+      return Phaser.Circle.intersects(boundsA, boundsB);
+
+}
+
+
 function spawnObstacle(x,y,type) {
         if (type == 'redCircle') {          
           redCircle = redCircles.create(x, y, 'redcircle');
