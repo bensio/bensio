@@ -213,14 +213,9 @@ function create() {
 }
 
 
-function checkOverlap(spriteA, spriteB) {
-      //if (spriteA && spriteB) {
-        var boundsA = spriteA.getBounds();
-        var boundsB = spriteB.getBounds();
-
-        return Phaser.Circle.intersects(boundsA, boundsB);
-        console.log(Phaser.Circle.intersects(boundsA, boundsB));
-      //}
+function checkOverlap(circle, rectangle) {
+        return Phaser.Circle.intersectsrectangle(circle, rectangle);
+        console.log(Phaser.Circle.intersects(circle, rectangle));
 
      // else {
        // return false;
@@ -394,14 +389,14 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
-  else if (body && body.kinematic == false && checkOverlap(equation[0].bodyB.parent.sprite, purpleCircle) == false) {
+  else if (body && body.kinematic == false && checkOverlap(purpleCircle,body) == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
       }
   } else {
-    if (equation[0].bodyB.parent.sprite && checkOverlap(equation[0].bodyB.parent.sprite, purpleCircle) == false) {
+    if (equation[0].bodyB.parent.sprite && checkOverlap(purpleCircle, equation[0].bodyB.parent.sprite) == false) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
