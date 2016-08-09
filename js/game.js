@@ -635,9 +635,9 @@ function update() {
       purpleCircles.forEach(function(purpleCircle) {
         if (purpleCircle.active == true) {
           while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
-              purpleCircle.scale.x += .1;
-              purpleCircle.scale.y += .1;
-              purpleCircle.alpha -= .01;
+              purpleCircle.scale.x += .01;
+              purpleCircle.scale.y += .01;
+              purpleCircle.alpha -= .001;
               }
           }
         }, this);
