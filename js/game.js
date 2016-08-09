@@ -120,7 +120,8 @@ function create() {
   blueCircle.inputEnabled = true;
   blueCircle.input.enableDrag();
   blueCircle.events.onDragStop.add(checkOutOfBounds, this);
-  
+ 
+
   purpleCircles = game.add.group();
   purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
   purpleCircle.anchor.x = .5;
@@ -269,8 +270,8 @@ function checkOutOfBounds(circle) {
         resetObstacle(circle);
       } else {
         console.log(circle);
-        circle.body.setCircle(36);        
         game.physics.p2.enable(circle);
+        circle.body.setCircle(36);        
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
