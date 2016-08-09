@@ -317,10 +317,10 @@ function checkOutOfBounds(circle) {
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
           purpleCircle.alpha = 1;
-          while (purpleCircle.scale < 3) {
-            purpleCircle.scale.x += .1;
-            purpleCircle.scale.y += .1;
-            purpleCircle.alpha -= .01;
+          while (circle.scale < 3) {
+            circle.scale.x += .1;
+            circle.scale.y += .1;
+            circle.alpha -= .01;
           }
           type = "purpleCircle";
       }
