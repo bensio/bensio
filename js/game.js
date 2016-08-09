@@ -646,7 +646,6 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
-              purpleCircle.body.setCircle(purpleCircle.physicsShape.radius + .02);
             } 
           }
         }, this);
