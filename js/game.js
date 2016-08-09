@@ -22,6 +22,7 @@ var redbutton;
 var greenbutton;
 var orangebutton;
 var redCircle;
+var purpleCircles;
 var greeting;
 var connected = "false";
 var playerName;
@@ -212,14 +213,14 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 1, killGreeting, this);
 }
 
-
+/*
 function checkOverlap(circle, rectangle) {
         circle = circle.getBounds();
         rectangle = rectangle.getBounds();
         return Phaser.Circle.intersectsRectangle(circle, rectangle);
         console.log(Phaser.Circle.intersectsRectangle(circle, rectangle));
 }
-
+*/
 
 function spawnObstacle(x,y,type) {
         if (type == 'redCircle') {          
@@ -251,12 +252,11 @@ function spawnObstacle(x,y,type) {
           purpleCircle.anchor.y = .5;
           purpleCircle.body.setCircle(36);
           purpleCircle.alpha = 1;
-          var purpleChange = 0;
-          while (purpleChange < 20) {
+          purpleCircle.activated = true;
+          while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
             purpleCircle.scale.x += .1;
             purpleCircle.scale.y += .1;
             purpleCircle.alpha -= .01;
-            purpleChange += 1;
           }
         }
 }
@@ -318,13 +318,7 @@ function checkOutOfBounds(circle) {
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
           purpleCircle.alpha = 1;
-          var purpleChange = 0;
-          while (circle && purpleChange < 20) {
-            circle.scale.x += .1;
-            circle.scale.y += .1;
-            circle.alpha -= .01;
-            purpleChange += 1;
-          }
+          purpleCircle.active = true;
           type = "purpleCircle";
       }
 
@@ -387,14 +381,14 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
-  else if (body && body.kinematic == false && checkOverlap(purpleCircle,body) == false) {
+  else if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
         body.sprite.destroy();
       }
   } else {
-    if (equation[0].bodyB.parent.sprite && checkOverlap(purpleCircle, equation[0].bodyB.parent.sprite) == false) {
+    if (equation[0].bodyB.parent.sprite) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
       equation[0].bodyB.parent.sprite.health -= 1;
       if (equation[0].bodyB.parent.sprite.health < 1) {
@@ -634,7 +628,19 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
+        if (Phaser.Circle.intersectsRectangle(purpleCircle, )) {
+
+        }
       }, this);
+      purpleCircles.forEach(function(purpleCircle) {
+        if (purpleCircle.active == true) {
+          while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
+              purpleCircle.scale.x += .1;
+              purpleCircle.scale.y += .1;
+              purpleCircle.alpha -= .01;
+              }
+          }
+        }, this);
     } else if (gameOver === true && blocks.length === 1)  {
       showResults();
     } else if (gameOver === true && blocks.length === 0) {
