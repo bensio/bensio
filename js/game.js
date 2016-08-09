@@ -402,7 +402,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       if (equation[0].bodyB.parent.sprite.health < 1) {
         equation[0].bodyB.parent.sprite.destroy();
       }
-    } if (body.sprite.key == "purplecircle")
+    } if (body && body.sprite.key == "purplecircle") {
       equation[0].bodyB.parent.sprite.alpha = 1;
       equation[0].bodyB.parent.sprite.health += 2;
      }
@@ -646,7 +646,8 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
-            }
+              purpleCircle.body.setCircle();
+            } 
           }
         }, this);
     } else if (gameOver === true && blocks.length === 1)  {
