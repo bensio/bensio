@@ -634,10 +634,10 @@ function update() {
       }, this);
       purpleCircles.forEach(function(purpleCircle) {
         if (purpleCircle.active == true) {
-          while (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
+          if (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
               purpleCircle.scale.x += .01;
               purpleCircle.scale.y += .01;
-              //purpleCircle.alpha -= .001;
+              purpleCircle.alpha -= .001;
               }
           }
         }, this);
