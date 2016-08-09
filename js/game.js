@@ -276,11 +276,11 @@ function checkOutOfBounds(circle) {
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
-            money -= 5;
-          } 
-          circle.body.setCollisionGroup(redCircleCollisionGroup);
-          circle.body.collides(blockCollisionGroup);        
-          circle.body.kinematic = true;          
+            money -= 5; 
+            circle.body.setCollisionGroup(redCircleCollisionGroup);
+            circle.body.collides(blockCollisionGroup);        
+            circle.body.kinematic = true;          
+          }
           redCircle = redCircles.create(game.world.centerX, game.world.centerY+405, 'redcircle');
           redCircle.inputEnabled = true;
           redCircle.input.enableDrag();
@@ -295,12 +295,11 @@ function checkOutOfBounds(circle) {
             circle.destroy();
           } else {
             money -= 10;
-          } 
-          game.physics.p2.enable(circle);
-          circle.body.setCollisionGroup(blueCircleCollisionGroup);
-          circle.body.collides(blockCollisionGroup);
-          circle.body.onBeginContact.add(hitBlock, this);
-          circle.body.kinematic = true;
+            circle.body.setCollisionGroup(blueCircleCollisionGroup);
+            circle.body.collides(blockCollisionGroup);
+            circle.body.onBeginContact.add(hitBlock, this);
+            circle.body.kinematic = true;
+          }
           blueCircle = blueCircles.create(game.world.centerX + 100, game.world.centerY+405, 'bluecircle');
           blueCircle.inputEnabled = true;
           blueCircle.input.enableDrag();
@@ -323,7 +322,7 @@ function checkOutOfBounds(circle) {
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
           purpleCircle.alpha = 1;
-          while (circle.scale < 3) {
+          while (circle && circle.scale < 3) {
             circle.scale.x += .1;
             circle.scale.y += .1;
             circle.alpha -= .01;
