@@ -315,11 +315,11 @@ function checkOutOfBounds(circle) {
           } else {
             money -= 5
             circle.active = true;
-            circle.body.kinematic = true;
-            circle.body.setCollisionGroup(blueCircleCollisionGroup);
+            circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circle.body.onBeginContact.add(hitBlock, this);
             circle.body.data.shapes[0].sensor = true;
+            circle.body.onBeginContact.add(hitBlock, this);
+            circle.body.kinematic = true;
           }
           purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
@@ -327,7 +327,6 @@ function checkOutOfBounds(circle) {
           purpleCircle.anchor.x = .5;
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
-          purpleCircle.kinematic = true;
           type = "purpleCircle";
       }
 
