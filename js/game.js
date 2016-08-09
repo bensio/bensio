@@ -629,7 +629,7 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Rectangle.intersects(purpleCircle.body.bounds, block.body.bounds)) {
+        if (Phaser.Rectangle.intersects(redCircle.body.bounds, block.body.bounds)) {
           block.health += 10;
           block.alpha += .5;
         }
