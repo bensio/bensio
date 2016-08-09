@@ -318,7 +318,7 @@ function checkOutOfBounds(circle) {
           purpleCircle.anchor.y = .5;
           purpleCircle.events.onDragStop.add(checkOutOfBounds, this);
           purpleCircle.alpha = 1;
-          purpleCircle.active = true;
+          circle.active = true;
           type = "purpleCircle";
       }
 
