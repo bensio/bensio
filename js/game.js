@@ -628,7 +628,7 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        if (Phaser.Circle.intersectsRectangle(purpleCircle.body, block.body)) {
+        if (Phaser.Circle.intersectsRectangle(purpleCircle, block.body)) {
           block.health += 10;
           block.alpha += .5;
         }
