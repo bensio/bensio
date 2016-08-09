@@ -184,6 +184,7 @@ function create() {
             }
         };
   blocks.forEach(function(block) {
+    block.body.setRectangleFromSprite();
     block.body.setCollisionGroup(blockCollisionGroup);
     block.body.collides(blockCollisionGroup);
     block.body.collides(menuCollisionGroup);
@@ -628,16 +629,17 @@ function update() {
         } else {
           constrainVelocity(block,0);
         }
-        //if (Phaser.Circle.intersectsRectangle(purpleCircle, )) {
-
-        //}
+        if (Phaser.Circle.intersectsRectangle(purpleCircle, block)) {
+          block.health += .1;
+          block.alpha += .005;
+        }
       }, this);
       purpleCircles.forEach(function(purpleCircle) {
         if (purpleCircle.active == true) {
           if (purpleCircle.scale.x < 3 && purpleCircle.scale.y < 3) {
-              purpleCircle.scale.x += .01;
-              purpleCircle.scale.y += .01;
-              purpleCircle.alpha -= .001;
+              purpleCircle.scale.x += .02;
+              purpleCircle.scale.y += .02;
+              purpleCircle.alpha -= .002;
               }
           }
         }, this);
