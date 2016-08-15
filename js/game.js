@@ -391,8 +391,8 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     }
 
    else if (shapeA && shapeA.sensor == true) {
-      body.sprite.alpha += .1;
-      body.sprite.health += 5;
+      body.sprite.alpha += .15;
+      body.sprite.health += 3;
     } 
 
   else if (body && body.kinematic == false) {
@@ -652,7 +652,6 @@ function update() {
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
               purpleCircle.circleShape = (36 * purpleCircle.scale.y);        
-              console.log(purpleCircle);
             } 
           }
         }, this);
