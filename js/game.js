@@ -270,7 +270,7 @@ function checkOutOfBounds(circle) {
         resetObstacle(circle);
       } else {
         game.physics.p2.enable(circle);
-        circleShape = circle.body.setCircle(36,0,0);        
+        circle.circleShape = circle.body.setCircle(36,0,0);        
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
@@ -316,7 +316,7 @@ function checkOutOfBounds(circle) {
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circleShape.sensor = true;
+            circle.circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
@@ -383,16 +383,16 @@ function unfreeze(block) {
 }
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) { 
-  if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
-    equation[0].bodyB.parent.sprite.frozen = true;
-    game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
-    body.sprite.destroy();
-  }
+    if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
+      equation[0].bodyB.parent.sprite.frozen = true;
+      game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
+      body.sprite.destroy();
+    }
 
-  else if (body && body.sprite.key == "purplecircle") {
-    console.log("YOU DID IT");
-    body.sprite.alpha = 1;
-    body.sprite.health += 2;
+    else if (body && body.circleShape.sensor == true) {
+      console.log("YOU DID IT");
+      body.sprite.alpha = 1;
+      body.sprite.health += 2;
   } 
 
   else if (body && body.kinematic == false) {
