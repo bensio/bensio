@@ -389,7 +389,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     body.sprite.destroy();
   }
 
-  if (body && equation[0].bodyB.parent.sprite == "purplecircle") {
+  if (body && body.sprite.key == "purplecircle" && equation[0].bodyB.parent.sprite) {
     console.log("YOU DID IT");
     body.sprite.alpha = 1;
     body.sprite.health += 2;
