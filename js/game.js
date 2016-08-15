@@ -391,6 +391,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     }
 
    else if (shapeA && shapeA.sensor == true) {
+      console.log(":D");
       body.sprite.alpha += .15;
       body.sprite.health += 3;
     } 
