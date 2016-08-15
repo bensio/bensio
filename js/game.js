@@ -650,6 +650,7 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
+              circleShape = purpleCircle.body.setCircle(36 * purpleCircle.scale.x,0,0);        
             } 
           }
         }, this);
