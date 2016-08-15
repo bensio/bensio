@@ -383,13 +383,13 @@ function unfreeze(block) {
 }
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) { 
-  if (body && body.sprite.key == "purplecircle" && equation[0].bodyB.parent.sprite) {
+  if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
     equation[0].bodyB.parent.sprite.frozen = true;
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
 
-  else if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
+  else if (body && body.sprite.key == "purplecircle") {
     console.log("YOU DID IT");
     body.sprite.alpha = 1;
     body.sprite.health += 2;
