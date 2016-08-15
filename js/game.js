@@ -651,8 +651,7 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
-              purpleCircle.circleShape = (36 * purpleCircle.scale.y);        
-              console.log(purpleCircle);
+              purpleCircle.body.data.shapes[0].radius = (36 * purpleCircle.scale.y);        
             } 
           }
         }, this);
