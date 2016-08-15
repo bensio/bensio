@@ -270,7 +270,7 @@ function checkOutOfBounds(circle) {
         resetObstacle(circle);
       } else {
         game.physics.p2.enable(circle);
-        circle.circleShape = circle.body.setCircle(36,0,0);        
+        circleShape = circle.body.setCircle(36,0,0);        
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
@@ -317,7 +317,7 @@ function checkOutOfBounds(circle) {
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
             circle.circleShape.sensor = true;
-            circle.body.onBeginContact.add(hitBlock, circle);
+            circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
           purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
@@ -389,9 +389,10 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.destroy();
     }
 
-    else if (body && body.body && body.body.sprite.key == "purplecircle") {
-      body.sprite.alpha = 1;
-      body.sprite.health += 2;
+    if (shapeA) {
+      console.log(shapeA);
+      //body.sprite.alpha = 1;
+      //body.sprite.health += 2;
   } 
 
   else if (body && body.kinematic == false) {
