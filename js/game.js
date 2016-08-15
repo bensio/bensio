@@ -405,8 +405,8 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
 
       if (body && body.sprite.key == "purplecircle") {
           console.log("YOU DID IT");
-          //equation[0].bodyB.parent.sprite.alpha = 1;
-          //equation[0].bodyB.parent.sprite.health += 2;
+          body.sprite.alpha = 1;
+          body.sprite.health += 2;
         } 
     
   }
