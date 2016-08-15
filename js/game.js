@@ -313,11 +313,10 @@ function checkOutOfBounds(circle) {
             circle.destroy();
           } else {
             money -= 5;
-            circle.circleShape = circle.body.setCircle(36,0,0);
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circle.circleShape.sensor = true;
+            circle.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
