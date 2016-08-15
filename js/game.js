@@ -253,11 +253,10 @@ function spawnObstacle(x,y,type) {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
           purpleCircle.anchor.x = .5;
           purpleCircle.anchor.y = .5;
-          purpleCircle.body.setCircle(36);
+          purpleCircle.body.setCircle(36,0,0);
           purpleCircle.alpha = 1;
           purpleCircle.activated = true;
           game.physics.p2.enable(purpleCircle);
-          purpleCircle.body.setCircle(36);
           purpleCircle.body.setCollisionGroup(purpleCircleCollisionGroup);
           purpleCircle.body.collides(blockCollisionGroup);
           purpleCircle.body.onBeginContact.add(hitblock, this);
@@ -271,7 +270,7 @@ function checkOutOfBounds(circle) {
         resetObstacle(circle);
       } else {
         game.physics.p2.enable(circle);
-        circle.body.setCircle(36);        
+        circleShape = circle.body.setCircle(36,0,0);        
         if (redCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 5) {
             circle.destroy();
@@ -313,11 +312,11 @@ function checkOutOfBounds(circle) {
           if (money - betMoney < 5) {
             circle.destroy();
           } else {
-            money -= 5
+            money -= 5;
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circle.body.data.shapes[0].sensor = true;
+            circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
