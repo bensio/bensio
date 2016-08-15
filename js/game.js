@@ -652,7 +652,7 @@ function update() {
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
               purpleCircle.circleShape = (36 * purpleCircle.scale.y);        
-              console.log(purpleCircle.body.data);
+              console.log(purpleCircle;
             } 
           }
         }, this);
