@@ -316,7 +316,7 @@ function checkOutOfBounds(circle) {
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circle.circleShape.sensor = true;
+            circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
@@ -389,11 +389,11 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.destroy();
     }
 
-    if (shapeA) {
+    else if (shapeA) {
       console.log(shapeA);
       //body.sprite.alpha = 1;
       //body.sprite.health += 2;
-  } 
+    } 
 
   else if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
