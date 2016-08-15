@@ -389,7 +389,7 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.destroy();
     }
 
-    else if (body && body.sensor == "true" ) {
+    else if (body && body.sensor == true ) {
       console.log("YOU DID IT");
       body.sprite.alpha = 1;
       body.sprite.health += 2;
