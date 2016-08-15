@@ -317,7 +317,7 @@ function checkOutOfBounds(circle) {
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circleShape.sensor = true;
+            circle.circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
