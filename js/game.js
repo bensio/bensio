@@ -388,6 +388,13 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
     body.sprite.destroy();
   }
+
+  if (body && equation[0].bodyB.parent.sprite == "purplecircle") {
+    console.log("YOU DID IT");
+    body.sprite.alpha = 1;
+    body.sprite.health += 2;
+  } 
+
   else if (body && body.kinematic == false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
@@ -395,12 +402,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
         body.sprite.destroy();
       }
 
-      if (body  && equation[0].bodyB.parent.sprite == "purplecircle") {
-          console.log("YOU DID IT");
-          body.sprite.alpha = 1;
-          body.sprite.health += 2;
-        } 
-  
   } else {
     if (equation[0] && equation[0].bodyB.parent.sprite) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
