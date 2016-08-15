@@ -390,8 +390,8 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
     }
 
    else if (shapeA && shapeA.sensor == true) {
-      body.sprite.alpha += .15;
-      body.sprite.health += 6;
+      body.sprite.alpha += .1;
+      body.sprite.health += 5;
     } 
 
   else if (body && body.kinematic == false) {
