@@ -389,9 +389,9 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       body.sprite.destroy();
     }
 
-   else  if (shapeA && shapeA.sensor == true) {
-      body.sprite.alpha = 1;
-      body.sprite.health += 2;
+   else if (shapeA && shapeA.sensor == true) {
+      body.sprite.alpha += .15;
+      body.sprite.health += 6;
     } 
 
   else if (body && body.kinematic == false) {
