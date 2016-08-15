@@ -394,6 +394,13 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
       if (body.sprite.health < 1) {
         body.sprite.destroy();
       }
+
+      if (body && equation[0] && equation[0].bodyB.parent.sprite == "purplecircle") {
+          console.log("YOU DID IT");
+          body.sprite.alpha = 1;
+          body.sprite.health += 2;
+        } 
+  
   } else {
     if (equation[0] && equation[0].bodyB.parent.sprite) {
       equation[0].bodyB.parent.sprite.alpha -= .05;
@@ -402,12 +409,6 @@ function hitBlock (body,bodyB,shapeA,shapeB,equation) {
         equation[0].bodyB.parent.sprite.destroy();
       }
     }
-
-      if (body && body.sprite.key == "purplecircle") {
-          console.log("YOU DID IT");
-          body.sprite.alpha = 1;
-          body.sprite.health += 2;
-        } 
     
   }
   if (blocks.length === 1 || blocks.length === 0) {
