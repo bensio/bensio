@@ -316,7 +316,7 @@ function checkOutOfBounds(circle) {
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
-            circle.sensor = true;
+            circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
           }
@@ -651,7 +651,7 @@ function update() {
               purpleCircle.scale.x += .02;
               purpleCircle.scale.y += .02;
               purpleCircle.alpha -= .002;
-              purpleCircle.body.data.shapes[0].radius *= 1.02;        
+              //purpleCircle.body.data.shapes[0].radius *= 1.02;        
             } 
           }
         }, this);
