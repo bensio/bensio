@@ -251,12 +251,11 @@ function spawnObstacle(x,y,type) {
 
         else if (type == 'purpleCircle') {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
+          game.physics.p2.enable(purpleCircle);
           circleShape = purpleCircle.body.setCircle(36,0,0);
           purpleCircle.anchor.x = .5;
           purpleCircle.anchor.y = .5;
-          purpleCircle.alpha = 1;
           purpleCircle.activated = true;
-          game.physics.p2.enable(purpleCircle);
           purpleCircle.body.setCollisionGroup(purpleCircleCollisionGroup);
           purpleCircle.body.collides(blockCollisionGroup);
           purpleCircle.body.onBeginContact.add(hitblock, this);
