@@ -251,9 +251,9 @@ function spawnObstacle(x,y,type) {
 
         else if (type = 'purpleCircle') {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
+          circleShape = purpleCircle.body.setCircle(36,0,0);
           purpleCircle.anchor.x = .5;
           purpleCircle.anchor.y = .5;
-          purpleCircle.body.setCircle(36,0,0);
           purpleCircle.alpha = 1;
           purpleCircle.activated = true;
           game.physics.p2.enable(purpleCircle);
@@ -261,7 +261,7 @@ function spawnObstacle(x,y,type) {
           purpleCircle.body.collides(blockCollisionGroup);
           purpleCircle.body.onBeginContact.add(hitblock, this);
           purpleCircle.body.kinematic = true;
-          purpleCircle.body.data.shapes[0].sensor = true;
+          circleShape.sensor = true;
         }
 }
 
@@ -309,10 +309,10 @@ function checkOutOfBounds(circle) {
         }  
 
       if (purpleCircles.children.indexOf(circle) > -1) {
-          if (money - betMoney < 5) {
+          if (money - betMoney < 10) {
             circle.destroy();
           } else {
-            money -= 5;
+            money -= 10;
             circle.active = true;
             circle.body.setCollisionGroup(purpleCircleCollisionGroup);
             circle.body.collides(blockCollisionGroup);
@@ -383,19 +383,19 @@ function unfreeze(block) {
 }
 
 function hitBlock (body,bodyB,shapeA,shapeB,equation) { 
-    if (body && body.sprite.key == "bluecircle" && equation[0].bodyB.parent.sprite) {
+    if (body && body.sprite.key === "bluecircle" && equation[0].bodyB.parent.sprite) {
       equation[0].bodyB.parent.sprite.frozen = true;
       game.time.events.add(Phaser.Timer.SECOND * 2, unfreeze, this, equation[0].bodyB.parent.sprite);
       body.sprite.destroy();
     }
 
-   else if (shapeA && shapeA.sensor == true) {
+   else if (shapeA && shapeA.sensor === true) {
       console.log(":D");
       body.sprite.alpha += .15;
       body.sprite.health += 3;
     } 
 
-  else if (body && body.kinematic == false) {
+  else if (body && body.kinematic === false) {
       body.sprite.alpha -= .05;
       body.sprite.health -= 1;
       if (body.sprite.health < 1) {
