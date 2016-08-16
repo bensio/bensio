@@ -237,7 +237,7 @@ function spawnObstacle(x,y,type) {
           redCircle.body.kinematic = true;          
         }
 
-        else if (type = 'blueCircle') {          
+        else if (type == 'blueCircle') {          
           blueCircle = blueCircles.create(x, y, 'bluecircle');
           blueCircle.anchor.x = .5
           blueCircle.anchor.y = .5
@@ -249,7 +249,7 @@ function spawnObstacle(x,y,type) {
           blueCircle.body.kinematic = true;
         }
 
-        else if (type = 'purpleCircle') {
+        else if (type == 'purpleCircle') {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
           circleShape = purpleCircle.body.setCircle(36,0,0);
           purpleCircle.anchor.x = .5;
@@ -348,7 +348,7 @@ function resetObstacle(obstacle) {
     obstacle.y = game.world.centerY + 405;
  } else if (purpleCircles.children.indexOf(obstacle) > -1) {
     obstacle.x = game.world.centerX - 100;
-    obstacle.y = game.world.centerY + 405
+    obstacle.y = game.world.centerY + 405;
  }
 }
 
