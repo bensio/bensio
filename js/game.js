@@ -256,7 +256,7 @@ function spawnObstacle(x,y,type) {
           purpleCircle.active = true;
           purpleCircle.body.setCollisionGroup(purpleCircleCollisionGroup);
           purpleCircle.body.collides(blockCollisionGroup);
-          purpleCircleShape.sensor = true;
+          circleShape.sensor = true;
           purpleCircle.body.onBeginContact.add(hitBlock, this);
           purpleCircle.body.kinematic = true;
           purpleCircle.anchor.x = .5;
