@@ -253,14 +253,14 @@ function spawnObstacle(x,y,type) {
           purpleCircle = purpleCircles.create(x, y, 'purplecircle');
           game.physics.p2.enable(purpleCircle);
           circleShape = purpleCircle.body.setCircle(36,0,0);
-          purpleCircle.anchor.x = .5;
-          purpleCircle.anchor.y = .5;
-          purpleCircle.activated = true;
+          purpleCircle.active = true;
           purpleCircle.body.setCollisionGroup(purpleCircleCollisionGroup);
           purpleCircle.body.collides(blockCollisionGroup);
+          purpleCircleShape.sensor = true;
           purpleCircle.body.onBeginContact.add(hitBlock, this);
           purpleCircle.body.kinematic = true;
-          circleShape.sensor = true;
+          purpleCircle.anchor.x = .5;
+          purpleCircle.anchor.y =.5;
         }
 }
 
@@ -318,6 +318,8 @@ function checkOutOfBounds(circle) {
             circleShape.sensor = true;
             circle.body.onBeginContact.add(hitBlock, this);
             circle.body.kinematic = true;
+            circle.anchor.x = .5;
+            circle.anchor.y = .5;
           }
           purpleCircle = purpleCircles.create(game.world.centerX - 100, game.world.centerY+405, 'purplecircle');
           purpleCircle.inputEnabled = true;
