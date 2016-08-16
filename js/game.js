@@ -289,7 +289,7 @@ function checkOutOfBounds(circle) {
           type = "redCircle";
         }
 
-        if (blueCircles.children.indexOf(circle) > -1) {          
+        else if (blueCircles.children.indexOf(circle) > -1) {          
           if (money - betMoney < 10) {
             circle.destroy();
           } else {
@@ -308,7 +308,7 @@ function checkOutOfBounds(circle) {
           type = "blueCircle";
         }  
 
-      if (purpleCircles.children.indexOf(circle) > -1) {
+        else if (purpleCircles.children.indexOf(circle) > -1) {
           if (money - betMoney < 10) {
             circle.destroy();
           } else {
