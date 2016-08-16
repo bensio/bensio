@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/pborman/uuid"
 	"log"
+	"math/rand"
 	"net/http"
 )
 
@@ -64,20 +65,29 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 	// existing players
 	log.Println("Publishing current net worths")
 
+	randred := rand.Intn(1000)
+	randgreen := rand.Intn(1000)
+	randblue := rand.Intn(1000)
+	randorange := rand.Intn(1000)
+	negorpos := rand.Float64()
 	go func() {
 		for _, p := range Players {
-			if err = player.Socket.WriteJSON(p.currency(false)); err != nil {
+			if err = player.Socket.WriteJSON(p.currency(true)); err != nil {
 				log.Println(err)
 			}
 			/*
-				if p.Socket.RemoteAddr() != player.Socket.RemoteAddr() {
-					if err = player.Socket.WriteJSON(p.currency(false)); err != nil {
-						log.Println(err)
-					}
-					if err = p.Socket.WriteJSON(player.currency(true)); err != nil {
-						log.Println(err)
-					}
-				}*/
+				if {
+					player.Socket.WriteJSON(player.currency(false))
+				}
+
+					if p.Socket.RemoteAddr() != player.Socket.RemoteAddr() {
+						if err = player.Socket.WriteJSON(p.currency(false)); err != nil {
+							log.Println(err)
+						}
+						if err = p.Socket.WriteJSON(player.currency(true)); err != nil {
+							log.Println(err)
+						}
+					}*/
 		}
 	}()
 
