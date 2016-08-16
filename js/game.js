@@ -625,7 +625,7 @@ function update() {
       updateTimer();
   } else if (goingToCenter === true) {
       if (blocks.children[0]) {  
-       if (blocks.children[0].alpha < 1) {
+       if (blocks.children[0].alpha <= .99) {
           blocks.children[0].alpha += .01;
        }
 
