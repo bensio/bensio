@@ -43,6 +43,7 @@ var player, //our player
         label,
         ip = "162.243.216.88"; //ip of our Go server
 var purpleCircle;
+var finished = {};
 function preload() { 
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();

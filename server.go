@@ -21,6 +21,7 @@ type Message struct {
 	ObsX int    //x coords of obs
 	ObsY int    //y coords of obs, obvsly
 	Type string // Type of obstacle being sent through.
+	Finished bool // Whether or not the player is finished with the current loop of the game.
 }
 
 type Player struct {
@@ -33,6 +34,7 @@ type Player struct {
 	ObsY       int
 	Type       string
 	Socket     *websocket.Conn // websocket connection of the player
+	Finished bool
 }
 
 func (p *Player) currency(new bool) Message {
@@ -124,6 +126,17 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 				}
 
 			}
+			var Json JsonData
+			if player.Socket.ReadJSON(&Json); err != nil {
+				log.Println(err)
+			}
+			if Json.Finished && Json.Finished == true {
+				for _, p := range Players {
+					if err = p.WriteMessage(ws.TextMessage, "finished"); err != nil {
+						log.Println(err)
+					}
+				}
+				Json.Finished = false
 		}()
 	}
 }
