@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/pborman/uuid"
 	"log"
-	"math/rand"
+	//"math/rand"
 	"net/http"
 )
 
@@ -18,10 +18,10 @@ type Message struct {
 	// messages it's false
 	Online bool // true if the player is no longer connected so the frontend
 	// will remove it from the roster
-	ObsX int    //x coords of obs
-	ObsY int    //y coords of obs, obvsly
-	Type string // Type of obstacle being sent through.
-	Finished bool // Whether or not the player is finished with the current loop of the game.
+	ObsX     int    //x coords of obs
+	ObsY     int    //y coords of obs, obvsly
+	Type     string // Type of obstacle being sent through.
+	Finished bool   // Whether or not the player is finished with the current loop of the game.
 }
 
 type Player struct {
@@ -34,7 +34,7 @@ type Player struct {
 	ObsY       int
 	Type       string
 	Socket     *websocket.Conn // websocket connection of the player
-	Finished bool
+	Finished   bool
 }
 
 func (p *Player) currency(new bool) Message {
@@ -67,11 +67,11 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 	// existing players
 	log.Println("Publishing current net worths")
 
-	randred := rand.Intn(1000)
-	randgreen := rand.Intn(1000)
-	randblue := rand.Intn(1000)
-	randorange := rand.Intn(1000)
-	negorpos := rand.Float64()
+	//randred := rand.Intn(1000)
+	//randgreen := rand.Intn(1000)
+	//randblue := rand.Intn(1000)
+	//randorange := rand.Intn(1000)
+	//negorpos := rand.Float64()
 	go func() {
 		for _, p := range Players {
 			if err = player.Socket.WriteJSON(p.currency(true)); err != nil {
@@ -126,17 +126,19 @@ func remoteHandler(res http.ResponseWriter, req *http.Request) {
 				}
 
 			}
-			var Json JsonData
-			if player.Socket.ReadJSON(&Json); err != nil {
-				log.Println(err)
-			}
-			if Json.Finished && Json.Finished == true {
-				for _, p := range Players {
-					if err = p.WriteMessage(ws.TextMessage, "finished"); err != nil {
-						log.Println(err)
-					}
+			/*
+				var Json JsonData
+				if player.Socket.ReadJSON(&Json); err != nil {
+					log.Println(err)
 				}
-				Json.Finished = false
+				if Json.Finished && Json.Finished == true {
+					for _, p := range Players {
+						if err = p.WriteMessage(ws.TextMessage, "finished"); err != nil {
+							log.Println(err)
+						}
+					}
+					Json.Finished = false
+			*/
 		}()
 	}
 }
