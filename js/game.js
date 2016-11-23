@@ -44,6 +44,7 @@ var player, //our player
 var purpleCircle;
 var finished = {};
 function preload() { 
+  game.scale.windowConstraints.bottom = "visual";
   //Center the game.
   this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -60,10 +61,14 @@ function preload() {
   sunsetbackground = game.load.image("sunsetbackground","assets/sunset3.png",1280,920);
   westbackground = game.load.image("westbackground", "assets/west2.png", 1280,920);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
+  if (!game.device.desktop) {
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  } else {
+    game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+  }
 }
 
 function create() {
-  this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   var backgrounds = Array("starbackground","sunsetbackground","westbackground");
   var backgroundchoice = backgrounds[Math.floor(Math.random()*backgrounds.length)]
   background = game.add.tileSprite(0,0,1280,920, backgroundchoice);
@@ -619,6 +624,14 @@ String.prototype.capitalizeFirstLetter = function() {
 }
 
 function update() {
+  if (game.device.desktop && ((window.innerWidth < game.width) || (window.innerHeight < game.height))) {
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  } else if (game.device.desktop) {
+    game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+  } else {
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  }
+
   if (constrain === false && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
