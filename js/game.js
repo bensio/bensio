@@ -1,5 +1,4 @@
-var game = new Phaser.Game(1200,900,Phaser.AUTO,'game',{preload:preload,create:create,update:update,render:render});
-
+var game = new Phaser.Game(1200,900,Phaser.AUTO,'',{preload:preload,create:create,update:update,render:render});
 var block;
 var blockCollisionGroup;
 var redCircleCollisionGroup;
@@ -61,10 +60,10 @@ function preload() {
   sunsetbackground = game.load.image("sunsetbackground","assets/sunset3.png",1280,920);
   westbackground = game.load.image("westbackground", "assets/west2.png", 1280,920);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
-  this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
 
 function create() {
+  this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   var backgrounds = Array("starbackground","sunsetbackground","westbackground");
   var backgroundchoice = backgrounds[Math.floor(Math.random()*backgrounds.length)]
   background = game.add.tileSprite(0,0,1280,920, backgroundchoice);
