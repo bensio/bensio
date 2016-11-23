@@ -61,9 +61,7 @@ function preload() {
   sunsetbackground = game.load.image("sunsetbackground","assets/sunset3.png",1280,920);
   westbackground = game.load.image("westbackground", "assets/west2.png", 1280,920);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
-  if (!Phaser.Device.desktop) {
-    this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-  }
+  this.game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
 
 function create() {
@@ -530,9 +528,6 @@ function showResults(result) {
   prompt.fontSize = 20;
   prompt.align = "center";
 };
-
-/* did white people ruin america? find out tonight on CNN at 12 */ 
-/* Donnovan pls */
 
 function resetGame() {
   if (blocks.children[0]) {
