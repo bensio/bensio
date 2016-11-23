@@ -46,7 +46,7 @@ var purpleCircle;
 var finished = {};
 function preload() { 
   //Center the game.
-  this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
+  this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
   game.stage.backgroundColor = '#ffffff';
   game.load.image("blue", "assets/bluesquare.png",72,72);
