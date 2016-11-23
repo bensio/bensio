@@ -61,7 +61,7 @@ function preload() {
   sunsetbackground = game.load.image("sunsetbackground","assets/sunset3.png",1280,920);
   westbackground = game.load.image("westbackground", "assets/west2.png", 1280,920);
   console.log("%c---Bootin' Bensio---", "color: #fff; background: #b800e6");
-  if (!game.device.desktop) {
+  if (game.device.desktop === false) {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   } else {
     game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
@@ -631,7 +631,6 @@ function update() {
   } else {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   }
-
   if (constrain === false && showTimer === true) {
       updateTimer();
   } else if (goingToCenter === true) {
